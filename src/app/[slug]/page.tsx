@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
-import { AboutPage, BlogPage, ContactPage, routeSlugs, ServicePage, VideoPage } from "@/components/rite-plumbing";
-import { getServicePage } from "@/lib/rite-content";
+import { AboutPage, BlogPage, ContactPage, ServicePage, VideoPage } from "@/components/rite-plumbing";
+import { getServicePage, servicePages } from "@/lib/rite-content";
 
 export function generateStaticParams() {
-  return routeSlugs.map((slug) => ({ slug }));
+  return servicePages.map((page) => ({ slug: page.slug })).concat([{ slug: "drain-clogged-services" }], ["blog", "video", "about-us", "contact"].map((slug) => ({ slug })));
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   if (slug === "about-us") return <AboutPage />;
   if (slug === "contact") return <ContactPage />;
 
-  const page = getServicePage(slug);
+  const page = getServicePage(slug === "drain-clogged-services" ? "professional-drain-clogged-services" : slug);
   if (!page) notFound();
 
   return <ServicePage page={page} />;

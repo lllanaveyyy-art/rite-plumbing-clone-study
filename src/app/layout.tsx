@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
-import { RiteScrollTop } from "@/components/rite-interactions";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -28,7 +27,7 @@ export default function RootLayout({
       lang="en"
       className={`${dmSans.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}<RiteScrollTop /></body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

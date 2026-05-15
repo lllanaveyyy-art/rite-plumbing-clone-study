@@ -1,14 +1,14 @@
 import { notFound } from "next/navigation";
 import { ServicePage } from "@/components/rite-plumbing";
-import { getServicePage, serviceRouteSlugs } from "@/lib/rite-content";
+import { getServicePage, servicePages } from "@/lib/rite-content";
 
 export function generateStaticParams() {
-  return serviceRouteSlugs.map((slug) => ({ slug }));
+  return servicePages.map((page) => ({ slug: page.slug })).concat([{ slug: "drain-clogged-services" }]);
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const page = getServicePage(slug);
+  const page = getServicePage(slug === "drain-clogged-services" ? "professional-drain-clogged-services" : slug);
   if (!page) notFound();
 
   return <ServicePage page={page} />;
