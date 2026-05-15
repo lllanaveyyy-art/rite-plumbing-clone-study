@@ -159,25 +159,30 @@
   }
 }
 
-@layer base {
-  .dark main,
-  .dark section.bg-white,
-  .dark article.bg-white {
-    background-color: #111013;
-    color: #f7f7f7;
+@layer utilities {
+  .dark .rite-page .bg-white {
+    background-color: #111013 !important;
   }
 
-  .dark .bg-\[\#f7f6f7\],
-  .dark .bg-\[\#f7f7f7\] {
-    background-color: #17161a;
+  .dark .rite-page .bg-\[\#f7f6f7\],
+  .dark .rite-page .bg-\[\#f7f7f7\] {
+    background-color: #17161a !important;
   }
 
-  .dark .text-\[\#111013\],
-  .dark .text-\[\#18171c\],
-  .dark .text-neutral-900,
-  .dark .text-neutral-700,
-  .dark .text-neutral-600,
-  .dark .text-neutral-500 {
-    color: rgb(255 255 255 / 0.78);
+  .dark .rite-page .text-neutral-500,
+  .dark .rite-page .text-neutral-600,
+  .dark .rite-page .text-neutral-700 {
+    color: rgb(255 255 255 / 70%) !important;
+  }
+
+  .dark .rite-page .text-neutral-900,
+  .dark .rite-page .text-\[\#111013\] {
+    color: #ffffff !important;
+  }
+}
+
+@layer utilities {
+  .text-shadow-sm {
+    text-shadow: 0 2px 10px rgb(0 0 0 / 28%);
   }
 }

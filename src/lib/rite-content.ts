@@ -1,5 +1,11 @@
 import type { DocumentRequirement, NavigationItem, NewsArticle, ServiceFeature } from "@/types/rite-plumbing";
 
+export type ServiceArchiveItem = {
+  title: string;
+  href: string;
+  image: string;
+};
+
 export type ServicePageContent = {
   slug: string;
   title: string;
@@ -16,7 +22,7 @@ export type ServicePageContent = {
 
 export const navItems: NavigationItem[] = [
   { label: "Home", href: "/" },
-  { label: "Services", href: "#services" },
+  { label: "Services", href: "/services/" },
   { label: "Blog", href: "/blog/" },
   { label: "Video", href: "/video/" },
   { label: "About Us", href: "/about-us/" },
@@ -24,21 +30,55 @@ export const navItems: NavigationItem[] = [
 ];
 
 export const serviceMenuItems: NavigationItem[] = [
-  { label: "24/7 Plumbing Services", href: "/services/24-7-plumbing-services/" },
-  { label: "Bathroom Plumbing & Shower Repair", href: "/services/bathroom-plumbing-shower-repair/" },
-  { label: "Clogged Toilet Repairs & Installation", href: "/services/clogged-toilet-repairs-installation/" },
-  { label: "Professional Drain Clogged Services", href: "/services/drain-clogged-services/" },
-  { label: "Emergency Plumber Repair", href: "/services/emergency-plumber-repair/" },
-  { label: "Faucet, Fixture, Sink Plumbing And Installation", href: "/services/faucet-fixture-sink-plumbing-and-installation/" },
-  { label: "Garbage Disposal Repair And Replacement", href: "/services/garbage-disposal-repair-and-replacement/" },
-  { label: "Gas Leak Repair Service", href: "/services/gas-leak-repair-service/" },
-  { label: "Hot Water Heater Repair & Installation", href: "/services/hot-water-heater-repair-installation/" },
-  { label: "Radiator Valve Repair & Installation", href: "/services/radiator-valve-repair-installation/" },
-  { label: "Sump Pump Installation, Maintenance & Repairs", href: "/services/sump-pump-installation-maintenance-repairs/" },
-  { label: "Tankless Water Heater Repair & Installation", href: "/services/tankless-water-heater-repair-installation/" },
-  { label: "Commercial Plumbing", href: "/services/commercial-plumbing/" },
-  { label: "Residential Plumbing Services & Repairs", href: "/services/residential-plumbing-services-repairs/" },
+  {
+    label: "24/7 Plumbing Services",
+    href: "/services/24-7-plumbing-services-in-nyc/",
+    children: [
+      { label: "Bathroom Plumbing & Shower Repair", href: "/services/bathroom-plumbing-shower-repair-nyc/" },
+      { label: "Clogged Toilet Repairs & Installation", href: "/services/clogged-toilet-repairs-installation-nyc/" },
+      { label: "Professional Drain Clogged Services", href: "/services/professional-drain-clogged-services-nyc/" },
+      { label: "Emergency Plumber Repair", href: "/services/emergency-plumber-repair-nyc/" },
+      { label: "Faucet Fixture Sink Plumbing And Installation", href: "/services/faucet-fixture-sink-plumbing-and-installation-repair-nyc/" },
+      { label: "Garbage Disposal Repair And Replacement", href: "/services/garbage-disposal-repair-and-replacement-nyc/" },
+      { label: "Gas Leak Repair Service", href: "/services/gas-leak-repair-service-nyc/" },
+      { label: "Hot Water Heater Repair Installation", href: "/services/hot-water-heater-repair-installation-nyc/" },
+      { label: "Radiator Valve Repair & Installation Repair", href: "/services/radiator-valve-repair-installation-repair-nyc/" },
+      { label: "Sump Pump Installation Maintenance & Repairs", href: "/services/sump-pump-installation-maintenance-repairs-in-nyc/" },
+      { label: "Tankless Water Heater Repair Installation", href: "/services/tankless-water-heater-repair-installation-nyc/" },
+    ],
+  },
+  { label: "Commercial Plumbing", href: "/services/commercial-plumber-nyc/" },
+  { label: "Residential Plumbing Services & Repairs", href: "/services/residential-plumbing-services-repairs-nyc/" },
 ];
+
+export const flatServiceMenuItems: NavigationItem[] = serviceMenuItems.flatMap((item) => [item, ...(item.children ?? [])]);
+
+export const serviceArchiveItems: ServiceArchiveItem[] = [
+  { title: "Tankless Water Heater Repair & Installation NYC", href: "/services/tankless-water-heater-repair-installation/", image: "/images/riteplumbing/services/p19.jpeg.webp" },
+  { title: "Sump Pump Installation, Maintenance & Repairs in NYC", href: "/services/sump-pump-installation-maintenance-repairs/", image: "/images/riteplumbing/services/p17.jpeg.webp" },
+  { title: "Radiator Valve Repair & Installation Repair NYC", href: "/services/radiator-valve-repair-installation-repair/", image: "/images/riteplumbing/services/p14.jpeg.webp" },
+  { title: "Hot Water Heater Repair & Installation NYC", href: "/services/hot-water-heater-repair-installation/", image: "/images/riteplumbing/services/p10.jpeg.webp" },
+  { title: "Gas Leak Repair Service", href: "/services/gas-leak-repair-service/", image: "/images/riteplumbing/services/gas-leak-repair-service-1-1920x1280.jpg.webp" },
+  { title: "Garbage Disposal Repair and Replacement NYC", href: "/services/garbage-disposal-repair-and-replacement/", image: "/images/riteplumbing/services/garbage-disposal-repair-and-replacement-1-1920x1371.jpg.webp" },
+  { title: "Faucet, Fixture, Sink Plumbing And Installation Repair New York City", href: "/services/faucet-fixture-sink-plumbing-and-installation-repair/", image: "/images/riteplumbing/services/faucet-fixture-sink-plumbing-and-installation-repair-1-1920x1371.jpg.webp" },
+  { title: "Emergency Plumber Repair", href: "/services/emergency-plumber-repair/", image: "/images/riteplumbing/services/emergency-plumber-repair-1-1920x1280.jpg.webp" },
+  { title: "Professional Drain Clogged Services NYC", href: "/services/drain-clogged-services/", image: "/images/riteplumbing/services/drain-clogged-services-1-scaled.jpg.webp" },
+  { title: "Clogged Toilet Repairs & Installation", href: "/services/clogged-toilet-repairs-installation/", image: "/images/riteplumbing/services/clogged-toilet-repairs-installation-1-scaled.jpg.webp" },
+  { title: "Bathroom Plumbing & Shower Repair", href: "/services/bathroom-plumbing-shower-repair/", image: "/images/riteplumbing/services/Bathroom-plumbing-and-shower-repair-1920x1371.jpg.webp" },
+  { title: "Residential Plumbing Services NYC", href: "/services/residential-plumbing-services-repairs/", image: "/images/riteplumbing/services/residential-plumbing-services-repairs-1.jpg.webp" },
+  { title: "Commercial Plumbing", href: "/services/commercial-plumbing/", image: "/images/riteplumbing/services/commercial-plumbing-image-1.jpg.webp" },
+  { title: "24/7 Plumbing Services", href: "/services/24-hour-emergency-plumbing/", image: "/images/riteplumbing/services/24-hour-emergency-plumbing-1.jpg.webp" },
+];
+
+export const socialLinks = [
+  { label: "Fb.", href: "https://www.facebook.com/pages/category/Plumbing-Service/Rite-Plumbing-Heating-195520531093617/" },
+  { label: "Ig.", href: "https://www.instagram.com/rite_plumbing_and_heating/" },
+  { label: "Yt.", href: "https://youtube.com/@riteplumbingandheating" },
+];
+
+export const scheduleUrl = "https://www.housecallpro.com/book/Rite-Plumbing--Heating-Inc/fe74abec57da43a0a171551f5812231d";
+export const uploadDocumentsUrl = "https://riteplumbingnyc.com/building-management-document/";
+export const heroVideoUrl = "https://riteplumbingnyc.com/wp-content/uploads/2023/04/WhatsApp-Video-2023-04-07-at-11.19.15-AM.mp4";
 
 export const features: ServiceFeature[] = [
   { icon: "calendar", title: "Schedule Online", description: "Schedule a plumber online within less than a minute." },
@@ -55,12 +95,12 @@ export const documents: DocumentRequirement[] = [
 ];
 
 export const news: NewsArticle[] = [
-  { title: "Plumbing Mistakes DIY-ers Make", category: "Uncategorized", readTime: "5 min read" },
-  { title: "Spring Cleaning Plumbing Tasks", category: "Plumbing", readTime: "5 min read" },
-  { title: "How Does Residential Plumbing Work", category: "Plumbing", readTime: "4 min read" },
-  { title: "Common Plumbing Issues Causes", category: "Plumbing", readTime: "5 min read" },
-  { title: "Is It Ok To Leave A Toilet Clogged Overnight", category: "Plumbing", readTime: "4 min read" },
-  { title: "What Happens If There'S A Gas Leak In My House", category: "Gas", readTime: "5 min read" },
+  { title: "Plumbing Mistakes DIY-ers Make", category: "Uncategorized", readTime: "5 min read", date: "August 25, 2023", slug: "plumbing-mistakes-diy-ers-make", excerpt: "Oftentimes, you find people making mistakes when they try to fix plumbing issues by themselves.", image: "/images/riteplumbing/news/diy-mistakes-1.jpg", secondaryImage: "/images/riteplumbing/news/diy-mistakes-2.jpg" },
+  { title: "Spring Cleaning Plumbing Tasks", category: "Plumbing", readTime: "5 min read", date: "August 25, 2023", slug: "spring-cleaning-plumbing-tasks", excerpt: "Spring cleaning is a good time to look at drains, fixtures, leaks, and water heater maintenance.", image: "/images/riteplumbing/news/spring-cleaning-1.jpg", secondaryImage: "/images/riteplumbing/news/spring-cleaning-2.jpg" },
+  { title: "How Does Residential Plumbing Work", category: "Plumbing", readTime: "4 min read", date: "August 25, 2023", slug: "how-does-residential-plumbing-work", excerpt: "Residential plumbing brings clean water in and carries waste water away through connected systems.", image: "/images/riteplumbing/news/residential-plumbing-1.jpg", secondaryImage: "/images/riteplumbing/news/residential-plumbing-2.jpg" },
+  { title: "Common Plumbing Issues Causes", category: "Plumbing", readTime: "5 min read", date: "August 25, 2023", slug: "common-plumbing-issues-causes", excerpt: "Common plumbing trouble often starts with aging pipes, clogged drains, leaks, and fixture wear.", image: "/images/riteplumbing/services/p9.jpeg.webp" },
+  { title: "Is It Ok To Leave A Toilet Clogged Overnight", category: "Plumbing", readTime: "4 min read", date: "August 25, 2023", slug: "is-it-ok-to-leave-a-toilet-clogged-overnight", excerpt: "A clogged toilet can overflow or back up, so quick service is safer than waiting overnight.", image: "/images/riteplumbing/services/clogged-toilet-repairs-installation-1-scaled.jpg.webp" },
+  { title: "What Happens If There'S A Gas Leak In My House", category: "Gas", readTime: "5 min read", date: "August 25, 2023", slug: "what-happens-if-theres-a-gas-leak-in-my-house", excerpt: "A suspected gas leak needs immediate attention from licensed professionals and emergency services.", image: "/images/riteplumbing/services/gas-leak-repair-service-1-1920x1280.jpg.webp" },
 ];
 
 const baseServices = "/images/riteplumbing/services/";
@@ -77,7 +117,7 @@ export const servicePages: ServicePageContent[] = [
     bullets: ["24/7 Emergency Services", "Free Estimates", "Under 30-minute Arrival Time", "State of the Art Scheduling Software", "Plumbing and Heating Problems in Manhattan, Queens, and Brooklyn"],
     closingTitle: "We Will Arrive In Less Than 30-minutes.",
     closing: "Schedule an emergency commercial plumber through our online calendar.",
-    images: [`${baseServices}Rite-Plumbing-20230204-026-1920x1280.jpg.webp`, `${baseServices}Rite-Plumbing-20230204-003-1920x1280.jpg.webp`],
+    images: [`${baseServices}24-hour-emergency-plumbing-1.jpg.webp`, `${baseServices}Rite-Plumbing-20230204-026-1920x1280.jpg.webp`, `${baseServices}Rite-Plumbing-20230204-003-1920x1280.jpg.webp`],
   },
   {
     slug: "bathroom-plumbing-shower-repair",
@@ -116,7 +156,7 @@ export const servicePages: ServicePageContent[] = [
     bullets: ["Clogged Bathroom Drains", "Kitchen Drain Cleaning", "Main Drain Service", "Emergency Drain Service", "Water Pipe Repairs and Installation", "State of the Art Equipment Solutions"],
     closingTitle: "We Will Arrive In Less Than 30-minutes.",
     closing: "24/7 Emergency Plumbing Service in QUEENS, BROOKLYN, AND MANHATTAN. Schedule an emergency commercial plumber through our online calendar.",
-    images: [`${baseServices}p9.jpeg.webp`, `${baseServices}p11.jpeg.webp`],
+    images: [`${baseServices}drain-clogged-services-1-scaled.jpg.webp`, `${baseServices}p9.jpeg.webp`, `${baseServices}p11.jpeg.webp`],
   },
   {
     slug: "emergency-plumber-repair",
@@ -181,7 +221,7 @@ export const servicePages: ServicePageContent[] = [
     bullets: ["Water Heater Repair", "Water Heater Replacement", "Water Heater Installations", "Tankless Water Heaters", "Emergency Plumbing Service", "Residential Plumbing"],
     closingTitle: "We Are Available 24/7, 7 Days A Week",
     closing: "There is no job too big or too small that we can’t handle.",
-    images: [`${baseServices}Rite-Plumbing-20230204-018-1920x2688.jpg.webp`, `${baseServices}p10.jpeg.webp`],
+    images: [`${baseServices}p10.jpeg.webp`, `${baseServices}Rite-Plumbing-20230204-018-1920x2688.jpg.webp`, `${baseServices}p19.jpeg.webp`],
   },
   {
     slug: "radiator-valve-repair-installation",
@@ -207,7 +247,7 @@ export const servicePages: ServicePageContent[] = [
     bullets: ["Sump Pump Installation", "Sump Pump Maintenance", "Sump Pump Repairs", "Water Pipe Repairs", "Emergency Plumbing", "Free Estimates"],
     closingTitle: "We Are Available 24/7, 7 Days A Week",
     closing: "We value your time in this busy city and are never late.",
-    images: [`${baseServices}p17.jpeg.webp`, `${baseServices}Rite-Plumbing-20230204-003-1920x1280.jpg.webp`],
+    images: [`${baseServices}p17.jpeg.webp`, `${baseServices}Rite-Plumbing-20230204-003-1920x1280.jpg.webp`, `${baseServices}p23.jpeg.webp`],
   },
   {
     slug: "tankless-water-heater-repair-installation",
@@ -250,6 +290,30 @@ export const servicePages: ServicePageContent[] = [
   },
 ];
 
+export const serviceSlugAliases: Record<string, string> = {
+  "24-hour-emergency-plumbing": "24-7-plumbing-services",
+  "24-7-plumbing-services-in-nyc": "24-7-plumbing-services",
+  "bathroom-plumbing-shower-repair-nyc": "bathroom-plumbing-shower-repair",
+  "clogged-toilet-repairs-installation-nyc": "clogged-toilet-repairs-installation",
+  "drain-clogged-services": "professional-drain-clogged-services",
+  "professional-drain-clogged-services-nyc": "professional-drain-clogged-services",
+  "emergency-plumber-repair-nyc": "emergency-plumber-repair",
+  "faucet-fixture-sink-plumbing-and-installation-repair": "faucet-fixture-sink-plumbing-and-installation",
+  "faucet-fixture-sink-plumbing-and-installation-repair-nyc": "faucet-fixture-sink-plumbing-and-installation",
+  "garbage-disposal-repair-and-replacement-nyc": "garbage-disposal-repair-and-replacement",
+  "gas-leak-repair-service-nyc": "gas-leak-repair-service",
+  "hot-water-heater-repair-installation-nyc": "hot-water-heater-repair-installation",
+  "radiator-valve-repair-installation-repair": "radiator-valve-repair-installation",
+  "radiator-valve-repair-installation-repair-nyc": "radiator-valve-repair-installation",
+  "sump-pump-installation-maintenance-repairs-in-nyc": "sump-pump-installation-maintenance-repairs",
+  "tankless-water-heater-repair-installation-nyc": "tankless-water-heater-repair-installation",
+  "commercial-plumber-nyc": "commercial-plumbing",
+  "residential-plumbing-services-repairs-nyc": "residential-plumbing-services-repairs",
+};
+
+export const serviceRouteSlugs = Array.from(new Set([...servicePages.map((page) => page.slug), ...Object.keys(serviceSlugAliases)]));
+
 export function getServicePage(slug: string) {
-  return servicePages.find((page) => page.slug === slug);
+  const canonicalSlug = serviceSlugAliases[slug] ?? slug;
+  return servicePages.find((page) => page.slug === canonicalSlug);
 }
