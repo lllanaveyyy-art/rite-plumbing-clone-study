@@ -1,6 +1,7 @@
 export type NavigationItem = {
   label: string;
   href: string;
+  children?: NavigationItem[];
 };
 
 export type ServiceFeature = {
@@ -18,4 +19,9 @@ export type NewsArticle = {
   title: string;
   category: string;
   readTime: string;
+  date: string;
+  slug: string;
+  excerpt: string;
+  image: string;
+  secondaryImage?: string;
 };
