@@ -141,70 +141,71 @@ export function RiteHeader({ active }: { active?: string }) {
       </button>
 
       {menuOpen ? (
-        <button
-          type="button"
-          aria-label="Close navigation overlay"
-          className="fixed inset-0 z-[55] bg-[#111013]/55 backdrop-blur-[2px] md:hidden"
-          onClick={closeMenu}
-        />
-      ) : null}
+        <>
+          <button
+            type="button"
+            aria-label="Close navigation overlay"
+            className="fixed inset-0 z-[55] bg-[#111013]/55 backdrop-blur-[2px] md:hidden"
+            onClick={closeMenu}
+          />
+          <aside
+            className="fixed inset-y-0 left-0 z-[60] flex w-[min(88vw,360px)] flex-col overflow-y-auto bg-white px-7 pb-8 pt-24 text-[#111013] shadow-2xl md:hidden dark:bg-[#111013] dark:text-white"
+          >
+            <div className="mb-8 flex items-center justify-between border-b border-neutral-200 pb-6 dark:border-white/15">
+              <Image src="/images/riteplumbing/logo.webp" alt="Professional Plumbing Services" width={253} height={75} className="h-auto w-[170px] dark:brightness-125" priority />
+              <button type="button" onClick={closeMenu} className="text-3xl font-light leading-none" aria-label="Close menu">×</button>
+            </div>
 
-      <aside
-        className={`${menuOpen ? "translate-x-0" : "-translate-x-full"} fixed inset-y-0 left-0 z-[60] flex w-[min(88vw,360px)] flex-col overflow-y-auto bg-white px-7 pb-8 pt-24 text-[#111013] shadow-2xl transition-transform duration-300 md:hidden dark:bg-[#111013] dark:text-white`}
-      >
-        <div className="mb-8 flex items-center justify-between border-b border-neutral-200 pb-6 dark:border-white/15">
-          <Image src="/images/riteplumbing/logo.webp" alt="Professional Plumbing Services" width={253} height={75} className="h-auto w-[170px] dark:brightness-125" priority />
-          <button type="button" onClick={closeMenu} className="text-3xl font-light leading-none" aria-label="Close menu">×</button>
-        </div>
-
-        <nav className="flex flex-col text-[20px] font-bold leading-none tracking-[-0.04em]">
-          <Link href="/" onClick={closeMenu} className={`${active === "Home" ? "text-[#09a9d6]" : ""} border-b border-neutral-200 py-4 dark:border-white/15`}>Home</Link>
-          <div className="border-b border-neutral-200 py-4 dark:border-white/15">
-            <button
-              type="button"
-              onClick={() => setServicesOpen((open) => !open)}
-              aria-expanded={servicesOpen}
-              className={`${active === "Services" ? "text-[#09a9d6]" : ""} flex w-full items-center justify-between text-left`}
-            >
-              Services
-              <span className="text-[20px] text-[#09a9d6]">{servicesOpen ? "−" : "+"}</span>
-            </button>
-            {servicesOpen ? (
-              <div className="mt-5 space-y-3 border-l-2 border-[#09a9d6]/35 pl-4 text-[14px] leading-tight tracking-[-0.02em] text-neutral-600 dark:text-white/70">
-                <Link href="/24-7-plumbing-services/" onClick={closeMenu} className="block font-bold text-[#111013] dark:text-white">24/7 Plumbing Services</Link>
-                <div className="space-y-3 pl-3">
-                  {serviceMenuItems.slice(1, 12).map((service) => (
-                    <Link key={service.href} href={service.href} onClick={closeMenu} className="block hover:text-[#09a9d6]">
-                      {service.label}
-                    </Link>
-                  ))}
-                </div>
-                {serviceMenuItems.slice(12).map((service) => (
-                  <Link key={service.href} href={service.href} onClick={closeMenu} className="block font-bold text-[#111013] hover:text-[#09a9d6] dark:text-white">
-                    {service.label}
-                  </Link>
-                ))}
+            <nav className="flex flex-col text-[20px] font-bold leading-none tracking-[-0.04em]">
+              <Link href="/" onClick={closeMenu} className={`${active === "Home" ? "text-[#09a9d6]" : ""} border-b border-neutral-200 py-4 dark:border-white/15`}>Home</Link>
+              <div className="border-b border-neutral-200 py-4 dark:border-white/15">
+                <button
+                  type="button"
+                  onClick={() => setServicesOpen((open) => !open)}
+                  aria-expanded={servicesOpen}
+                  className={`${active === "Services" ? "text-[#09a9d6]" : ""} flex w-full items-center justify-between text-left`}
+                >
+                  Services
+                  <span className="text-[20px] text-[#09a9d6]">{servicesOpen ? "−" : "+"}</span>
+                </button>
+                {servicesOpen ? (
+                  <div className="mt-5 space-y-3 border-l-2 border-[#09a9d6]/35 pl-4 text-[14px] leading-tight tracking-[-0.02em] text-neutral-600 dark:text-white/70">
+                    <Link href="/24-7-plumbing-services/" onClick={closeMenu} className="block font-bold text-[#111013] dark:text-white">24/7 Plumbing Services</Link>
+                    <div className="space-y-3 pl-3">
+                      {serviceMenuItems.slice(1, 12).map((service) => (
+                        <Link key={service.href} href={service.href} onClick={closeMenu} className="block hover:text-[#09a9d6]">
+                          {service.label}
+                        </Link>
+                      ))}
+                    </div>
+                    {serviceMenuItems.slice(12).map((service) => (
+                      <Link key={service.href} href={service.href} onClick={closeMenu} className="block font-bold text-[#111013] hover:text-[#09a9d6] dark:text-white">
+                        {service.label}
+                      </Link>
+                    ))}
+                  </div>
+                ) : null}
               </div>
-            ) : null}
-          </div>
-          {navItems.filter((item) => item.label !== "Home" && item.label !== "Services").map((item) => (
-            <Link key={item.label} href={item.href} onClick={closeMenu} className={`${active === item.label ? "text-[#09a9d6]" : ""} border-b border-neutral-200 py-4 dark:border-white/15`}>
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+              {navItems.filter((item) => item.label !== "Home" && item.label !== "Services").map((item) => (
+                <Link key={item.label} href={item.href} onClick={closeMenu} className={`${active === item.label ? "text-[#09a9d6]" : ""} border-b border-neutral-200 py-4 dark:border-white/15`}>
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
 
-        <div className="mt-8">
-          <CtaButton dark>Schedule a plumber now</CtaButton>
-        </div>
-        <div className="mt-8 border-t border-neutral-200 pt-6 dark:border-white/15">
-          <p className="text-[12px] font-bold uppercase tracking-[0.1em] text-neutral-400">Follow Us</p>
-          <p className="mt-3 text-[16px] font-bold">Fb. / Ig. / Yt.</p>
-        </div>
-        <div className="mt-7 border-t border-neutral-200 pt-6 dark:border-white/15">
-          <ThemeControls compact />
-        </div>
-      </aside>
+            <div className="mt-8">
+              <CtaButton dark>Schedule a plumber now</CtaButton>
+            </div>
+            <div className="mt-8 border-t border-neutral-200 pt-6 dark:border-white/15">
+              <p className="text-[12px] font-bold uppercase tracking-[0.1em] text-neutral-400">Follow Us</p>
+              <p className="mt-3 text-[16px] font-bold">Fb. / Ig. / Yt.</p>
+            </div>
+            <div className="mt-7 border-t border-neutral-200 pt-6 dark:border-white/15">
+              <ThemeControls compact />
+            </div>
+          </aside>
+        </>
+      ) : null}
 
       <div className="fixed right-3 top-1/2 z-40 hidden -translate-y-1/2 rotate-180 text-[13px] font-bold text-[#111013] [writing-mode:vertical-rl] md:block dark:text-white">
         Follow Us — Fb. / Ig. / Yt.
@@ -212,7 +213,7 @@ export function RiteHeader({ active }: { active?: string }) {
       <div className="fixed left-0 top-0 z-40 hidden bg-white/90 p-3 backdrop-blur md:block dark:bg-[#111013]/90">
         <ThemeControls />
       </div>
-      <header className="relative z-30 mx-auto flex max-w-[1320px] items-center justify-between px-20 py-6 md:py-8">
+      <header className="relative z-30 mx-auto hidden max-w-[1320px] items-center justify-between px-20 py-6 md:flex md:py-8">
         <Link href="/" className="shrink-0">
           <Image src="/images/riteplumbing/logo.webp" alt="Professional Plumbing Services" width={253} height={75} className="h-auto w-[150px] md:w-[230px]" priority />
         </Link>
