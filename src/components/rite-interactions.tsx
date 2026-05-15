@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { createPortal } from "react-dom";
 import { PlayCircleIcon } from "@/components/icons";
+import { navItems, scheduleUrl, serviceMenuItems, socialLinks } from "@/lib/rite-content";
 
 function SunIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" fill="currentColor">
-      <path d="M9 6.75A2.25 2.25 0 1 1 9 11.25A2.25 2.25 0 0 1 9 6.75Zm0-1.5A3.75 3.75 0 1 0 9 12.75A3.75 3.75 0 0 0 9 5.25Zm-.75-3.75v1.5a.75.75 0 0 0 1.5 0V1.5a.75.75 0 0 0-1.5 0ZM8.25 15v1.5a.75.75 0 0 0 1.5 0V15a.75.75 0 0 0-1.5 0ZM1.5 8.25a.75.75 0 0 0 0 1.5H3a.75.75 0 0 0 0-1.5H1.5Zm13.5 0a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H15ZM3.44 3.44a.75.75 0 0 0 0 1.05l.8.8a.75.75 0 0 0 1.05-1.06l-.8-.79a.75.75 0 0 0-1.05 0Zm9.27 9.27a.75.75 0 0 0 0 1.06l.8.79a.75.75 0 0 0 1.05-1.05l-.79-.8a.75.75 0 0 0-1.06 0Zm1.85-9.27a.75.75 0 0 0-1.05 0l-.8.79a.75.75 0 0 0 1.06 1.06l.79-.8a.75.75 0 0 0 0-1.05ZM5.29 12.71a.75.75 0 0 0-1.06 0l-.79.8a.75.75 0 0 0 1.05 1.05l.8-.79a.75.75 0 0 0 0-1.06Z" />
+      <path d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM9 5a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm0-5a.75.75 0 0 0-.75.75v1.1a.75.75 0 0 0 1.5 0V.75A.75.75 0 0 0 9 0Zm0 15.4a.75.75 0 0 0-.75.75v1.1a.75.75 0 0 0 1.5 0v-1.1A.75.75 0 0 0 9 15.4ZM.75 8.25a.75.75 0 0 0 0 1.5h1.1a.75.75 0 0 0 0-1.5H.75Zm15.4 0a.75.75 0 0 0 0 1.5h1.1a.75.75 0 0 0 0-1.5h-1.1ZM3.44 3.44a.75.75 0 0 0 0 1.05l.79.8a.75.75 0 0 0 1.06-1.06l-.8-.79a.75.75 0 0 0-1.05 0Zm9.27 9.27a.75.75 0 0 0 0 1.06l.8.79a.75.75 0 0 0 1.05-1.05l-.79-.8a.75.75 0 0 0-1.06 0Zm1.85-9.27a.75.75 0 0 0-1.05 0l-.8.79a.75.75 0 0 0 1.06 1.06l.79-.8a.75.75 0 0 0 0-1.05ZM5.29 12.71a.75.75 0 0 0-1.06 0l-.79.8a.75.75 0 0 0 1.05 1.05l.8-.79a.75.75 0 0 0 0-1.06Z" />
     </svg>
   );
 }
@@ -20,7 +22,7 @@ function MoonIcon() {
   );
 }
 
-export function RiteThemeControls() {
+function useRiteTheme() {
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     if (typeof window === "undefined") return "light";
     return window.localStorage.getItem("rite-theme") === "dark" ? "dark" : "light";
@@ -36,19 +38,131 @@ export function RiteThemeControls() {
     setTheme(nextTheme);
   }
 
+  return { theme, applyTheme };
+}
+
+function ThemeButtons({ compact = false }: { compact?: boolean }) {
+  const { theme, applyTheme } = useRiteTheme();
+  const buttonClass = (value: "light" | "dark") => `${compact ? "h-10 flex-1 flex-row gap-2" : "h-12 w-12 flex-col gap-0.5"} group flex items-center justify-center text-[9px] font-bold uppercase tracking-[0.06em] transition ${theme === value ? "bg-[#111013] text-white dark:bg-white dark:text-[#111013]" : "text-neutral-400 hover:text-[#111013] dark:hover:text-white"}`;
+
   return (
-    <div className="fixed left-3 top-[104px] z-40 md:left-5 md:top-[148px]">
-      <div className="overflow-hidden rounded-full border border-black/10 bg-white/95 text-[#111013] shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur dark:border-white/15 dark:bg-[#111013]/95 dark:text-white">
-        <button type="button" aria-label="Light theme" onClick={() => applyTheme("light")} className={`group flex h-12 w-12 flex-col items-center justify-center gap-0.5 text-[9px] font-bold uppercase tracking-[0.06em] transition ${theme === "light" ? "bg-[#111013] text-white dark:bg-white dark:text-[#111013]" : "text-neutral-400 hover:text-[#111013] dark:hover:text-white"}`}>
-          <SunIcon />
-          <span>Light</span>
-        </button>
-        <button type="button" aria-label="Dark theme" onClick={() => applyTheme("dark")} className={`group flex h-12 w-12 flex-col items-center justify-center gap-0.5 border-t border-black/10 text-[9px] font-bold uppercase tracking-[0.06em] transition dark:border-white/15 ${theme === "dark" ? "bg-[#111013] text-white dark:bg-white dark:text-[#111013]" : "text-neutral-400 hover:text-[#111013] dark:hover:text-white"}`}>
-          <MoonIcon />
-          <span>Dark</span>
-        </button>
-      </div>
+    <div className={`${compact ? "flex w-full" : "overflow-hidden rounded-full"} border border-black/10 bg-white/95 text-[#111013] shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur dark:border-white/15 dark:bg-[#111013]/95 dark:text-white`}>
+      <button type="button" aria-label="Light theme" onClick={() => applyTheme("light")} className={buttonClass("light")}>
+        <SunIcon />
+        <span>Light</span>
+      </button>
+      <button type="button" aria-label="Dark theme" onClick={() => applyTheme("dark")} className={`${buttonClass("dark")} ${compact ? "border-l" : "border-t"} border-black/10 dark:border-white/15`}>
+        <MoonIcon />
+        <span>Dark</span>
+      </button>
     </div>
+  );
+}
+
+export function RiteThemeControls() {
+  return (
+    <div className="fixed left-3 top-[104px] z-40 hidden md:left-5 md:top-[148px] md:block">
+      <ThemeButtons />
+    </div>
+  );
+}
+
+export function MobileRiteMenu({ active }: { active?: string }) {
+  const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  function closeMenu() {
+    setOpen(false);
+    setServicesOpen(false);
+  }
+
+  return (
+    <>
+      <button
+        type="button"
+        aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+        aria-expanded={open}
+        onClick={() => setOpen((current) => !current)}
+        className="fixed left-4 top-6 z-[70] flex h-12 w-12 items-center justify-center rounded-full bg-[#f7f7f7] shadow-sm transition hover:bg-white md:hidden dark:bg-[#17161a]"
+      >
+        <span className="sr-only">Menu</span>
+        <span className={`${open ? "rotate-45 shadow-none before:rotate-90" : "shadow-[0_7px_0_#1f2937,0_-7px_0_#1f2937] before:rotate-0 dark:shadow-[0_7px_0_#fff,0_-7px_0_#fff]"} relative h-0.5 w-5 bg-neutral-800 transition before:absolute before:left-0 before:top-0 before:h-0.5 before:w-5 before:bg-neutral-800 before:transition dark:bg-white dark:before:bg-white`} />
+      </button>
+
+      {open ? (
+        <>
+          <button type="button" aria-label="Close navigation overlay" className="fixed inset-0 z-[55] bg-[#111013]/55 backdrop-blur-[2px] md:hidden" onClick={closeMenu} />
+          <aside className="fixed inset-y-0 left-0 z-[60] flex w-[min(90vw,370px)] flex-col overflow-y-auto bg-white px-7 pb-8 pt-24 text-[#111013] shadow-2xl md:hidden dark:bg-[#111013] dark:text-white">
+            <button type="button" onClick={closeMenu} className="absolute right-6 top-6 text-4xl font-light leading-none" aria-label="Close menu">×</button>
+            <nav className="flex flex-col text-[20px] font-bold leading-none tracking-[-0.04em]">
+              {navItems.map((item) => item.label === "Services" ? (
+                <div key={item.label} className="border-b border-neutral-200 py-4 dark:border-white/15">
+                  <button
+                    type="button"
+                    onClick={() => setServicesOpen((current) => !current)}
+                    aria-expanded={servicesOpen}
+                    className={`${active === "Services" ? "text-[#09a9d6]" : ""} flex w-full items-center justify-between text-left`}
+                  >
+                    Services
+                    <span className="text-[22px] text-[#09a9d6]">{servicesOpen ? "−" : "+"}</span>
+                  </button>
+                  {servicesOpen ? (
+                    <div className="mt-5 space-y-3 border-l-2 border-[#09a9d6]/35 pl-4 text-[14px] leading-tight tracking-[-0.02em] text-neutral-600 dark:text-white/70">
+                      <Link href="/services/" onClick={closeMenu} className="block font-bold text-[#111013] hover:text-[#09a9d6] dark:text-white">Services</Link>
+                      {serviceMenuItems.map((service) => (
+                        <div key={service.href}>
+                          <Link href={service.href} onClick={closeMenu} className="block font-bold text-[#111013] hover:text-[#09a9d6] dark:text-white">
+                            {service.label}
+                          </Link>
+                          {service.children ? (
+                            <div className="mt-3 space-y-3 pl-3">
+                              {service.children.map((child) => (
+                                <Link key={child.href} href={child.href} onClick={closeMenu} className="block hover:text-[#09a9d6]">
+                                  {child.label}
+                                </Link>
+                              ))}
+                            </div>
+                          ) : null}
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              ) : (
+                <Link key={item.label} href={item.href} onClick={closeMenu} className={`${active === item.label ? "text-[#09a9d6]" : ""} border-b border-neutral-200 py-4 dark:border-white/15`}>
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+
+            <a href={scheduleUrl} target="_blank" rel="noreferrer" onClick={closeMenu} className="mt-8 inline-flex items-center justify-center bg-[#111013] px-5 py-3 text-[11px] font-bold uppercase tracking-[-0.01em] text-white transition hover:brightness-110 dark:bg-white dark:text-[#111013]">
+              Schedule a plumber now <span className="ml-2">→</span>
+            </a>
+            <div className="mt-8 border-t border-neutral-200 pt-6 dark:border-white/15">
+              <p className="text-[12px] font-bold uppercase tracking-[0.1em] text-neutral-400">Follow Us</p>
+              <p className="mt-3 text-[16px] font-bold">
+                {socialLinks.map((social, index) => (
+                  <span key={social.label}>
+                    <a href={social.href} target="_blank" rel="noreferrer" className="hover:text-[#18a9d4]">{social.label}</a>{index < socialLinks.length - 1 ? " / " : ""}
+                  </span>
+                ))}
+              </p>
+            </div>
+            <div className="mt-7 border-t border-neutral-200 pt-6 dark:border-white/15">
+              <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.1em] text-neutral-400">Theme</p>
+              <ThemeButtons compact />
+            </div>
+          </aside>
+        </>
+      ) : null}
+    </>
   );
 }
 
@@ -73,7 +187,7 @@ export function RiteScrollTop() {
         <span className="h-16 w-px bg-[#f22b2b]" />
         Scroll to top
       </span>
-      <span className="fixed bottom-7 right-7 flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-[#f22b2b] text-[20px] font-bold leading-none text-white shadow-lg md:hidden">↑</span>
+      <span className="fixed bottom-6 right-5 flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-[#f22b2b] text-[20px] font-bold leading-none text-white shadow-lg md:hidden">↑</span>
     </button>
   );
 }
@@ -96,8 +210,8 @@ export function HeroVideoButton({ src }: { src: string }) {
 
   return (
     <>
-      <button type="button" aria-label="Play Rite Plumbing video" onClick={() => setOpen(true)} className="mb-8 block rounded-full text-[#111013] transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#18a9d4] dark:text-white">
-        <PlayCircleIcon className="h-16 w-16 drop-shadow-[0_2px_8px_rgba(0,0,0,0.28)]" />
+      <button type="button" aria-label="Play Rite Plumbing video" onClick={() => setOpen(true)} className="mb-5 block rounded-full text-white transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#18a9d4] md:mb-8 md:text-[#111013] dark:text-white">
+        <PlayCircleIcon className="h-14 w-14 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)] md:h-16 md:w-16" />
       </button>
       {open ? createPortal(
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/82 px-4 py-8" role="dialog" aria-modal="true" aria-label="Rite Plumbing video player">

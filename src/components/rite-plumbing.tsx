@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarLineIcon, CreditCardIcon, DocumentStackIcon, RoutePinIcon } from "@/components/icons";
-import { HeroVideoButton, RiteThemeControls } from "@/components/rite-interactions";
+import { HeroVideoButton, MobileRiteMenu, RiteThemeControls } from "@/components/rite-interactions";
 import { documents, features, heroVideoUrl, navItems, news, scheduleUrl, serviceMenuItems, serviceRouteSlugs, socialLinks, uploadDocumentsUrl, type ServicePageContent } from "@/lib/rite-content";
 import type { ServiceFeature } from "@/types/rite-plumbing";
 
@@ -61,14 +61,15 @@ function FeatureIcon({ icon }: { icon: ServiceFeature["icon"] }) {
 export function RiteHeader({ active }: { active?: string }) {
   return (
     <>
-      <div className="fixed left-4 top-8 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-[#f7f7f7] shadow-sm md:left-5 md:top-12 md:h-14 md:w-14">
+      <MobileRiteMenu active={active} />
+      <div className="fixed left-4 top-8 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-[#f7f7f7] shadow-sm md:left-5 md:top-12 md:flex md:h-14 md:w-14">
         <span className="h-0.5 w-5 bg-neutral-800 shadow-[0_7px_0_#1f2937,0_-7px_0_#1f2937]" />
       </div>
       <div className="fixed right-3 top-1/2 z-40 hidden -translate-y-1/2 rotate-180 text-[13px] font-bold text-[#111013] [writing-mode:vertical-rl] dark:text-white md:block">
         Follow Us — <SocialLinks />
       </div>
       <RiteThemeControls />
-      <header className="relative z-30 mx-auto flex max-w-[1320px] items-center justify-between px-20 py-6 md:py-8">
+      <header className="relative z-30 mx-auto flex max-w-[1320px] items-center justify-between px-7 py-5 pl-20 md:px-20 md:py-8">
         <Link href="/" className="shrink-0">
           <Image src="/images/riteplumbing/logo.webp" alt="Professional Plumbing Services" width={253} height={75} className="h-auto w-[150px] md:w-[230px]" priority />
         </Link>
@@ -104,7 +105,7 @@ export function RiteHeader({ active }: { active?: string }) {
             </Link>
           ))}
         </nav>
-        <CtaButton dark>Schedule a plumber now</CtaButton>
+        <div className="hidden md:block"><CtaButton dark>Schedule a plumber now</CtaButton></div>
       </header>
     </>
   );
@@ -137,23 +138,24 @@ export function HomePage() {
   return (
     <main id="home" className="rite-page min-h-screen overflow-hidden bg-white text-[#18171c] dark:bg-[#111013] dark:text-white">
       <RiteHeader active="Home" />
-      <section className="relative mx-auto grid max-w-[1320px] px-7 pb-8 md:min-h-[720px] md:grid-cols-[0.96fr_1fr] md:items-start md:px-0 md:pb-0">
-        <div className="rite-bg-hero min-h-[560px] bg-cover bg-center md:min-h-[720px]" />
-        <div className="relative -mt-[500px] flex min-h-[560px] flex-col justify-center px-5 text-white md:-ml-28 md:mt-0 md:min-h-[720px] md:px-0">
+      <section className="relative mx-auto grid max-w-[1320px] pb-8 md:min-h-[720px] md:grid-cols-[0.96fr_1fr] md:items-start md:pb-0">
+        <div className="rite-bg-hero min-h-[590px] bg-cover bg-center md:min-h-[720px]" />
+        <div className="relative -mt-[590px] flex min-h-[590px] flex-col justify-center overflow-hidden px-7 py-10 text-white md:-ml-28 md:mt-0 md:min-h-[720px] md:overflow-visible md:px-0 md:py-0">
           <div className="absolute top-4 -left-24 -z-0 hidden aspect-square h-[720px] rounded-full bg-[#19a9d4]/78 md:block" />
-          <div className="absolute inset-0 -z-0 bg-[#18a9d4]/72 md:hidden" />
+          <div className="absolute -left-28 top-6 -z-0 aspect-square h-[680px] rounded-full bg-[#18a9d4]/64 md:hidden" />
+          <div className="absolute inset-0 -z-0 bg-gradient-to-r from-[#18a9d4]/68 via-[#18a9d4]/54 to-[#111013]/18 md:hidden" />
           <div className="relative z-10 max-w-[540px] text-shadow-sm md:pt-10">
             <HeroVideoButton src={heroVideoUrl} />
-            <h1 className="max-w-[520px] text-[32px] font-bold leading-[0.95] tracking-[-0.06em] md:text-[47px]">Rite Plumbing NYC | Your Plumbing Solution</h1>
-            <div className="my-7 h-px w-full bg-white/65" />
-            <PhoneLink className="block text-[37px] font-bold leading-none tracking-[-0.06em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)] md:text-[55px]">(347) 502-6441</PhoneLink>
-            <p className="mt-5 max-w-[470px] text-[24px] font-bold leading-[1.08] tracking-[-0.05em] drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)] md:text-[37px]">24/7 Plumbing services Less than 30 minutes to arrive!</p>
-            <div className="my-8 h-px w-44 bg-white/65" />
-            <p className="text-[16px] font-bold leading-tight tracking-[-0.04em] drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">Licensed and Insured<br />Plumbing License: 1608</p>
-            <div className="mt-8"><CtaButton dark>Schedule a plumber now</CtaButton></div>
+            <h1 className="max-w-[520px] text-[31px] font-bold leading-[0.98] tracking-[-0.06em] md:text-[47px]">Rite Plumbing NYC | Your Plumbing Solution</h1>
+            <div className="my-5 h-px w-full bg-white/65 md:my-7" />
+            <PhoneLink className="block text-[34px] font-bold leading-none tracking-[-0.06em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)] md:text-[55px]">(347) 502-6441</PhoneLink>
+            <p className="mt-4 max-w-[470px] text-[22px] font-bold leading-[1.08] tracking-[-0.05em] drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)] md:mt-5 md:text-[37px]">24/7 Plumbing services Less than 30 minutes to arrive!</p>
+            <div className="my-6 h-px w-44 bg-white/65 md:my-8" />
+            <p className="text-[15px] font-bold leading-tight tracking-[-0.04em] drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)] md:text-[16px]">Licensed and Insured<br />Plumbing License: 1608</p>
+            <div className="mt-6 md:mt-8"><CtaButton dark>Schedule a plumber now</CtaButton></div>
           </div>
         </div>
-        <p className="absolute bottom-2 left-7 rounded-full bg-black/45 px-3 py-1 text-[11px] font-bold text-white shadow-sm md:bottom-4 md:left-[720px]">750 Lexington Ave, New York, NY 10022</p>
+        <p className="absolute bottom-5 left-7 rounded-full bg-black/45 px-3 py-1 text-[11px] font-bold text-white shadow-sm md:bottom-4 md:left-[720px]">750 Lexington Ave, New York, NY 10022</p>
       </section>
       <section id="services" className="bg-[#111013] text-white">
         <div className="mx-auto grid max-w-[1220px] gap-12 px-7 py-20 md:grid-cols-[0.85fr_1.35fr] md:px-0 md:py-24">
@@ -220,14 +222,14 @@ export function ServicePage({ page }: { page: ServicePageContent }) {
       <section className="mx-auto grid max-w-[1320px] md:grid-cols-[0.9fr_1fr]">
         <div className="grid content-start gap-0">
           {page.images.map((src, index) => (
-            <div key={src} className={`${index === 0 ? "h-[390px] md:h-[470px]" : "h-[300px] md:h-[350px]"} relative bg-neutral-100 dark:bg-[#17161a]`}>
+            <div key={src} className={`${index === 0 ? "h-[310px] md:h-[470px]" : "hidden h-[230px] md:relative md:block md:h-[350px]"} relative bg-neutral-100 dark:bg-[#17161a]`}>
               <Image src={src} alt={`${page.title} service photo ${index + 1}`} fill className="object-cover" sizes="(min-width: 768px) 48vw, 100vw" priority={index === 0} />
             </div>
           ))}
         </div>
-        <article className="px-8 py-12 md:px-20 md:py-20">
-          <Link href="/" className="mb-10 block text-3xl">←</Link>
-          <h1 className="max-w-[650px] text-[42px] font-bold leading-[0.95] tracking-[-0.065em] md:text-[64px]">{page.title}</h1>
+        <article className="px-7 py-10 md:px-20 md:py-20">
+          <Link href="/services/" className="mb-8 block text-3xl md:mb-10">←</Link>
+          <h1 className="max-w-[650px] text-[36px] font-bold leading-[0.97] tracking-[-0.065em] md:text-[64px]">{page.title}</h1>
           <h2 className="mt-7 text-[24px] font-bold tracking-[-0.04em]">{page.eyebrow}</h2>
           {page.intro.map((paragraph) => <p key={paragraph} className="mt-4 max-w-[650px] text-[16px] font-medium leading-relaxed text-neutral-700 dark:text-white/70"><TextWithPhone text={paragraph} className="font-bold" /></p>)}
           <h2 className="mt-9 max-w-[680px] text-[30px] font-bold leading-tight tracking-[-0.055em] md:text-[40px]">{page.sectionTitle}</h2>
@@ -236,9 +238,16 @@ export function ServicePage({ page }: { page: ServicePageContent }) {
           <ul className="mt-4 list-disc space-y-2 pl-7 text-[16px] leading-relaxed text-neutral-700 dark:text-white/70">{page.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
           <h2 className="mt-9 max-w-[620px] text-[30px] font-bold leading-tight tracking-[-0.055em] md:text-[38px]">{page.closingTitle}</h2>
           <p className="mt-5 max-w-[680px] text-[16px] leading-relaxed text-neutral-700 dark:text-white/70"><TextWithPhone text={page.closing} className="font-bold" /></p>
+          <div className="mt-9 grid gap-4 md:hidden">
+            {page.images.slice(1).map((src, index) => (
+              <div key={src} className="relative h-[220px] bg-neutral-100 dark:bg-[#17161a]">
+                <Image src={src} alt={`${page.title} service photo ${index + 2}`} fill className="object-cover" sizes="100vw" />
+              </div>
+            ))}
+          </div>
         </article>
       </section>
-      <section className="bg-white px-7 py-16 dark:bg-[#111013] md:py-20">
+      <section className="bg-white px-7 py-12 dark:bg-[#111013] md:py-20">
         <div className="mx-auto max-w-[780px]">
           <h2 className="text-[28px] font-bold tracking-[-0.05em]">We Will Arrive In Less Than 30-minutes.</h2>
           <p className="mt-8 text-[16px] leading-relaxed text-neutral-500 dark:text-white/55">24/7 Emergency Plumbing Service in QUEENS, BROOKLYN, AND MANHATTAN. Schedule an emergency commercial plumber through our online calendar.</p>
@@ -301,11 +310,11 @@ export function AboutPage() {
 }
 
 export function ContactPage() {
-  return <main className="rite-page min-h-screen bg-white text-[#111013] dark:bg-[#111013] dark:text-white"><RiteHeader active="Contact" /><SimpleHero title="Contact" subtitle="Leave us a little info, and we’ll be in touch.\nSend Us an Email" /><section className="grid md:grid-cols-2"><div className="h-[420px] bg-[url('/images/riteplumbing/services/residential-plumbing-services-repairs-1.jpg.webp')] bg-cover bg-center md:h-[520px]" /><div className="grid md:grid-cols-2"><div className="bg-[#111013] p-16 text-white md:p-24"><p className="text-3xl">▰</p><h2 className="mt-12 text-[28px] font-bold">Get in touch</h2><p className="mt-10 text-[18px] leading-loose"><a href="mailto:info@riteplumbingnyc.com">info@riteplumbingnyc.com</a><br /><PhoneLink><strong>347 502 6441</strong></PhoneLink><br /><br />Assistance hours:<br />24/7 Services</p></div><div className="bg-[#17161a] p-16 text-white md:p-24"><p className="text-3xl">✉</p><h2 className="mt-12 text-[28px] font-bold">Rite Plumbing & Heating Inc</h2><p className="mt-10 text-[18px] font-bold leading-relaxed">750 Lexington Ave, 9th Floor New York, NY 10022 United States</p></div></div></section><section className="bg-[#f7f6f7] px-7 py-16 md:px-0"><div className="mx-auto max-w-[1220px]"><p className="text-[16px] font-bold uppercase">Careers</p><div className="mt-6 flex items-center justify-between border-b border-neutral-400 pb-14"><h2 className="text-[58px] font-bold tracking-[-0.06em]">Join our team.</h2><CtaButton dark>Upload Resume</CtaButton></div><p className="mt-10 max-w-[760px] text-[18px] leading-relaxed">Join our plumbing team that values trust, quality, and innovation. We offer growth opportunities and a supportive work environment.</p></div></section><RiteFooter /></main>;
+  return <main className="rite-page min-h-screen bg-white text-[#111013] dark:bg-[#111013] dark:text-white"><RiteHeader active="Contact" /><SimpleHero title="Contact" subtitle="Leave us a little info, and we’ll be in touch.\nSend Us an Email" /><section className="grid md:grid-cols-2"><div className="h-[420px] bg-[url('/images/riteplumbing/services/residential-plumbing-services-repairs-1.jpg.webp')] bg-cover bg-center md:h-[520px]" /><div className="grid md:grid-cols-2"><div className="bg-[#111013] p-8 text-white md:p-24"><p className="text-3xl">▰</p><h2 className="mt-12 text-[28px] font-bold">Get in touch</h2><p className="mt-10 text-[18px] leading-loose"><a href="mailto:info@riteplumbingnyc.com">info@riteplumbingnyc.com</a><br /><PhoneLink><strong>347 502 6441</strong></PhoneLink><br /><br />Assistance hours:<br />24/7 Services</p></div><div className="bg-[#17161a] p-8 text-white md:p-24"><p className="text-3xl">✉</p><h2 className="mt-12 text-[28px] font-bold">Rite Plumbing & Heating Inc</h2><p className="mt-10 text-[18px] font-bold leading-relaxed">750 Lexington Ave, 9th Floor New York, NY 10022 United States</p></div></div></section><section className="bg-[#f7f6f7] px-7 py-16 md:px-0"><div className="mx-auto max-w-[1220px]"><p className="text-[16px] font-bold uppercase">Careers</p><div className="mt-6 flex flex-col items-start justify-between gap-6 border-b border-neutral-400 pb-10 md:flex-row md:items-center md:pb-14"><h2 className="text-[42px] font-bold tracking-[-0.06em] md:text-[58px]">Join our team.</h2><CtaButton dark>Upload Resume</CtaButton></div><p className="mt-10 max-w-[760px] text-[18px] leading-relaxed">Join our plumbing team that values trust, quality, and innovation. We offer growth opportunities and a supportive work environment.</p></div></section><RiteFooter /></main>;
 }
 
 function SimpleHero({ title, subtitle, crumb }: { title: string; subtitle?: string; crumb?: string }) {
-  return <section className="mx-auto max-w-[1220px] px-7 pb-16 pt-20 md:px-0 md:pb-28 md:pt-28"><Link href="/" className="mb-16 block text-3xl">←</Link>{crumb ? <p className="mb-7 text-[14px] font-bold text-neutral-400">{crumb}</p> : null}<h1 className="text-[64px] font-bold leading-none tracking-[-0.065em] md:text-[88px]">{title}</h1>{subtitle ? <p className="mt-8 whitespace-pre-line text-[22px] leading-relaxed">{subtitle}</p> : null}</section>;
+  return <section className="mx-auto max-w-[1220px] px-7 pb-12 pt-16 md:px-0 md:pb-28 md:pt-28"><Link href="/" className="mb-10 block text-3xl md:mb-16">←</Link>{crumb ? <p className="mb-7 text-[14px] font-bold text-neutral-400">{crumb}</p> : null}<h1 className="text-[54px] font-bold leading-none tracking-[-0.065em] md:text-[88px]">{title}</h1>{subtitle ? <p className="mt-8 whitespace-pre-line text-[22px] leading-relaxed">{subtitle}</p> : null}</section>;
 }
 
 export const routeSlugs = serviceRouteSlugs.concat(["blog", "video", "about-us", "contact"]);
