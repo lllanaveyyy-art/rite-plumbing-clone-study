@@ -158,3 +158,26 @@
     background-image: url("/images/riteplumbing/team.jpg");
   }
 }
+
+@layer base {
+  .dark main,
+  .dark section.bg-white,
+  .dark article.bg-white {
+    background-color: #111013;
+    color: #f7f7f7;
+  }
+
+  .dark .bg-\[\#f7f6f7\],
+  .dark .bg-\[\#f7f7f7\] {
+    background-color: #17161a;
+  }
+
+  .dark .text-\[\#111013\],
+  .dark .text-\[\#18171c\],
+  .dark .text-neutral-900,
+  .dark .text-neutral-700,
+  .dark .text-neutral-600,
+  .dark .text-neutral-500 {
+    color: rgb(255 255 255 / 0.78);
+  }
+}

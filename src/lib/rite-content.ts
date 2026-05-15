@@ -24,20 +24,20 @@ export const navItems: NavigationItem[] = [
 ];
 
 export const serviceMenuItems: NavigationItem[] = [
-  { label: "24/7 Plumbing Services", href: "/24-7-plumbing-services/" },
-  { label: "Bathroom Plumbing & Shower Repair", href: "/bathroom-plumbing-shower-repair/" },
-  { label: "Clogged Toilet Repairs & Installation", href: "/clogged-toilet-repairs-installation/" },
-  { label: "Professional Drain Clogged Services", href: "/professional-drain-clogged-services/" },
-  { label: "Emergency Plumber Repair", href: "/emergency-plumber-repair/" },
-  { label: "Faucet, Fixture, Sink Plumbing And Installation", href: "/faucet-fixture-sink-plumbing-and-installation/" },
-  { label: "Garbage Disposal Repair And Replacement", href: "/garbage-disposal-repair-and-replacement/" },
-  { label: "Gas Leak Repair Service", href: "/gas-leak-repair-service/" },
-  { label: "Hot Water Heater Repair & Installation", href: "/hot-water-heater-repair-installation/" },
-  { label: "Radiator Valve Repair & Installation", href: "/radiator-valve-repair-installation/" },
-  { label: "Sump Pump Installation, Maintenance & Repairs", href: "/sump-pump-installation-maintenance-repairs/" },
-  { label: "Tankless Water Heater Repair & Installation", href: "/tankless-water-heater-repair-installation/" },
-  { label: "Commercial Plumbing", href: "/commercial-plumbing/" },
-  { label: "Residential Plumbing Services & Repairs", href: "/residential-plumbing-services-repairs/" },
+  { label: "24/7 Plumbing Services", href: "/services/24-7-plumbing-services/" },
+  { label: "Bathroom Plumbing & Shower Repair", href: "/services/bathroom-plumbing-shower-repair/" },
+  { label: "Clogged Toilet Repairs & Installation", href: "/services/clogged-toilet-repairs-installation/" },
+  { label: "Professional Drain Clogged Services", href: "/services/drain-clogged-services/" },
+  { label: "Emergency Plumber Repair", href: "/services/emergency-plumber-repair/" },
+  { label: "Faucet, Fixture, Sink Plumbing And Installation", href: "/services/faucet-fixture-sink-plumbing-and-installation/" },
+  { label: "Garbage Disposal Repair And Replacement", href: "/services/garbage-disposal-repair-and-replacement/" },
+  { label: "Gas Leak Repair Service", href: "/services/gas-leak-repair-service/" },
+  { label: "Hot Water Heater Repair & Installation", href: "/services/hot-water-heater-repair-installation/" },
+  { label: "Radiator Valve Repair & Installation", href: "/services/radiator-valve-repair-installation/" },
+  { label: "Sump Pump Installation, Maintenance & Repairs", href: "/services/sump-pump-installation-maintenance-repairs/" },
+  { label: "Tankless Water Heater Repair & Installation", href: "/services/tankless-water-heater-repair-installation/" },
+  { label: "Commercial Plumbing", href: "/services/commercial-plumbing/" },
+  { label: "Residential Plumbing Services & Repairs", href: "/services/residential-plumbing-services-repairs/" },
 ];
 
 export const features: ServiceFeature[] = [
