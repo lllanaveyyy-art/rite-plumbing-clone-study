@@ -181,13 +181,13 @@ export function RiteScrollTop() {
       type="button"
       aria-label="Back to top"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className={`fixed z-50 transition ${visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"}`}
+      className={`fixed bottom-6 right-5 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-[#f22b2b] text-[20px] font-bold leading-none text-white shadow-lg transition md:bottom-auto md:right-auto md:left-5 md:top-[295px] md:h-auto md:w-auto md:rounded-none md:border-0 md:bg-transparent md:text-[#111013] md:shadow-none md:dark:text-white ${visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"}`}
     >
-      <span className="hidden items-center gap-3 text-[11px] font-bold uppercase tracking-[0.08em] text-[#111013] dark:text-white md:fixed md:left-5 md:top-[295px] md:flex md:[writing-mode:vertical-rl]">
+      <span className="hidden items-center gap-3 text-[11px] font-bold uppercase tracking-[0.08em] md:flex md:[writing-mode:vertical-rl]">
         <span className="h-16 w-px bg-[#f22b2b]" />
         Scroll to top
       </span>
-      <span className="fixed bottom-6 right-5 flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-[#f22b2b] text-[20px] font-bold leading-none text-white shadow-lg md:hidden">↑</span>
+      <span className="md:hidden">↑</span>
     </button>
   );
 }
