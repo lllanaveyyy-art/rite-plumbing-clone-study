@@ -1,41 +1,103 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { RiteFooter, RiteHeader } from "@/components/rite-plumbing";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import {
+  FinalCTA,
+  GasSafetyNotice,
+  SiteShell,
+} from "@/components/rite-plumbing";
 import { news } from "@/lib/rite-content";
+import { pageMetadata } from "@/lib/metadata";
 
+type Props = { params: Promise<{ slug: string }> };
 export function generateStaticParams() {
   return news.map((article) => ({ slug: article.slug }));
 }
-
-export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const article = news.find((item) => item.slug === slug);
+  return article
+    ? {
+        ...pageMetadata(
+          article.title,
+          article.excerpt,
+          `/blog/${article.slug}`,
+          article.image,
+        ),
+        openGraph: {
+          type: "article",
+          title: article.title,
+          description: article.excerpt,
+          images: [article.image],
+        },
+      }
+    : {};
+}
+export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const article = news.find((item) => item.slug === slug);
   if (!article) notFound();
-
   return (
-    <main className="rite-page min-h-screen bg-white text-[#111013] dark:bg-[#111013] dark:text-white">
-      <RiteHeader active="Blog" />
-      <article className="mx-auto max-w-[860px] px-7 py-16 md:px-0 md:py-20">
-        <Link href="/blog/" className="mb-10 block text-3xl">←</Link>
-        <p className="text-[12px] font-bold text-neutral-400">Posted by SEO RankZenith</p>
-        <p className="mt-2 text-[12px] font-bold text-neutral-400">{article.date} · {article.readTime}</p>
-        <h1 className="mt-6 text-[48px] font-bold leading-tight tracking-[-0.06em] md:text-[72px]">{article.title}</h1>
-        <p className="mt-8 text-[13px] font-bold text-neutral-500">{article.category}</p>
-        <div className="relative mt-8 h-[300px] overflow-hidden bg-neutral-200 dark:bg-[#17161a] md:h-[430px]">
-          <Image src={article.image} alt={article.title} fill className="object-cover" sizes="(min-width: 768px) 860px, 100vw" priority />
+    <SiteShell active="Tips & advice">
+      <article className="mx-auto max-w-[900px] px-5 py-12 sm:px-8 sm:py-16">
+        <Link
+          href="/blog"
+          className="inline-flex items-center gap-2 text-xs font-bold text-muted-foreground"
+        >
+          <ArrowLeft size={15} aria-hidden="true" />
+          All tips & advice
+        </Link>
+        <div className="mt-9 flex items-center gap-3 text-xs font-semibold">
+          <span className="text-accent">{article.category}</span>
+          <span className="text-muted-foreground">{article.readTime}</span>
         </div>
-        {article.secondaryImage ? (
-          <div className="relative mt-6 h-[260px] overflow-hidden bg-neutral-200 dark:bg-[#17161a] md:h-[360px]">
-            <Image src={article.secondaryImage} alt={`${article.title} detail`} fill className="object-cover" sizes="(min-width: 768px) 860px, 100vw" />
-          </div>
-        ) : null}
-        <div className="mt-8 space-y-6 text-[18px] leading-relaxed text-neutral-600 dark:text-white/70">
-          <p>{article.excerpt}</p>
-          <p>Rite Plumbing & Heating keeps the original local-service blog rhythm here with concise plumbing guidance and clear calls to contact a licensed NYC plumber when a problem needs professional help.</p>
+        <h1 className="mt-4 text-[38px] font-bold leading-[1.12] tracking-[-0.045em] sm:text-[54px]">
+          {article.title}
+        </h1>
+        <p className="mt-5 text-lg leading-8 text-muted-foreground">
+          {article.excerpt}
+        </p>
+        <div className="relative my-9 h-[270px] overflow-hidden rounded-xl bg-sand sm:h-[430px]">
+          <Image
+            src={article.image}
+            alt={article.title}
+            fill
+            preload
+            sizes="(min-width: 900px) 836px, 92vw"
+            className="object-cover"
+          />
+        </div>
+        <div className="mx-auto max-w-[700px]">
+          {article.category === "Safety" ? <GasSafetyNotice /> : null}
+          <p className="mb-7 text-xs text-muted-foreground">
+            Advice from Rite Plumbing & Heating · Updated October 2026
+          </p>
+          {article.sections.map((section) => (
+            <section key={section.title} className="mb-8">
+              <h2 className="text-2xl font-bold tracking-tight">
+                {section.title}
+              </h2>
+              <p className="mt-3 text-base leading-8 text-muted-foreground">
+                {section.text}
+              </p>
+            </section>
+          ))}
+          <Link
+            href="/services"
+            className="mt-3 inline-flex items-center gap-2 text-sm font-bold"
+          >
+            Find the right plumbing service{" "}
+            <ArrowUpRight
+              size={16}
+              className="text-accent"
+              aria-hidden="true"
+            />
+          </Link>
         </div>
       </article>
-      <RiteFooter />
-    </main>
+      <FinalCTA />
+    </SiteShell>
   );
 }
