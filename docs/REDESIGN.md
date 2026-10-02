@@ -44,3 +44,5 @@ Petri Plumbing and Roto-Rooter’s NYC service pages were used as references for
 - Gas safety: https://www.coned.com/en/safety/energy-safety/gas-safety/gas-leak-faq
 
 Copy-edit validation: `npm run check` passed. All 76 homepage, content, article, and current/legacy service routes returned successfully; removed slogans were absent and booking links remained present. Browser checks are performed on the Vercel preview because Chromium could not be installed in the local execution environment.
+
+The Vercel preview passed desktop browser checks for all 14 service pages, six articles, the service index, company page, contact page, and video page, with no horizontal overflow or application console errors. The services menu and FAQ opened correctly; an invalid ZIP code blocked the email form, while valid details produced an unsent email draft. The homepage was also inspected visually. The existing mobile CSS and booking integration were preserved.

@@ -255,7 +255,7 @@ export function HomePage() {
                 24/7
               </span>
               <span className="mt-1.5 text-[8px] font-bold uppercase tracking-[0.13em] sm:text-[9px]">
-                Emergency service
+                Emergency
               </span>
             </div>
             <div className="absolute -bottom-7 left-5 right-5 flex items-center gap-4 rounded-xl border border-border bg-white px-5 py-4 shadow-[0_10px_35px_rgba(16,46,60,0.08)] sm:left-7 sm:right-auto sm:min-w-[335px]">
