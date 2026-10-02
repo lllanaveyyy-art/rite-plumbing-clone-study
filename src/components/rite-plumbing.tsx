@@ -1,208 +1,743 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CalendarLineIcon, CreditCardIcon, DocumentStackIcon, RoutePinIcon } from "@/components/icons";
-import { HeroVideoButton, MobileRiteMenu, RiteThemeControls } from "@/components/rite-interactions";
-import { documents, features, heroVideoUrl, navItems, news, scheduleUrl, serviceMenuItems, serviceRouteSlugs, socialLinks, uploadDocumentsUrl, type ServicePageContent } from "@/lib/rite-content";
-import type { ServiceFeature } from "@/types/rite-plumbing";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  BadgeCheck,
+  Building2,
+  CalendarDays,
+  Check,
+  CheckCircle2,
+  Clock3,
+  Droplet,
+  FileCheck2,
+  Flame,
+  House,
+  Mail,
+  MapPin,
+  Phone,
+  Plus,
+  ShieldCheck,
+  Waves,
+  Wrench,
+} from "lucide-react";
+import {
+  MobileActionBar,
+  RequestForm,
+  SiteNavigation,
+} from "@/components/rite-interactions";
+import {
+  company,
+  documents,
+  faqs,
+  heroVideoUrl,
+  news,
+  scheduleUrl,
+  servicePages,
+  serviceRouteSlugs,
+  socialLinks,
+  uploadDocumentsUrl,
+  type ServiceIcon,
+  type ServicePageContent,
+} from "@/lib/rite-content";
 
-function CtaButton({ children, dark = false, href = scheduleUrl }: { children: React.ReactNode; dark?: boolean; href?: string }) {
-  const className = `${dark ? "bg-[#111013] text-white dark:bg-white dark:text-[#111013]" : "bg-[#f22b2b] text-white"} inline-flex items-center justify-center px-5 py-3 text-[11px] font-bold uppercase tracking-[-0.01em] transition hover:brightness-110`;
-
-  if (href.startsWith("http")) {
-    return <a href={href} target="_blank" rel="noreferrer" className={className}>{children} <span className="ml-2">→</span></a>;
-  }
-
+export function BrandLogo({ light = false }: { light?: boolean }) {
   return (
-    <Link href={href} className={className}>
-      {children} <span className="ml-2">→</span>
+    <Link
+      href="/"
+      aria-label="Rite Plumbing & Heating home"
+      className={`inline-flex shrink-0 items-center gap-3 ${light ? "text-white" : "text-ink"}`}
+    >
+      <span className="flex h-11 w-11 items-center justify-center rounded-[11px] bg-accent text-white">
+        <Droplet size={25} strokeWidth={2.1} aria-hidden="true" />
+      </span>
+      <span>
+        <span className="block text-[29px] font-extrabold leading-none tracking-[-0.06em]">
+          RITE<span className="text-accent">.</span>
+        </span>
+        <span
+          className={`mt-1 block text-[9px] font-semibold uppercase tracking-[0.12em] ${light ? "text-white/75" : "text-muted-foreground"}`}
+        >
+          Plumbing & Heating
+        </span>
+      </span>
     </Link>
   );
 }
 
-function SocialLinks({ className = "" }: { className?: string }) {
-  return (
-    <span className={className}>
-      {socialLinks.map((social, index) => (
-        <span key={social.label}>
-          <a href={social.href} target="_blank" rel="noreferrer" className="hover:text-[#18a9d4]">{social.label}</a>{index < socialLinks.length - 1 ? " / " : ""}
-        </span>
-      ))}
-    </span>
-  );
-}
-
-
-function PhoneLink({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <a href="tel:3475026441" className={`hover:text-[#18a9d4] ${className}`}>{children}</a>;
-}
-
-function TextWithPhone({ text, className = "" }: { text: string; className?: string }) {
-  const phonePattern = /(\(347\)\s*502-6441|347[-\s]502[-\s]6441)/g;
-  const exactPhonePattern = /^(\(347\)\s*502-6441|347[-\s]502[-\s]6441)$/;
-  const parts = text.split(phonePattern);
-
-  return (
-    <>
-      {parts.map((part, index) => exactPhonePattern.test(part) ? (
-        <PhoneLink key={`${part}-${index}`} className={className}>{part}</PhoneLink>
-      ) : part)}
-    </>
-  );
-}
-
-function FeatureIcon({ icon }: { icon: ServiceFeature["icon"] }) {
-  const className = "h-8 w-8 text-white/80";
-  if (icon === "calendar") return <CalendarLineIcon className={className} />;
-  if (icon === "route") return <RoutePinIcon className={className} />;
-  if (icon === "document") return <DocumentStackIcon className={className} />;
-  return <CreditCardIcon className={className} />;
-}
-
 export function RiteHeader({ active }: { active?: string }) {
   return (
+    <header className="sticky top-0 z-50 border-b border-border bg-white/97 backdrop-blur-lg">
+      <div className="bg-ink text-white">
+        <div className="site-container flex min-h-8 items-center justify-between gap-4 text-[11px] font-medium">
+          <span className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#ffad80]" />
+            24/7 emergency plumbing. We’re here to help.
+          </span>
+          <span className="hidden items-center gap-1.5 text-white/75 sm:flex">
+            <MapPin size={12} aria-hidden="true" />
+            Manhattan · Brooklyn · Queens
+          </span>
+          <a href={company.phoneHref} className="font-bold sm:hidden">
+            Call now <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+      <div className="site-container flex h-[78px] items-center justify-between gap-6 lg:h-[88px]">
+        <BrandLogo />
+        <SiteNavigation active={active} />
+      </div>
+    </header>
+  );
+}
+
+export function SiteShell({
+  children,
+  active,
+}: {
+  children: React.ReactNode;
+  active?: string;
+}) {
+  return (
     <>
-      <MobileRiteMenu active={active} />
-      <div className="fixed left-4 top-8 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-[#f7f7f7] shadow-sm md:left-5 md:top-12 md:flex md:h-14 md:w-14">
-        <span className="h-0.5 w-5 bg-neutral-800 shadow-[0_7px_0_#1f2937,0_-7px_0_#1f2937]" />
-      </div>
-      <div className="fixed right-3 top-1/2 z-40 hidden -translate-y-1/2 rotate-180 text-[13px] font-bold text-[#111013] [writing-mode:vertical-rl] dark:text-white md:block">
-        Follow Us — <SocialLinks />
-      </div>
-      <RiteThemeControls />
-      <header className="relative z-30 mx-auto flex max-w-[1320px] items-center justify-between px-7 py-5 pl-20 md:px-20 md:py-8">
-        <Link href="/" className="shrink-0">
-          <Image src="/images/riteplumbing/logo.webp" alt="Professional Plumbing Services" width={253} height={75} className="h-auto w-[150px] md:w-[230px]" priority />
-        </Link>
-        <nav className="hidden items-center gap-8 text-[16px] font-bold md:flex">
-          {navItems.map((item) => item.label === "Services" ? (
-            <div key={item.label} className="group relative py-4">
-              <button className={`${active === "Services" ? "text-[#09a9d6]" : "text-[#111013] dark:text-white"} hover:text-[#09a9d6]`}>Services</button>
-              <div className="invisible absolute left-0 top-full w-[355px] translate-y-2 border border-black/10 bg-white px-0 py-3 opacity-0 shadow-xl transition group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 dark:border-white/15 dark:bg-[#111013]">
-                <Link href="/services/" className="block border-b border-neutral-200 px-5 pb-3 text-[14px] font-bold text-[#111013] hover:text-[#09a9d6] dark:border-white/15 dark:text-white">Services</Link>
-                <div className="py-2">
-                  {serviceMenuItems.map((service) => (
-                    <div key={service.href}>
-                      <Link href={service.href} className="block px-5 py-2 text-[13px] font-bold leading-tight text-[#111013] hover:text-[#09a9d6] dark:text-white">
-                        {service.label}
-                      </Link>
-                      {service.children ? (
-                        <div className="pb-1 pl-5">
-                          {service.children.map((child) => (
-                            <Link key={child.href} href={child.href} className="block px-5 py-1.5 text-[12px] font-bold leading-tight text-neutral-500 hover:text-[#09a9d6] dark:text-white/60">
-                              → {child.label}
-                            </Link>
-                          ))}
-                        </div>
-                      ) : null}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ) : (
-            <Link key={item.label} href={item.href} className={`${active === item.label ? "text-[#09a9d6]" : "text-[#111013] dark:text-white"} hover:text-[#09a9d6]`}>
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="hidden md:block"><CtaButton dark>Schedule a plumber now</CtaButton></div>
-      </header>
+      <RiteHeader active={active} />
+      <main id="main-content">{children}</main>
+      <RiteFooter />
+      <MobileActionBar />
     </>
   );
 }
 
-export function RiteFooter() {
+export function BookButton({
+  dark = false,
+  label = "Book a service",
+}: {
+  dark?: boolean;
+  label?: string;
+}) {
   return (
-    <footer className="bg-[#111013] px-7 py-20 text-white md:px-0 md:py-28">
-      <div className="mx-auto grid max-w-[1220px] gap-12 md:grid-cols-[1.2fr_1fr_1fr_1fr]">
-        <div className="flex items-end"><p className="text-[16px] font-bold text-white/65"><SocialLinks /></p></div>
-        <div>
-          <h4 className="text-[15px] font-bold text-white/35">Quick Links</h4>
-          <div className="mt-12 grid gap-3 text-[15px] font-bold text-white/55"><Link href="/about-us/#history" className="hover:text-white">History</Link><Link href="/about-us/#faq" className="hover:text-white">FAQ</Link><Link href="/about-us/#licensed-plumber" className="hover:text-white">Why Hired Licensed Plumber</Link></div>
-        </div>
-        <div>
-          <h4 className="text-[15px] font-bold text-white/35">Mission</h4>
-          <div className="mt-12 grid gap-3 text-[15px] font-bold text-white/55"><Link href="/about-us/#mission" className="hover:text-white">Mission Statement</Link><Link href="/video/" className="hover:text-white">Videos</Link></div>
-        </div>
-        <div className="flex items-center"><CtaButton>Schedule Plumber Now</CtaButton></div>
+    <a
+      href={scheduleUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`btn ${dark ? "btn-dark" : "btn-primary"}`}
+    >
+      {label}
+      <ArrowRight size={17} aria-hidden="true" />
+    </a>
+  );
+}
+
+export function ServiceGlyph({
+  icon,
+  className = "",
+}: {
+  icon: ServiceIcon;
+  className?: string;
+}) {
+  const Icon = {
+    emergency: Clock3,
+    drain: Waves,
+    water: Droplet,
+    faucet: Wrench,
+    home: House,
+    building: Building2,
+    heat: Flame,
+    gas: ShieldCheck,
+  }[icon];
+  return (
+    <Icon
+      size={23}
+      strokeWidth={1.7}
+      className={className}
+      aria-hidden="true"
+    />
+  );
+}
+
+export function ServiceCard({ service }: { service: ServicePageContent }) {
+  return (
+    <Link
+      href={`/services/${service.slug}`}
+      className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-white transition duration-300 hover:-translate-y-1 hover:border-ink/25 hover:shadow-lg"
+    >
+      <div className="relative h-44 overflow-hidden bg-sand sm:h-48">
+        <Image
+          src={service.images[0]}
+          alt={`${service.shortTitle} by the Rite Plumbing team`}
+          fill
+          sizes="(min-width: 1024px) 370px, (min-width: 640px) 46vw, 92vw"
+          className="object-cover transition duration-500 group-hover:scale-[1.04]"
+        />
+        <span className="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-lg bg-white text-ink shadow-sm">
+          <ServiceGlyph icon={service.icon} />
+        </span>
       </div>
-      <div className="mx-auto mt-20 flex max-w-[1220px] flex-col justify-between gap-5 border-t border-white/20 pt-8 text-[13px] font-bold text-white/45 md:flex-row">
-        <p>© 2025 Rite Plumbing NYC. All rights reserved</p>
-        <p><Link href="/contact/" className="hover:text-white">Security</Link> | <a href="https://riteplumbingnyc.com/privacy-policy/" target="_blank" rel="noreferrer" className="hover:text-white">Privacy & Cookie Policy</a> | <a href="https://riteplumbingnyc.com/terms-of-service/" target="_blank" rel="noreferrer" className="hover:text-white">Terms of Services</a></p>
+      <div className="flex flex-1 flex-col p-6">
+        <div className="flex items-center justify-between gap-2">
+          <h3 className="text-xl font-bold tracking-[-0.025em]">
+            {service.shortTitle}
+          </h3>
+          <ArrowUpRight
+            size={20}
+            className="shrink-0 text-accent transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            aria-hidden="true"
+          />
+        </div>
+        <p className="mt-3 text-sm leading-6 text-muted-foreground">
+          {service.description}
+        </p>
+        <span className="mt-auto block pt-5 text-xs font-bold">
+          Explore service{" "}
+          <span className="ml-1 text-accent" aria-hidden="true">
+            →
+          </span>
+        </span>
       </div>
-    </footer>
+    </Link>
   );
 }
 
 export function HomePage() {
   return (
-    <main id="home" className="rite-page min-h-screen overflow-hidden bg-white text-[#18171c] dark:bg-[#111013] dark:text-white">
-      <RiteHeader active="Home" />
-      <section className="relative mx-auto grid max-w-[1320px] pb-8 md:min-h-[720px] md:grid-cols-[0.96fr_1fr] md:items-start md:pb-0">
-        <div className="rite-bg-hero min-h-[590px] bg-cover bg-center md:min-h-[720px]" />
-        <div className="relative -mt-[590px] flex min-h-[590px] flex-col justify-center overflow-hidden px-7 py-10 text-white md:-ml-28 md:mt-0 md:min-h-[720px] md:overflow-visible md:px-0 md:py-0">
-          <div className="absolute top-4 -left-24 -z-0 hidden aspect-square h-[720px] rounded-full bg-[#19a9d4]/78 md:block" />
-          <div className="absolute -left-28 top-6 -z-0 aspect-square h-[680px] rounded-full bg-[#18a9d4]/64 md:hidden" />
-          <div className="absolute inset-0 -z-0 bg-gradient-to-r from-[#18a9d4]/68 via-[#18a9d4]/54 to-[#111013]/18 md:hidden" />
-          <div className="relative z-10 max-w-[540px] text-shadow-sm md:pt-10">
-            <HeroVideoButton src={heroVideoUrl} />
-            <h1 className="max-w-[520px] text-[31px] font-bold leading-[0.98] tracking-[-0.06em] md:text-[47px]">Rite Plumbing NYC | Your Plumbing Solution</h1>
-            <div className="my-5 h-px w-full bg-white/65 md:my-7" />
-            <PhoneLink className="block text-[34px] font-bold leading-none tracking-[-0.06em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)] md:text-[55px]">(347) 502-6441</PhoneLink>
-            <p className="mt-4 max-w-[470px] text-[22px] font-bold leading-[1.08] tracking-[-0.05em] drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)] md:mt-5 md:text-[37px]">24/7 Plumbing services Less than 30 minutes to arrive!</p>
-            <div className="my-6 h-px w-44 bg-white/65 md:my-8" />
-            <p className="text-[15px] font-bold leading-tight tracking-[-0.04em] drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)] md:text-[16px]">Licensed and Insured<br />Plumbing License: 1608</p>
-            <div className="mt-6 md:mt-8"><CtaButton dark>Schedule a plumber now</CtaButton></div>
+    <SiteShell active="Home">
+      <section className="relative bg-cream">
+        <div className="site-container grid items-center gap-12 pb-16 pt-10 lg:grid-cols-[1.03fr_1fr] lg:gap-16 lg:pb-20 lg:pt-16">
+          <div className="hero-enter">
+            <p className="eyebrow flex items-center gap-2.5 text-muted-foreground">
+              <span className="h-0.5 w-6 bg-accent" />
+              New York’s neighborhood plumbers
+            </p>
+            <h1 className="mt-6 text-[46px] font-bold leading-[1.04] tracking-[-0.055em] sm:text-[64px] lg:text-[72px]">
+              Good plumbing.
+              <br />
+              Great{" "}
+              <span className="text-accent">
+                peace
+                <br className="hidden lg:block" /> of mind.
+              </span>
+            </h1>
+            <p className="mt-6 max-w-[455px] text-base leading-7 text-muted-foreground sm:text-[17px]">
+              From a leaky faucet to a late-night emergency, we’ll help get your
+              day flowing again. Local people. Expert work. No runaround.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <BookButton />
+              <a href={company.phoneHref} className="btn btn-outline">
+                <Phone size={17} aria-hidden="true" />
+                {company.phone}
+              </a>
+            </div>
+            <div className="mt-7 flex items-center gap-2 text-xs font-medium text-muted-foreground">
+              <CheckCircle2 size={16} className="text-ink" aria-hidden="true" />
+              Licensed & insured <span className="mx-1 text-border">
+                /
+              </span>{" "}
+              Free estimates
+            </div>
+          </div>
+          <div className="hero-enter relative mb-6 lg:mb-0">
+            <div className="relative h-[340px] overflow-hidden rounded-[22px] bg-sand sm:h-[470px] lg:h-[520px]">
+              <Image
+                src="/images/riteplumbing/history.jpg"
+                alt="Two Rite Plumbing professionals outside 750 Lexington Avenue in New York"
+                fill
+                preload
+                sizes="(min-width: 1024px) 550px, 92vw"
+                className="object-cover object-[center_42%]"
+              />
+              <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-ink/60 to-transparent" />
+              <span className="absolute bottom-7 left-6 flex items-center gap-2 text-xs font-semibold text-white">
+                <MapPin size={16} aria-hidden="true" />
+                Your city. Your plumbers.
+              </span>
+            </div>
+            <div className="absolute -right-3 -top-5 flex h-[95px] w-[95px] rotate-[8deg] flex-col items-center justify-center rounded-full border-[5px] border-cream bg-accent text-white sm:-right-5 sm:-top-6 sm:h-[116px] sm:w-[116px]">
+              <span className="text-[30px] font-extrabold leading-none sm:text-[35px]">
+                24/7
+              </span>
+              <span className="mt-1.5 text-[8px] font-bold uppercase tracking-[0.13em] sm:text-[9px]">
+                Here for you
+              </span>
+            </div>
+            <div className="absolute -bottom-7 left-5 right-5 flex items-center gap-4 rounded-xl border border-border bg-white px-5 py-4 shadow-[0_10px_35px_rgba(16,46,60,0.08)] sm:left-7 sm:right-auto sm:min-w-[335px]">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
+                <ShieldCheck size={23} aria-hidden="true" />
+              </span>
+              <div>
+                <p className="text-sm font-bold">
+                  Good hands. Proper credentials.
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  NYC plumbing license #{company.license}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-        <p className="absolute bottom-5 left-7 rounded-full bg-black/45 px-3 py-1 text-[11px] font-bold text-white shadow-sm md:bottom-4 md:left-[720px]">750 Lexington Ave, New York, NY 10022</p>
       </section>
-      <section id="services" className="bg-[#111013] text-white">
-        <div className="mx-auto grid max-w-[1220px] gap-12 px-7 py-20 md:grid-cols-[0.85fr_1.35fr] md:px-0 md:py-24">
-          <div><p className="mb-6 text-[10px] font-bold uppercase text-white/45">What we do</p><h2 className="max-w-[470px] text-[40px] font-bold leading-[0.95] tracking-[-0.06em] md:text-[56px]">Say goodbye to old-fashioned plumbing appointments - our innovative system is here.</h2><div className="mt-8"><CtaButton>Schedule Plumber Now</CtaButton></div></div>
-          <div><p className="max-w-[720px] text-[15px] font-bold leading-relaxed text-white/60">You can save time by quickly and easily schedule with our online scheduling service! In just 30 seconds you can book a virtual estimate or job appointment that fits into your schedule.</p><div className="mt-16 grid gap-x-20 gap-y-14 md:grid-cols-2">{features.map((feature) => <article key={feature.title}><FeatureIcon icon={feature.icon} /><h3 className="mt-5 text-[19px] font-bold leading-tight tracking-[-0.04em]">{feature.title}</h3><p className="mt-3 max-w-[300px] text-[13px] leading-relaxed text-white/38">{feature.description}</p></article>)}</div></div>
+      <TrustStrip />
+      <section id="services" className="section-space bg-white">
+        <div className="site-container">
+          <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+            <div>
+              <p className="eyebrow text-accent">A fix for whatever comes up</p>
+              <h2 className="section-title mt-4">
+                Big problems. Small fixes.
+                <br />
+                We handle both.
+              </h2>
+            </div>
+            <Link
+              href="/services"
+              className="btn btn-outline self-start sm:self-auto"
+            >
+              View all services <ArrowUpRight size={17} aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {servicePages.slice(0, 6).map((service) => (
+              <ServiceCard key={service.slug} service={service} />
+            ))}
+          </div>
+          <div className="mt-8 flex flex-col items-start justify-between gap-6 rounded-xl bg-accent-soft px-6 py-6 sm:flex-row sm:items-center sm:px-8">
+            <div className="flex items-center gap-4">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-accent">
+                <Clock3 size={24} aria-hidden="true" />
+              </span>
+              <div>
+                <h3 className="text-lg font-bold tracking-tight">
+                  Can’t wait until tomorrow?
+                </h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Call us for 24/7 emergency plumbing.
+                </p>
+              </div>
+            </div>
+            <a
+              href={company.phoneHref}
+              className="btn btn-dark w-full sm:w-auto"
+            >
+              <Phone size={17} aria-hidden="true" />
+              {company.phone}
+            </a>
+          </div>
         </div>
       </section>
-      <section className="grid md:grid-cols-2">
-        <article className="rite-bg-service flex min-h-[430px] items-center bg-cover bg-center px-7 text-white md:min-h-[690px] md:px-0"><div className="mx-auto w-full max-w-[610px]"><h2 className="max-w-[470px] text-[42px] font-bold leading-[0.95] drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] tracking-[-0.06em] md:text-[56px]">Specialised in plumbing repair, service and installation.</h2><Link className="mt-9 inline-block bg-[#111013] px-5 py-3 text-[11px] font-bold" href="/services/residential-plumbing-services-repairs-nyc/">Read More ▸</Link></div></article>
-        <article className="rite-bg-licensed relative flex min-h-[430px] items-center bg-cover bg-center px-7 text-white md:min-h-[690px] md:px-16"><div className="absolute inset-0 bg-[#12aada]/70" /><div className="relative mx-auto max-w-[560px]"><h2 className="text-[42px] font-bold leading-[0.95] drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] tracking-[-0.06em] md:text-[56px]">Why you should hire a licensed plumber in NYC.</h2><Link className="mt-9 inline-block bg-[#111013] px-5 py-3 text-[11px] font-bold" href="/about-us/">Read More ▸</Link></div></article>
-      </section>
-      <DocumentAndTeam />
-      <section className="bg-white py-10 dark:bg-[#111013] md:py-14"><div className="rite-bg-team mx-auto h-[240px] max-w-[1220px] bg-cover bg-center md:h-[660px]" /></section>
+      <WhyRite />
+      <HowItWorks />
+      <ServiceAreas />
+      <BuildingDocuments />
+      <FAQSection />
       <NewsSection />
-      <ContactStrip />
-      <RiteFooter />
-    </main>
+      <FinalCTA />
+    </SiteShell>
   );
 }
 
-function DocumentAndTeam() {
+export function TrustStrip() {
+  const items = [
+    {
+      Icon: ShieldCheck,
+      title: "Licensed & insured",
+      text: `NYC license #${company.license}`,
+    },
+    {
+      Icon: Clock3,
+      title: "Here for you 24/7",
+      text: "Day, night, and weekends",
+    },
+    {
+      Icon: House,
+      title: "Homes & businesses",
+      text: "Repairs to installations",
+    },
+    {
+      Icon: FileCheck2,
+      title: "Free estimates",
+      text: "Let’s talk about your project",
+    },
+  ];
   return (
-    <section className="mx-auto max-w-[1220px] px-7 py-16 md:px-0 md:py-24">
-      <div className="grid gap-14 md:grid-cols-[1.1fr_0.9fr]"><div><h2 className="max-w-[650px] text-[32px] font-bold leading-[1.05] tracking-[-0.055em] md:text-[43px]">Building Management Document Requirements done within 24 Hours</h2><p className="mt-11 max-w-[590px] text-[32px] font-bold leading-[1.05] tracking-[-0.055em] md:text-[42px]">Secure your plumbing work with nessesary documents.</p><div className="mt-11"><CtaButton dark href={uploadDocumentsUrl}>Upload Documents</CtaButton></div></div><div className="grid gap-5 text-[14px] font-bold leading-none">{documents.map((doc) => <details key={doc.title} className="group border-b border-transparent"><summary className="cursor-pointer list-none">+ <span className="ml-4">{doc.title}</span></summary><p className="mt-4 pl-7 text-[13px] font-medium leading-relaxed text-neutral-500 group-open:pb-4">{doc.description}</p></details>)}</div></div>
-      <div id="history" className="mt-12 grid gap-8 md:grid-cols-[0.63fr_0.37fr] md:items-start"><article className="rite-bg-history flex min-h-[520px] items-end bg-cover bg-center p-10 text-white md:min-h-[520px] md:p-20"><div><h2 className="text-[42px] font-bold drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] tracking-[-0.06em] md:text-[56px]">Our History</h2><Link className="mt-6 inline-block bg-[#111013] px-5 py-3 text-[11px] font-bold" href="/about-us/">Read More ▸</Link></div></article><div className="rite-bg-document hidden min-h-[520px] bg-cover bg-center md:block" /></div>
+    <section
+      aria-label="Our service commitments"
+      className="border-y border-border bg-sand/60"
+    >
+      <div className="site-container grid grid-cols-2 gap-x-5 gap-y-7 py-7 lg:grid-cols-4">
+        {items.map(({ Icon, title, text }) => (
+          <div key={title} className="flex items-start gap-3 lg:items-center">
+            <Icon
+              size={25}
+              strokeWidth={1.6}
+              className="shrink-0 text-ink"
+              aria-hidden="true"
+            />
+            <div>
+              <p className="text-[13px] font-bold sm:text-sm">{title}</p>
+              <p className="mt-1 text-[11px] leading-4 text-muted-foreground sm:text-xs">
+                {text}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
 
-function NewsSection() {
+function WhyRite() {
   return (
-    <section id="news" className="bg-[#f7f7f7] px-7 py-14 dark:bg-[#17161a] md:py-20">
-      <div className="mx-auto max-w-[1220px]">
-        <h2 className="text-[26px] font-bold tracking-[-0.055em] md:text-[34px]">Recent news.</h2>
-        <div className="mt-10 grid gap-7 md:grid-cols-3">
-          {news.slice(0, 3).map((article) => (
-            <Link key={article.title} href={`/blog/${article.slug}/`} className="group relative flex min-h-[305px] overflow-hidden bg-[#777] p-6 text-white transition hover:brightness-95 md:min-h-[345px]">
-              <Image src={article.image} alt={article.title} fill className="object-cover transition duration-500 group-hover:scale-105" sizes="(min-width: 768px) 33vw, 100vw" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/82 via-black/30 to-black/10" />
-              <div className="relative z-10 mt-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)]">
-                <p className="text-[10px] font-bold text-white/65">Posted by</p>
-                <p className="mt-1 text-[10px] font-bold text-white/65">SEO RankZenith</p>
-                <p className="mt-3 text-[10px] font-bold text-white/65">{article.date}</p>
-                <p className="mt-1 text-[10px] font-bold text-white/65">{article.readTime}</p>
-                <h3 className="mt-3 text-[20px] font-bold leading-tight tracking-[-0.05em] group-hover:text-white/85">{article.title}</h3>
-                <p className="mt-3 text-[11px] font-bold text-white/80">{article.category}</p>
+    <section className="section-space bg-ink text-white">
+      <div className="site-container grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+        <div className="relative">
+          <div className="relative h-[390px] overflow-hidden rounded-2xl bg-ink-soft sm:h-[520px]">
+            <Image
+              src="/images/riteplumbing/service-plumber.jpg"
+              alt="Rite Plumbing technicians bringing drain equipment to a New York building"
+              fill
+              sizes="(min-width: 1024px) 550px, 92vw"
+              className="object-cover object-[42%_center]"
+            />
+          </div>
+          <div className="absolute -bottom-5 left-5 right-5 flex items-center gap-3 rounded-xl bg-white px-5 py-4 text-ink sm:left-7 sm:right-auto">
+            <BadgeCheck size={29} className="text-accent" aria-hidden="true" />
+            <div>
+              <p className="text-sm font-bold">Real people. Reliable work.</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Proud to work in the city we call home.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="pt-3 lg:pt-0">
+          <p className="eyebrow text-[#ffad80]">The Rite way to do it</p>
+          <h2 className="section-title mt-4">
+            New York moves fast.
+            <br />
+            So do we.
+          </h2>
+          <p className="mt-5 text-base leading-7 text-white/75">
+            You have enough on your plate. Getting a plumber shouldn’t add to
+            it. We bring clear communication, capable hands, and care for your
+            space.
+          </p>
+          <div className="mt-8 space-y-6">
+            {[
+              {
+                title: "Clear answers, from the start",
+                text: "We explain the issue and talk through the work so you know what comes next.",
+              },
+              {
+                title: "Your home gets our respect",
+                text: "Careful repairs, thoughtful installations, and a team that cares about the details.",
+              },
+              {
+                title: "We know NYC buildings",
+                text: "Co-ops, condos, and commercial spaces. We help coordinate access and required paperwork.",
+              },
+            ].map((item, i) => (
+              <div key={item.title} className="flex gap-4">
+                <span className="mt-0.5 text-xs font-semibold text-[#ffad80]">
+                  0{i + 1}
+                </span>
+                <div>
+                  <h3 className="text-[17px] font-semibold">{item.title}</h3>
+                  <p className="mt-1.5 text-sm leading-6 text-white/65">
+                    {item.text}
+                  </p>
+                </div>
               </div>
+            ))}
+          </div>
+          <Link
+            href="/about-us"
+            className="mt-8 inline-flex items-center gap-3 border-b border-white/40 pb-2 text-sm font-bold"
+          >
+            Get to know Rite <ArrowUpRight size={17} aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function HowItWorks() {
+  const steps = [
+    {
+      title: "Tell us what you need",
+      text: "Call our team or choose a time in our online booking calendar.",
+      Icon: CalendarDays,
+    },
+    {
+      title: "We make a plan",
+      text: "We assess the issue and explain the work and estimate before starting.",
+      Icon: Wrench,
+    },
+    {
+      title: "Get back to your day",
+      text: "We finish the work, check the result, and walk you through what’s been done.",
+      Icon: CheckCircle2,
+    },
+  ];
+  return (
+    <section className="section-space bg-cream">
+      <div className="site-container">
+        <div className="text-center">
+          <p className="eyebrow text-accent">Less hassle. More flow.</p>
+          <h2 className="section-title mt-4">Good service should be simple.</h2>
+        </div>
+        <div className="mt-12 grid gap-10 sm:grid-cols-3 sm:gap-8">
+          {steps.map(({ title, text, Icon }, i) => (
+            <div key={title} className="relative">
+              <div className="mb-5 flex items-center gap-4">
+                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-border bg-white">
+                  <Icon size={23} strokeWidth={1.7} aria-hidden="true" />
+                </span>
+                <span className="eyebrow text-muted-foreground">
+                  Step 0{i + 1}
+                </span>
+                {i < 2 ? (
+                  <span className="hidden h-px flex-1 bg-border sm:block" />
+                ) : null}
+              </div>
+              <h3 className="text-xl font-bold tracking-tight">{title}</h3>
+              <p className="mt-3 max-w-[330px] text-sm leading-6 text-muted-foreground">
+                {text}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function ServiceAreas() {
+  return (
+    <section id="service-areas" className="bg-white">
+      <div className="site-container grid items-center gap-10 border-t border-border py-16 lg:grid-cols-[1fr_1.04fr] lg:gap-16 lg:py-20">
+        <div>
+          <p className="eyebrow text-accent">Local roots. Citywide know-how.</p>
+          <h2 className="section-title mt-4">
+            From downtown
+            <br />
+            to your doorstep.
+          </h2>
+          <p className="mt-5 max-w-[420px] text-base leading-7 text-muted-foreground">
+            New York plumbing is its own world. We help homeowners, businesses,
+            and building managers across three boroughs.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-2.5">
+            {["Manhattan", "Brooklyn", "Queens"].map((area) => (
+              <span
+                key={area}
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-cream px-4 py-2.5 text-sm font-semibold"
+              >
+                <MapPin size={14} className="text-accent" aria-hidden="true" />
+                {area}
+              </span>
+            ))}
+          </div>
+          <p className="mt-5 text-xs leading-5 text-muted-foreground">
+            Call with your address to confirm service availability.
+          </p>
+          <Link
+            href="/contact"
+            className="mt-5 inline-flex items-center gap-2 text-sm font-bold"
+          >
+            Let’s talk about your property{" "}
+            <ArrowUpRight
+              size={17}
+              className="text-accent"
+              aria-hidden="true"
+            />
+          </Link>
+        </div>
+        <div className="relative h-[360px] overflow-hidden rounded-2xl bg-sand sm:h-[430px]">
+          <Image
+            src="/images/riteplumbing/services/Rite-Plumbing-20230204-026-1920x1280.jpg.webp"
+            alt="Rite Plumbing service truck on a Manhattan street"
+            fill
+            sizes="(min-width: 1024px) 550px, 92vw"
+            className="object-cover"
+          />
+          <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between gap-3 rounded-lg bg-white px-5 py-4">
+            <div>
+              <p className="eyebrow text-muted-foreground">Based in New York</p>
+              <p className="mt-1.5 text-sm font-bold">750 Lexington Avenue</p>
+            </div>
+            <MapPin
+              size={24}
+              className="shrink-0 text-accent"
+              aria-hidden="true"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function BuildingDocuments() {
+  return (
+    <section className="bg-sand/70">
+      <div className="site-container grid items-center gap-10 py-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <div>
+          <p className="eyebrow text-accent">Built for building requirements</p>
+          <h2 className="mt-4 text-[30px] font-bold leading-tight tracking-[-0.035em] sm:text-[36px]">
+            Your building’s paperwork?
+            <br />
+            We can help with that.
+          </h2>
+          <p className="mt-4 text-sm leading-6 text-muted-foreground">
+            Send your building’s requirements before your visit. We’ll help
+            coordinate the documents and scope of work.
+          </p>
+          <a
+            href={uploadDocumentsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-2 text-sm font-bold"
+          >
+            Send building requirements{" "}
+            <ArrowUpRight
+              size={17}
+              className="text-accent"
+              aria-hidden="true"
+            />
+          </a>
+        </div>
+        <div className="grid gap-5 sm:grid-cols-2">
+          {documents.map((doc) => (
+            <div key={doc.title} className="flex items-start gap-3">
+              <FileCheck2
+                size={21}
+                className="mt-0.5 shrink-0 text-accent"
+                strokeWidth={1.6}
+                aria-hidden="true"
+              />
+              <div>
+                <h3 className="text-sm font-bold">{doc.title}</h3>
+                <p className="mt-1.5 text-xs leading-5 text-muted-foreground">
+                  {doc.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function FAQSection() {
+  return (
+    <section id="faq" className="section-space bg-white">
+      <div className="site-container grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
+        <div>
+          <p className="eyebrow text-accent">
+            A few things you might be wondering
+          </p>
+          <h2 className="section-title mt-4">
+            Good questions.
+            <br />
+            Straight answers.
+          </h2>
+          <p className="mt-5 max-w-[300px] text-sm leading-6 text-muted-foreground">
+            Still have something on your mind? We’re happy to talk it through.
+          </p>
+          <a
+            href={company.phoneHref}
+            className="mt-6 inline-flex items-center gap-2 text-sm font-bold"
+          >
+            <Phone size={16} className="text-accent" aria-hidden="true" />
+            {company.phone}
+          </a>
+        </div>
+        <div>
+          {faqs.map((faq) => (
+            <details
+              key={faq.question}
+              className="faq-row group border-b border-border"
+            >
+              <summary className="flex min-h-[76px] cursor-pointer list-none items-center justify-between gap-5 py-5 text-[15px] font-semibold">
+                <span>{faq.question}</span>
+                <Plus
+                  size={19}
+                  className="faq-plus shrink-0 text-accent transition"
+                  aria-hidden="true"
+                />
+              </summary>
+              <p className="max-w-[590px] pb-6 pr-8 text-sm leading-7 text-muted-foreground">
+                {faq.answer}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function NewsSection({ all = false }: { all?: boolean }) {
+  return (
+    <section className="section-space bg-cream">
+      <div className="site-container">
+        {!all ? (
+          <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+            <div>
+              <p className="eyebrow text-accent">
+                A little know-how goes a long way
+              </p>
+              <h2 className="section-title mt-4">Good advice. On the house.</h2>
+            </div>
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-2 text-sm font-bold"
+            >
+              All tips & advice{" "}
+              <ArrowUpRight
+                size={17}
+                className="text-accent"
+                aria-hidden="true"
+              />
+            </Link>
+          </div>
+        ) : null}
+        <div
+          className={`grid gap-x-7 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 ${all ? "" : "mt-10"}`}
+        >
+          {(all ? news : news.slice(0, 3)).map((article) => (
+            <Link
+              key={article.slug}
+              href={`/blog/${article.slug}`}
+              className="group"
+            >
+              <div className="relative h-56 overflow-hidden rounded-xl bg-sand">
+                <Image
+                  src={article.image}
+                  alt={article.title}
+                  fill
+                  sizes="(min-width: 1024px) 370px, (min-width: 640px) 46vw, 92vw"
+                  className="object-cover transition duration-500 group-hover:scale-[1.04]"
+                />
+              </div>
+              <div className="mt-5 flex items-center gap-2 text-[11px] font-semibold text-muted-foreground">
+                <span className="text-accent">{article.category}</span>
+                <span aria-hidden="true">·</span>
+                <span>{article.readTime}</span>
+              </div>
+              <h3 className="mt-3 text-xl font-bold leading-snug tracking-tight transition group-hover:text-accent">
+                {article.title}
+              </h3>
+              <span className="mt-4 inline-flex items-center gap-2 text-xs font-bold">
+                Read the advice{" "}
+                <ArrowUpRight
+                  size={15}
+                  className="text-accent"
+                  aria-hidden="true"
+                />
+              </span>
             </Link>
           ))}
         </div>
@@ -211,110 +746,591 @@ function NewsSection() {
   );
 }
 
-function ContactStrip() {
-  return <section id="contact" className="bg-white px-7 py-16 md:px-0"><div className="mx-auto grid max-w-[980px] gap-16 md:grid-cols-2"><div><p className="text-2xl">☏</p><h3 className="mt-4 text-[16px] font-bold tracking-[-0.03em]">Get in touch</h3><p className="mt-8 text-[13px] leading-loose text-neutral-500"><a href="mailto:info@riteplumbingnyc.com" className="hover:text-[#18a9d4]">info@riteplumbingnyc.com</a><br /><PhoneLink className="font-bold text-neutral-900 dark:text-white">347 502 6441</PhoneLink><br /><br />Assistance hours:<br /><strong className="text-neutral-900">24/7 Services</strong></p></div><div><p className="text-2xl">▣</p><h3 className="mt-4 text-[16px] font-bold tracking-[-0.03em]">Rite Plumbing & Heating Inc</h3><p className="mt-8 max-w-[260px] text-[13px] font-bold leading-relaxed text-neutral-700">750 Lexington Ave, 9th Floor New York, NY 10022 United States</p></div></div></section>;
+export function FinalCTA() {
+  return (
+    <section className="bg-ink text-white">
+      <div className="site-container flex flex-col justify-between gap-8 py-14 lg:flex-row lg:items-center lg:py-16">
+        <div>
+          <p className="eyebrow text-[#ffad80]">Let’s take it from here</p>
+          <h2 className="mt-4 text-[36px] font-bold leading-[1.1] tracking-[-0.04em] sm:text-[46px]">
+            Get your day
+            <br />
+            flowing again.
+          </h2>
+          <p className="mt-4 text-sm leading-6 text-white/75">
+            Expert plumbing. A friendly local team. Here when you need us.
+          </p>
+        </div>
+        <div className="flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+          <a href={company.phoneHref} className="btn btn-primary">
+            <Phone size={17} aria-hidden="true" />
+            {company.phone}
+          </a>
+          <a
+            href={scheduleUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn border border-white/30 text-white hover:border-white hover:bg-white/10"
+          >
+            Book a service <ArrowRight size={17} aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function RiteFooter() {
+  return (
+    <footer className="bg-ink pb-24 text-white sm:pb-0">
+      <div className="site-container">
+        <div className="grid gap-10 border-t border-white/15 py-12 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_0.9fr_1fr] lg:gap-14">
+          <div>
+            <BrandLogo light />
+            <p className="mt-5 max-w-[230px] text-sm leading-6 text-white/65">
+              Plumbing & heating for the city that never stops.
+            </p>
+            <div className="mt-5 flex gap-4 text-xs text-white/75">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition hover:text-[#ffad80]"
+                >
+                  {social.label}
+                </a>
+              ))}
+            </div>
+          </div>
+          <div>
+            <p className="eyebrow text-white/70">How we help</p>
+            <ul className="mt-5 space-y-3 text-[13px] text-white/75">
+              {servicePages.slice(0, 4).map((service) => (
+                <li key={service.slug}>
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className="hover:text-[#ffad80]"
+                  >
+                    {service.shortTitle}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link href="/services" className="hover:text-[#ffad80]">
+                  All services <span aria-hidden="true">↗</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p className="eyebrow text-white/70">Meet Rite</p>
+            <ul className="mt-5 space-y-3 text-[13px] text-white/75">
+              <li>
+                <Link href="/about-us" className="hover:text-[#ffad80]">
+                  About our team
+                </Link>
+              </li>
+              <li>
+                <Link href="/#service-areas" className="hover:text-[#ffad80]">
+                  Service areas
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="hover:text-[#ffad80]">
+                  Tips & advice
+                </Link>
+              </li>
+              <li>
+                <Link href="/video" className="hover:text-[#ffad80]">
+                  Rite in action
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-[#ffad80]">
+                  Contact us
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p className="eyebrow text-white/70">Get in touch</p>
+            <a
+              href={company.phoneHref}
+              className="mt-5 block text-lg font-bold"
+            >
+              {company.phone}
+            </a>
+            <a
+              href={`mailto:${company.email}`}
+              className="mt-2 block text-xs text-white/75 hover:text-[#ffad80]"
+            >
+              {company.email}
+            </a>
+            <address className="mt-5 text-xs not-italic leading-6 text-white/65">
+              {company.address}
+              <br />
+              {company.city}
+            </address>
+            <p className="mt-3 text-xs text-white/65">
+              Available 24 hours, 7 days a week
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-col justify-between gap-4 border-t border-white/15 py-6 text-[11px] leading-5 text-white/60 sm:flex-row">
+          <p>
+            © {new Date().getFullYear()} Rite Plumbing & Heating Inc. All rights
+            reserved.
+          </p>
+          <div className="flex flex-wrap gap-5">
+            <span>NYC license #{company.license}</span>
+            <a
+              href="https://riteplumbingnyc.com/privacy-policy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white"
+            >
+              Privacy policy{" "}
+              <span className="sr-only">on the company website</span>
+            </a>
+            <a
+              href="https://riteplumbingnyc.com/terms-of-service/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white"
+            >
+              Terms <span className="sr-only">on the company website</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+export function PageIntro({
+  title,
+  eyebrow,
+  description,
+}: {
+  title: string;
+  eyebrow: string;
+  description?: string;
+}) {
+  return (
+    <section className="bg-cream">
+      <div className="site-container py-12 sm:py-16">
+        <Link
+          href="/"
+          className="mb-7 inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground"
+        >
+          Home <span aria-hidden="true">/</span>{" "}
+          <span className="text-ink">{eyebrow}</span>
+        </Link>
+        <p className="eyebrow text-accent">{eyebrow}</p>
+        <h1 className="mt-4 max-w-[820px] text-[40px] font-bold leading-[1.08] tracking-[-0.05em] sm:text-[60px]">
+          {title}
+        </h1>
+        {description ? (
+          <p className="mt-6 max-w-[640px] text-base leading-7 text-muted-foreground">
+            {description}
+          </p>
+        ) : null}
+      </div>
+    </section>
+  );
 }
 
 export function ServicePage({ page }: { page: ServicePageContent }) {
+  const related = servicePages
+    .filter((service) => service.slug !== page.slug)
+    .sort(
+      (a, b) =>
+        Number(b.category === page.category) -
+        Number(a.category === page.category),
+    )
+    .slice(0, 3);
   return (
-    <main className="rite-page min-h-screen bg-white text-[#111013] dark:bg-[#111013] dark:text-white">
-      <RiteHeader active="Services" />
-      <section className="mx-auto grid max-w-[1320px] md:grid-cols-[0.9fr_1fr]">
-        <div className="grid content-start gap-0">
-          {page.images.map((src, index) => (
-            <div key={src} className={`${index === 0 ? "h-[310px] md:h-[470px]" : "hidden h-[230px] md:relative md:block md:h-[350px]"} relative bg-neutral-100 dark:bg-[#17161a]`}>
-              <Image src={src} alt={`${page.title} service photo ${index + 1}`} fill className="object-cover" sizes="(min-width: 768px) 48vw, 100vw" priority={index === 0} />
+    <SiteShell active="Services">
+      <section className="bg-cream">
+        <div className="site-container grid items-center gap-10 py-10 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:py-14">
+          <div>
+            <nav
+              aria-label="Breadcrumb"
+              className="mb-7 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
+            >
+              <Link href="/">Home</Link>
+              <span aria-hidden="true">/</span>
+              <Link href="/services">Services</Link>
+              <span aria-hidden="true">/</span>
+              <span className="text-ink">{page.shortTitle}</span>
+            </nav>
+            <p className="eyebrow text-accent">
+              {page.category} services in NYC
+            </p>
+            <h1 className="mt-4 text-[42px] font-bold leading-[1.08] tracking-[-0.05em] sm:text-[58px]">
+              {page.title}
+            </h1>
+            <p className="mt-5 text-base leading-7 text-muted-foreground">
+              {page.description}
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <BookButton />
+              <a href={company.phoneHref} className="btn btn-outline">
+                <Phone size={16} aria-hidden="true" />
+                Call 24/7
+              </a>
             </div>
-          ))}
-        </div>
-        <article className="px-7 py-10 md:px-20 md:py-20">
-          <Link href="/services/" className="mb-8 block text-3xl md:mb-10">←</Link>
-          <h1 className="max-w-[650px] text-[36px] font-bold leading-[0.97] tracking-[-0.065em] md:text-[64px]">{page.title}</h1>
-          <h2 className="mt-7 text-[24px] font-bold tracking-[-0.04em]">{page.eyebrow}</h2>
-          {page.intro.map((paragraph) => <p key={paragraph} className="mt-4 max-w-[650px] text-[16px] font-medium leading-relaxed text-neutral-700 dark:text-white/70"><TextWithPhone text={paragraph} className="font-bold" /></p>)}
-          <h2 className="mt-9 max-w-[680px] text-[30px] font-bold leading-tight tracking-[-0.055em] md:text-[40px]">{page.sectionTitle}</h2>
-          {page.body.map((paragraph) => <p key={paragraph} className="mt-5 max-w-[680px] text-[16px] leading-relaxed text-neutral-700 dark:text-white/70"><TextWithPhone text={paragraph} className="font-bold" /></p>)}
-          {page.listTitle ? <h3 className="mt-7 text-[17px] font-bold">{page.listTitle}</h3> : null}
-          <ul className="mt-4 list-disc space-y-2 pl-7 text-[16px] leading-relaxed text-neutral-700 dark:text-white/70">{page.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
-          <h2 className="mt-9 max-w-[620px] text-[30px] font-bold leading-tight tracking-[-0.055em] md:text-[38px]">{page.closingTitle}</h2>
-          <p className="mt-5 max-w-[680px] text-[16px] leading-relaxed text-neutral-700 dark:text-white/70"><TextWithPhone text={page.closing} className="font-bold" /></p>
-          <div className="mt-9 grid gap-4 md:hidden">
-            {page.images.slice(1).map((src, index) => (
-              <div key={src} className="relative h-[220px] bg-neutral-100 dark:bg-[#17161a]">
-                <Image src={src} alt={`${page.title} service photo ${index + 2}`} fill className="object-cover" sizes="100vw" />
-              </div>
-            ))}
+            <p className="mt-5 text-xs text-muted-foreground">
+              Licensed & insured · Manhattan, Brooklyn & Queens
+            </p>
           </div>
-        </article>
-      </section>
-      <section className="bg-white px-7 py-12 dark:bg-[#111013] md:py-20">
-        <div className="mx-auto max-w-[780px]">
-          <h2 className="text-[28px] font-bold tracking-[-0.05em]">We Will Arrive In Less Than 30-minutes.</h2>
-          <p className="mt-8 text-[16px] leading-relaxed text-neutral-500 dark:text-white/55">24/7 Emergency Plumbing Service in QUEENS, BROOKLYN, AND MANHATTAN. Schedule an emergency commercial plumber through our online calendar.</p>
-          <div className="mt-8"><CtaButton dark>Schedule a plumber now</CtaButton></div>
+          <div className="relative h-[350px] overflow-hidden rounded-2xl bg-sand sm:h-[450px]">
+            <Image
+              src={page.images[0]}
+              alt={page.shortTitle}
+              fill
+              preload
+              sizes="(min-width: 1024px) 550px, 92vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </section>
-      <RiteFooter />
-    </main>
+      <section className="section-space bg-white">
+        <div className="site-container grid items-start gap-12 lg:grid-cols-[1fr_350px] lg:gap-16">
+          <div>
+            {page.icon === "gas" ? <GasSafetyNotice /> : null}
+            <p className="eyebrow text-accent">
+              Careful work. Clear communication.
+            </p>
+            <h2 className="mt-4 text-[32px] font-bold leading-tight tracking-[-0.035em]">
+              The right help for your property.
+            </h2>
+            <p className="mt-5 text-base leading-8 text-muted-foreground">
+              {page.body}
+            </p>
+            <h3 className="mt-8 text-xl font-bold">How we can help</h3>
+            <ul className="mt-5 grid gap-4 sm:grid-cols-2">
+              {page.bullets.map((bullet) => (
+                <li
+                  key={bullet}
+                  className="flex items-start gap-2.5 text-sm leading-6"
+                >
+                  <Check
+                    size={17}
+                    className="mt-0.5 shrink-0 text-accent"
+                    aria-hidden="true"
+                  />
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+            <div className="relative mt-9 h-[300px] overflow-hidden rounded-xl bg-sand sm:h-[360px]">
+              <Image
+                src={page.images[1]}
+                alt={`Rite Plumbing ${page.shortTitle.toLowerCase()} work`}
+                fill
+                sizes="(min-width: 1024px) 700px, 92vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+          <aside className="rounded-2xl bg-cream p-7 lg:sticky lg:top-36">
+            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent-soft text-accent">
+              <ServiceGlyph icon={page.icon} />
+            </span>
+            <h2 className="mt-5 text-2xl font-bold tracking-tight">
+              Let’s get it sorted.
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-muted-foreground">
+              Call for urgent help or book a planned visit online. We’ll discuss
+              your issue and confirm the next steps.
+            </p>
+            <a href={company.phoneHref} className="btn btn-dark mt-6 w-full">
+              <Phone size={16} aria-hidden="true" />
+              {company.phone}
+            </a>
+            <a
+              href={scheduleUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary mt-3 w-full"
+            >
+              Book a service <ArrowRight size={16} aria-hidden="true" />
+            </a>
+            <div className="mt-6 space-y-3 border-t border-border pt-5 text-xs text-muted-foreground">
+              <p className="flex items-center gap-2">
+                <ShieldCheck size={15} aria-hidden="true" />
+                Licensed & insured · #{company.license}
+              </p>
+              <p className="flex items-center gap-2">
+                <Clock3 size={15} aria-hidden="true" />
+                24/7 emergency availability
+              </p>
+              <p className="flex items-center gap-2">
+                <FileCheck2 size={15} aria-hidden="true" />
+                Building documentation available
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+      {related.length ? (
+        <section className="section-space bg-cream">
+          <div className="site-container">
+            <p className="eyebrow text-accent">While we’re here</p>
+            <h2 className="section-title mt-4">More ways we can help.</h2>
+            <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {related.map((service) => (
+                <ServiceCard key={service.slug} service={service} />
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+      <FinalCTA />
+    </SiteShell>
+  );
+}
+
+export function GasSafetyNotice() {
+  return (
+    <div className="mb-8 rounded-xl border border-accent/30 bg-accent-soft p-5">
+      <h2 className="text-lg font-bold">Smell gas? Leave first. Call 911.</h2>
+      <p className="mt-2 text-sm leading-6">
+        Leave the area immediately and call 911 from a safe location. Don’t use
+        switches, appliances, flames, or a phone in the affected area.
+      </p>
+      <a
+        href="https://www.nyc.gov/site/em/ready/gas-disruptions.page"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-3 inline-flex items-center gap-2 text-xs font-bold underline underline-offset-4"
+      >
+        NYC emergency guidance <ArrowUpRight size={14} aria-hidden="true" />
+      </a>
+    </div>
   );
 }
 
 export function BlogPage() {
   return (
-    <main className="rite-page min-h-screen bg-white text-[#111013] dark:bg-[#111013] dark:text-white">
-      <RiteHeader active="Blog" />
-      <SimpleHero title="Blog" crumb="Home / Blog" />
-      <section className="mx-auto grid max-w-[1220px] gap-12 px-7 py-14 md:grid-cols-[0.75fr_0.25fr] md:px-0">
-        <div className="grid gap-8 md:grid-cols-2">
-          {news.map((article) => (
-            <article key={article.title} className="border-b border-neutral-200 pb-10 dark:border-white/15">
-              <Link href={`/blog/${article.slug}/`} className="relative block h-[210px] overflow-hidden bg-neutral-200 dark:bg-[#17161a]">
-                <Image src={article.image} alt={article.title} fill className="object-cover transition duration-500 hover:scale-105" sizes="(min-width: 768px) 38vw, 100vw" />
-              </Link>
-              <p className="mt-5 text-[12px] font-bold text-neutral-400">Posted by SEO RankZenith</p>
-              <p className="mt-2 text-[12px] font-bold text-neutral-400">{article.date} · {article.readTime}</p>
-              <h2 className="mt-5 text-[32px] font-bold leading-tight tracking-[-0.055em]">{article.title}</h2>
-              <p className="mt-5 text-neutral-500">{article.excerpt}</p>
-              <p className="mt-5 text-[13px] font-bold text-neutral-500">{article.category}</p>
-              <Link href={`/blog/${article.slug}/`} className="mt-5 inline-block text-[13px] font-bold">Read More</Link>
-            </article>
-          ))}
-        </div>
-        <aside>
-          <h3 className="text-[16px] font-bold">Categories</h3>
-          <p className="mt-8 leading-loose text-neutral-500">Gas<br />NYC Plumber Council<br />Plumbing<br />Tanless Water Heaters<br />Uncategorized<br />Water Heater<br />Winter</p>
-        </aside>
-      </section>
-      <RiteFooter />
-    </main>
+    <SiteShell active="Tips & advice">
+      <PageIntro
+        eyebrow="Tips & advice"
+        title="A little plumbing know-how. A lot less hassle."
+        description="Simple, useful advice for looking after your home and knowing when to call a professional."
+      />
+      <NewsSection all />
+      <FinalCTA />
+    </SiteShell>
   );
 }
 
 export function VideoPage() {
   return (
-    <main className="rite-page min-h-screen bg-white text-[#111013] dark:bg-[#111013] dark:text-white">
-      <RiteHeader active="Video" />
-      <SimpleHero title="Video" crumb="Home / Video" />
-      <section className="mx-auto max-w-[980px] px-7 pb-16 md:px-0 md:pb-20" aria-label="Video content">
-        <div className="bg-black shadow-xl">
-          <video src={heroVideoUrl} controls preload="metadata" className="h-auto w-full" />
-        </div>
+    <SiteShell>
+      <PageIntro
+        eyebrow="Rite in action"
+        title="Meet the people behind the plumbing."
+        description="A closer look at our team and the work we do in New York."
+      />
+      <section className="site-container pb-16">
+        <video
+          controls
+          playsInline
+          preload="none"
+          poster="/images/riteplumbing/team.jpg"
+          className="aspect-video w-full rounded-2xl bg-ink"
+          aria-label="Rite Plumbing team video"
+        >
+          <source src={heroVideoUrl} type="video/mp4" />
+          <p>
+            Your browser does not support this video.{" "}
+            <a href={heroVideoUrl}>Open the video</a>.
+          </p>
+        </video>
+        <p className="mt-5 text-sm text-muted-foreground">
+          Having trouble playing?{" "}
+          <a
+            href={heroVideoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-bold text-ink underline underline-offset-4"
+          >
+            Open the video directly.
+          </a>
+        </p>
       </section>
-      <RiteFooter />
-    </main>
+      <FinalCTA />
+    </SiteShell>
   );
 }
 
 export function AboutPage() {
-  return <main className="rite-page min-h-screen bg-white text-[#111013] dark:bg-[#111013] dark:text-white"><RiteHeader active="About Us" /><SimpleHero title="About Us" crumb="Home / About Us" /><section className="mx-auto max-w-[1220px] px-7 py-14 md:px-0"><Image src="/images/riteplumbing/services/RitePlumbingTeam-3-1-1-1536x570.jpg.webp" alt="Rite Plumbing team" width={1536} height={570} className="w-full" /><div className="mt-12 grid gap-12 md:grid-cols-2"><div><p className="text-[12px] font-bold uppercase">What we do</p><h2 className="mt-6 text-[48px] font-bold leading-none tracking-[-0.06em]">Results and answers form driven master plumbers</h2></div><div className="space-y-6 text-[17px] leading-relaxed text-neutral-600"><p>Big or small we are there and ready and waiting to solve multiple plumbing and heating issues: 24/7 Emergency Services, Free Estimates, Under 30-minute Arrival Time, State of the Art Scheduling Software.</p><p>We are exceeding customer expectations every day. Every one of our highly-trained techs are experienced, ready, and waiting to handle any task, regardless of the extent.</p><p>Our peace of mind commitment | We get the picture. Residential Plumbing And Heating. Commercial Plumbing And Heating.</p></div></div></section><RiteFooter /></main>;
+  return (
+    <SiteShell active="Why Rite">
+      <PageIntro
+        eyebrow="Why Rite"
+        title="Your city. Your plumbers. Your peace of mind."
+        description="We’re Rite Plumbing & Heating: a local team helping New York homes and businesses keep moving."
+      />
+      <section className="site-container pb-16">
+        <div className="relative h-[270px] overflow-hidden rounded-2xl bg-sand sm:h-[440px]">
+          <Image
+            src="/images/riteplumbing/team.jpg"
+            alt="The Rite Plumbing and Heating team together in New York City"
+            fill
+            preload
+            sizes="(min-width: 1280px) 1168px, 92vw"
+            className="object-cover"
+          />
+        </div>
+        <div id="history" className="grid gap-8 pt-14 lg:grid-cols-2 lg:gap-20">
+          <div>
+            <p className="eyebrow text-accent">
+              A local team. A personal approach.
+            </p>
+            <h2 className="section-title mt-4">
+              Good plumbing starts
+              <br />
+              with good people.
+            </h2>
+          </div>
+          <div className="space-y-5 text-base leading-8 text-muted-foreground">
+            <p>
+              New York’s buildings are as individual as the people who live in
+              them. From apartment fixtures to commercial plumbing, we bring
+              practical expertise and clear communication to each job.
+            </p>
+            <p>
+              Our licensed, insured team serves Manhattan, Brooklyn, and Queens.
+              We help with everyday repairs, installations, heating connections,
+              and the urgent problems that can’t wait.
+            </p>
+            <p id="mission">
+              Our approach is simple: understand the problem, explain the work,
+              and treat your property with care.
+            </p>
+          </div>
+        </div>
+      </section>
+      <TrustStrip />
+      <div id="licensed-plumber">
+        <WhyRite />
+      </div>
+      <BuildingDocuments />
+      <FAQSection />
+      <FinalCTA />
+    </SiteShell>
+  );
 }
 
-export function ContactPage() {
-  return <main className="rite-page min-h-screen bg-white text-[#111013] dark:bg-[#111013] dark:text-white"><RiteHeader active="Contact" /><SimpleHero title="Contact" subtitle="Leave us a little info, and we’ll be in touch.\nSend Us an Email" /><section className="grid md:grid-cols-2"><div className="h-[420px] bg-[url('/images/riteplumbing/services/residential-plumbing-services-repairs-1.jpg.webp')] bg-cover bg-center md:h-[520px]" /><div className="grid md:grid-cols-2"><div className="bg-[#111013] p-8 text-white md:p-24"><p className="text-3xl">▰</p><h2 className="mt-12 text-[28px] font-bold">Get in touch</h2><p className="mt-10 text-[18px] leading-loose"><a href="mailto:info@riteplumbingnyc.com">info@riteplumbingnyc.com</a><br /><PhoneLink><strong>347 502 6441</strong></PhoneLink><br /><br />Assistance hours:<br />24/7 Services</p></div><div className="bg-[#17161a] p-8 text-white md:p-24"><p className="text-3xl">✉</p><h2 className="mt-12 text-[28px] font-bold">Rite Plumbing & Heating Inc</h2><p className="mt-10 text-[18px] font-bold leading-relaxed">750 Lexington Ave, 9th Floor New York, NY 10022 United States</p></div></div></section><section className="bg-[#f7f6f7] px-7 py-16 md:px-0"><div className="mx-auto max-w-[1220px]"><p className="text-[16px] font-bold uppercase">Careers</p><div className="mt-6 flex flex-col items-start justify-between gap-6 border-b border-neutral-400 pb-10 md:flex-row md:items-center md:pb-14"><h2 className="text-[42px] font-bold tracking-[-0.06em] md:text-[58px]">Join our team.</h2><CtaButton dark>Upload Resume</CtaButton></div><p className="mt-10 max-w-[760px] text-[18px] leading-relaxed">Join our plumbing team that values trust, quality, and innovation. We offer growth opportunities and a supportive work environment.</p></div></section><RiteFooter /></main>;
+export function ContactPage({
+  initialService = "",
+  initialZip = "",
+}: {
+  initialService?: string;
+  initialZip?: string;
+}) {
+  return (
+    <SiteShell active="Contact">
+      <PageIntro
+        eyebrow="Contact"
+        title="Let’s get your day back on track."
+        description="Call for urgent help, book an appointment online, or tell us about your project by email."
+      />
+      <section className="site-container grid items-start gap-9 pb-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:pb-24">
+        <div>
+          <div className="rounded-2xl bg-ink p-7 text-white sm:p-9">
+            <span className="eyebrow text-[#ffad80]">
+              A real team, ready to help
+            </span>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight">
+              Plumbing problem?
+              <br />
+              Start here.
+            </h2>
+            <a
+              href={company.phoneHref}
+              className="mt-7 flex items-center gap-3 text-[27px] font-bold tracking-tight"
+            >
+              <Phone size={22} className="text-[#ffad80]" aria-hidden="true" />
+              {company.phone}
+            </a>
+            <p className="mt-2 text-sm text-white/70">
+              Emergency help available 24/7
+            </p>
+            <a
+              href={scheduleUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary mt-7 w-full"
+            >
+              Book an appointment online{" "}
+              <ArrowRight size={17} aria-hidden="true" />
+            </a>
+            <a
+              href={`mailto:${company.email}`}
+              className="mt-6 flex items-center gap-2.5 text-sm text-white/80"
+            >
+              <Mail size={17} aria-hidden="true" />
+              {company.email}
+            </a>
+          </div>
+          <div className="mt-8 space-y-6 px-1">
+            <div className="flex gap-3">
+              <MapPin
+                size={22}
+                className="mt-0.5 shrink-0 text-accent"
+                aria-hidden="true"
+              />
+              <div>
+                <h3 className="font-bold">Based in New York</h3>
+                <address className="mt-2 text-sm not-italic leading-6 text-muted-foreground">
+                  {company.address}
+                  <br />
+                  {company.city}
+                </address>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=750+Lexington+Avenue+New+York+NY+10022"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold"
+                >
+                  View on Google Maps{" "}
+                  <ArrowUpRight size={14} aria-hidden="true" />
+                </a>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <Building2
+                size={22}
+                className="mt-0.5 shrink-0 text-accent"
+                aria-hidden="true"
+              />
+              <div>
+                <h3 className="font-bold">Manhattan, Brooklyn & Queens</h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  Residential and commercial service. Call with your address to
+                  confirm availability.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <RequestForm initialService={initialService} initialZip={initialZip} />
+      </section>
+      <BuildingDocuments />
+    </SiteShell>
+  );
 }
 
-function SimpleHero({ title, subtitle, crumb }: { title: string; subtitle?: string; crumb?: string }) {
-  return <section className="mx-auto max-w-[1220px] px-7 pb-12 pt-16 md:px-0 md:pb-28 md:pt-28"><Link href="/" className="mb-10 block text-3xl md:mb-16">←</Link>{crumb ? <p className="mb-7 text-[14px] font-bold text-neutral-400">{crumb}</p> : null}<h1 className="text-[54px] font-bold leading-none tracking-[-0.065em] md:text-[88px]">{title}</h1>{subtitle ? <p className="mt-8 whitespace-pre-line text-[22px] leading-relaxed">{subtitle}</p> : null}</section>;
-}
-
-export const routeSlugs = serviceRouteSlugs.concat(["blog", "video", "about-us", "contact"]);
+export const routeSlugs = serviceRouteSlugs.concat([
+  "blog",
+  "video",
+  "about-us",
+  "contact",
+]);

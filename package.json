@@ -1,27 +1,24 @@
 {
-  "name": "ai-website-clone-template",
+  "name": "rite-plumbing-nyc",
   "version": "0.3.1",
   "private": true,
-  "description": "Clone any website into a clean, modern Next.js codebase using AI coding agents",
+  "description": "Modern NYC plumbing and heating website with online booking and local service pages",
   "author": "JCodesMore",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JCodesMore/ai-website-cloner-template.git"
+    "url": "https://github.com/lllanaveyyy-art/rite-plumbing-clone-study.git"
   },
-  "homepage": "https://github.com/JCodesMore/ai-website-cloner-template",
+  "homepage": "https://github.com/lllanaveyyy-art/rite-plumbing-clone-study",
   "bugs": {
-    "url": "https://github.com/JCodesMore/ai-website-cloner-template/issues"
+    "url": "https://github.com/lllanaveyyy-art/rite-plumbing-clone-study/issues"
   },
   "keywords": [
-    "claude-code",
-    "website-clone",
-    "reverse-engineering",
+    "plumbing",
+    "nyc",
     "nextjs",
-    "ai",
-    "template",
-    "tailwindcss",
-    "shadcn-ui"
+    "react",
+    "tailwindcss"
   ],
   "engines": {
     "node": ">=24"
@@ -31,8 +28,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit",
-    "check": "npm run lint && npm run typecheck && npm run build"
+    "typecheck": "next typegen && tsc --noEmit",
+    "check": "npm run lint && npm run typecheck && npm run build",
+    "test:ui": "node scripts/verify-site.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.3.0",

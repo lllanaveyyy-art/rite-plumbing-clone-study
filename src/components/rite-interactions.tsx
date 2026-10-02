@@ -1,227 +1,420 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import { createPortal } from "react-dom";
-import { PlayCircleIcon } from "@/components/icons";
-import { navItems, scheduleUrl, serviceMenuItems, socialLinks } from "@/lib/rite-content";
+import { useEffect, useRef, useState } from "react";
+import {
+  ArrowRight,
+  Check,
+  ChevronDown,
+  Copy,
+  Mail,
+  Menu,
+  Phone,
+  X,
+} from "lucide-react";
+import {
+  company,
+  navItems,
+  scheduleUrl,
+  servicePages,
+} from "@/lib/rite-content";
 
-function SunIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" fill="currentColor">
-      <path d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM9 5a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm0-5a.75.75 0 0 0-.75.75v1.1a.75.75 0 0 0 1.5 0V.75A.75.75 0 0 0 9 0Zm0 15.4a.75.75 0 0 0-.75.75v1.1a.75.75 0 0 0 1.5 0v-1.1A.75.75 0 0 0 9 15.4ZM.75 8.25a.75.75 0 0 0 0 1.5h1.1a.75.75 0 0 0 0-1.5H.75Zm15.4 0a.75.75 0 0 0 0 1.5h1.1a.75.75 0 0 0 0-1.5h-1.1ZM3.44 3.44a.75.75 0 0 0 0 1.05l.79.8a.75.75 0 0 0 1.06-1.06l-.8-.79a.75.75 0 0 0-1.05 0Zm9.27 9.27a.75.75 0 0 0 0 1.06l.8.79a.75.75 0 0 0 1.05-1.05l-.79-.8a.75.75 0 0 0-1.06 0Zm1.85-9.27a.75.75 0 0 0-1.05 0l-.8.79a.75.75 0 0 0 1.06 1.06l.79-.8a.75.75 0 0 0 0-1.05ZM5.29 12.71a.75.75 0 0 0-1.06 0l-.79.8a.75.75 0 0 0 1.05 1.05l.8-.79a.75.75 0 0 0 0-1.06Z" />
-    </svg>
-  );
-}
-
-function MoonIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" fill="currentColor">
-      <path d="M6.66 3.23A6.6 6.6 0 0 0 6.42 5A6.58 6.58 0 0 0 13 11.58c.6 0 1.2-.08 1.77-.24A6.22 6.22 0 1 1 6.66 3.23ZM9 1a8 8 0 1 0 8 8c0-.41-.04-.82-.09-1.21A4.8 4.8 0 0 1 8.2 5c0-1.61.79-3.04 2.01-3.91A8.1 8.1 0 0 0 9 1Z" />
-    </svg>
-  );
-}
-
-function useRiteTheme() {
-  const [theme, setTheme] = useState<"light" | "dark">(() => {
-    if (typeof window === "undefined") return "light";
-    return window.localStorage.getItem("rite-theme") === "dark" ? "dark" : "light";
-  });
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "dark");
-  }, [theme]);
-
-  function applyTheme(nextTheme: "light" | "dark") {
-    document.documentElement.classList.toggle("dark", nextTheme === "dark");
-    window.localStorage.setItem("rite-theme", nextTheme);
-    setTheme(nextTheme);
-  }
-
-  return { theme, applyTheme };
-}
-
-function ThemeButtons({ compact = false }: { compact?: boolean }) {
-  const { theme, applyTheme } = useRiteTheme();
-  const buttonClass = (value: "light" | "dark") => `${compact ? "h-10 flex-1 flex-row gap-2" : "h-12 w-12 flex-col gap-0.5"} group flex items-center justify-center text-[9px] font-bold uppercase tracking-[0.06em] transition ${theme === value ? "bg-[#111013] text-white dark:bg-white dark:text-[#111013]" : "text-neutral-400 hover:text-[#111013] dark:hover:text-white"}`;
-
-  return (
-    <div className={`${compact ? "flex w-full" : "overflow-hidden rounded-full"} border border-black/10 bg-white/95 text-[#111013] shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur dark:border-white/15 dark:bg-[#111013]/95 dark:text-white`}>
-      <button type="button" aria-label="Light theme" onClick={() => applyTheme("light")} className={buttonClass("light")}>
-        <SunIcon />
-        <span>Light</span>
-      </button>
-      <button type="button" aria-label="Dark theme" onClick={() => applyTheme("dark")} className={`${buttonClass("dark")} ${compact ? "border-l" : "border-t"} border-black/10 dark:border-white/15`}>
-        <MoonIcon />
-        <span>Dark</span>
-      </button>
-    </div>
-  );
-}
-
-export function RiteThemeControls() {
-  return (
-    <div className="fixed left-3 top-[104px] z-40 hidden md:left-5 md:top-[148px] md:block">
-      <ThemeButtons />
-    </div>
-  );
-}
-
-export function MobileRiteMenu({ active }: { active?: string }) {
-  const [open, setOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
-
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
-
-  function closeMenu() {
-    setOpen(false);
-    setServicesOpen(false);
-  }
-
-  return (
-    <>
-      <button
-        type="button"
-        aria-label={open ? "Close navigation menu" : "Open navigation menu"}
-        aria-expanded={open}
-        onClick={() => setOpen((current) => !current)}
-        className="fixed left-4 top-6 z-[70] flex h-12 w-12 items-center justify-center rounded-full bg-[#f7f7f7] shadow-sm transition hover:bg-white md:hidden dark:bg-[#17161a]"
-      >
-        <span className="sr-only">Menu</span>
-        <span className={`${open ? "rotate-45 shadow-none before:rotate-90" : "shadow-[0_7px_0_#1f2937,0_-7px_0_#1f2937] before:rotate-0 dark:shadow-[0_7px_0_#fff,0_-7px_0_#fff]"} relative h-0.5 w-5 bg-neutral-800 transition before:absolute before:left-0 before:top-0 before:h-0.5 before:w-5 before:bg-neutral-800 before:transition dark:bg-white dark:before:bg-white`} />
-      </button>
-
-      {open ? (
-        <>
-          <button type="button" aria-label="Close navigation overlay" className="fixed inset-0 z-[55] bg-[#111013]/55 backdrop-blur-[2px] md:hidden" onClick={closeMenu} />
-          <aside className="fixed inset-y-0 left-0 z-[60] flex w-[min(90vw,370px)] flex-col overflow-y-auto bg-white px-7 pb-8 pt-24 text-[#111013] shadow-2xl md:hidden dark:bg-[#111013] dark:text-white">
-            <button type="button" onClick={closeMenu} className="absolute right-6 top-6 text-4xl font-light leading-none" aria-label="Close menu">×</button>
-            <nav className="flex flex-col text-[20px] font-bold leading-none tracking-[-0.04em]">
-              {navItems.map((item) => item.label === "Services" ? (
-                <div key={item.label} className="border-b border-neutral-200 py-4 dark:border-white/15">
-                  <button
-                    type="button"
-                    onClick={() => setServicesOpen((current) => !current)}
-                    aria-expanded={servicesOpen}
-                    className={`${active === "Services" ? "text-[#09a9d6]" : ""} flex w-full items-center justify-between text-left`}
-                  >
-                    Services
-                    <span className="text-[22px] text-[#09a9d6]">{servicesOpen ? "−" : "+"}</span>
-                  </button>
-                  {servicesOpen ? (
-                    <div className="mt-5 space-y-3 border-l-2 border-[#09a9d6]/35 pl-4 text-[14px] leading-tight tracking-[-0.02em] text-neutral-600 dark:text-white/70">
-                      <Link href="/services/" onClick={closeMenu} className="block font-bold text-[#111013] hover:text-[#09a9d6] dark:text-white">Services</Link>
-                      {serviceMenuItems.map((service) => (
-                        <div key={service.href}>
-                          <Link href={service.href} onClick={closeMenu} className="block font-bold text-[#111013] hover:text-[#09a9d6] dark:text-white">
-                            {service.label}
-                          </Link>
-                          {service.children ? (
-                            <div className="mt-3 space-y-3 pl-3">
-                              {service.children.map((child) => (
-                                <Link key={child.href} href={child.href} onClick={closeMenu} className="block hover:text-[#09a9d6]">
-                                  {child.label}
-                                </Link>
-                              ))}
-                            </div>
-                          ) : null}
-                        </div>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
-              ) : (
-                <Link key={item.label} href={item.href} onClick={closeMenu} className={`${active === item.label ? "text-[#09a9d6]" : ""} border-b border-neutral-200 py-4 dark:border-white/15`}>
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-
-            <a href={scheduleUrl} target="_blank" rel="noreferrer" onClick={closeMenu} className="mt-8 inline-flex items-center justify-center bg-[#111013] px-5 py-3 text-[11px] font-bold uppercase tracking-[-0.01em] text-white transition hover:brightness-110 dark:bg-white dark:text-[#111013]">
-              Schedule a plumber now <span className="ml-2">→</span>
-            </a>
-            <div className="mt-8 border-t border-neutral-200 pt-6 dark:border-white/15">
-              <p className="text-[12px] font-bold uppercase tracking-[0.1em] text-neutral-400">Follow Us</p>
-              <p className="mt-3 text-[16px] font-bold">
-                {socialLinks.map((social, index) => (
-                  <span key={social.label}>
-                    <a href={social.href} target="_blank" rel="noreferrer" className="hover:text-[#18a9d4]">{social.label}</a>{index < socialLinks.length - 1 ? " / " : ""}
-                  </span>
-                ))}
-              </p>
-            </div>
-            <div className="mt-7 border-t border-neutral-200 pt-6 dark:border-white/15">
-              <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.1em] text-neutral-400">Theme</p>
-              <ThemeButtons compact />
-            </div>
-          </aside>
-        </>
-      ) : null}
-    </>
-  );
-}
-
-export function RiteScrollTop() {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 520);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  return (
-    <button
-      type="button"
-      aria-label="Back to top"
-      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className={`fixed bottom-6 right-5 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-[#f22b2b] text-[20px] font-bold leading-none text-white shadow-lg transition md:bottom-auto md:right-auto md:left-5 md:top-[295px] md:h-auto md:w-auto md:rounded-none md:border-0 md:bg-transparent md:text-[#111013] md:shadow-none md:dark:text-white ${visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"}`}
-    >
-      <span className="hidden items-center gap-3 text-[11px] font-bold uppercase tracking-[0.08em] md:flex md:[writing-mode:vertical-rl]">
-        <span className="h-16 w-px bg-[#f22b2b]" />
-        Scroll to top
-      </span>
-      <span className="md:hidden">↑</span>
-    </button>
-  );
-}
-
-export function HeroVideoButton({ src }: { src: string }) {
+export function SiteNavigation({ active }: { active?: string }) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const desktopMenuRef = useRef<HTMLDetailsElement>(null);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (!open) return;
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
-    };
+    const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKeyDown);
     return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previous;
     };
   }, [open]);
 
+  useEffect(() => {
+    const closeDropdown = (event: Event) => {
+      const menu = desktopMenuRef.current;
+      if (!menu?.open) return;
+      if (event instanceof KeyboardEvent && event.key === "Escape") {
+        menu.open = false;
+        menu.querySelector("summary")?.focus();
+      } else if (event.target instanceof Node && !menu.contains(event.target)) {
+        menu.open = false;
+      }
+    };
+    document.addEventListener("pointerdown", closeDropdown);
+    document.addEventListener("focusin", closeDropdown);
+    document.addEventListener("keydown", closeDropdown);
+    return () => {
+      document.removeEventListener("pointerdown", closeDropdown);
+      document.removeEventListener("focusin", closeDropdown);
+      document.removeEventListener("keydown", closeDropdown);
+    };
+  }, []);
+
+  function closeMenu() {
+    dialogRef.current?.close();
+    setOpen(false);
+    triggerRef.current?.focus();
+  }
+
   return (
     <>
-      <button type="button" aria-label="Play Rite Plumbing video" onClick={() => setOpen(true)} className="mb-5 block rounded-full text-white transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#18a9d4] md:mb-8 md:text-[#111013] dark:text-white">
-        <PlayCircleIcon className="h-14 w-14 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)] md:h-16 md:w-16" />
-      </button>
-      {open ? createPortal(
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/82 px-4 py-8" role="dialog" aria-modal="true" aria-label="Rite Plumbing video player">
-          <button type="button" aria-label="Close video" onClick={() => setOpen(false)} className="absolute right-4 top-4 z-50 h-11 w-11 rounded-full bg-white text-[26px] font-bold leading-none text-[#111013] md:right-8 md:top-8">×</button>
-          <div className="w-full max-w-[960px] bg-black shadow-2xl">
-            <video src={src} controls autoPlay playsInline className="h-auto max-h-[78vh] w-full" />
+      <nav
+        aria-label="Main navigation"
+        className="hidden items-center gap-6 xl:flex"
+      >
+        <details ref={desktopMenuRef} className="service-menu relative">
+          <summary
+            className={`nav-link flex cursor-pointer list-none items-center gap-1.5 ${active === "Services" ? "nav-active" : ""}`}
+          >
+            Services <ChevronDown size={14} aria-hidden="true" />
+          </summary>
+          <div className="absolute left-0 top-[calc(100%+24px)] w-[510px] rounded-xl border border-border bg-white p-5 shadow-xl">
+            <div className="mb-4 flex items-center justify-between border-b border-border pb-4">
+              <span className="eyebrow">How we can help</span>
+              <Link
+                href="/services"
+                onClick={() => {
+                  if (desktopMenuRef.current)
+                    desktopMenuRef.current.open = false;
+                }}
+                className="text-sm font-semibold text-accent"
+              >
+                All services <span aria-hidden="true">↗</span>
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-x-5 gap-y-1">
+              {servicePages.map((service) => (
+                <Link
+                  key={service.slug}
+                  href={`/services/${service.slug}`}
+                  onClick={() => {
+                    if (desktopMenuRef.current)
+                      desktopMenuRef.current.open = false;
+                  }}
+                  className="rounded-md px-2 py-2.5 text-sm font-medium transition hover:bg-cream hover:text-accent"
+                >
+                  {service.shortTitle}
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>,
-        document.body,
-      ) : null}
+        </details>
+        {navItems.slice(1).map((item) => (
+          <Link
+            key={item.label}
+            href={item.href}
+            className={`nav-link ${active === item.label ? "nav-active" : ""}`}
+            aria-current={active === item.label ? "page" : undefined}
+          >
+            {item.label}
+          </Link>
+        ))}
+      </nav>
+      <div className="flex items-center gap-3 sm:gap-5">
+        <a
+          href={company.phoneHref}
+          className="hidden items-center gap-2 text-sm font-bold md:flex"
+        >
+          <Phone size={16} className="text-accent" aria-hidden="true" />
+          {company.phone}
+        </a>
+        <a
+          href={scheduleUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn-primary hidden sm:inline-flex"
+        >
+          Book a service <ArrowRight size={16} aria-hidden="true" />
+        </a>
+        <button
+          ref={triggerRef}
+          type="button"
+          onClick={() => {
+            dialogRef.current?.showModal();
+            setOpen(true);
+          }}
+          aria-label="Open navigation"
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
+          className="flex h-11 w-11 items-center justify-center rounded-lg border border-border xl:hidden"
+        >
+          <Menu size={23} aria-hidden="true" />
+        </button>
+      </div>
+      <dialog
+        ref={dialogRef}
+        id="mobile-navigation"
+        aria-label="Navigation"
+        onCancel={() => setOpen(false)}
+        onClose={() => setOpen(false)}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) closeMenu();
+        }}
+        className="mobile-dialog m-0 ml-auto h-dvh max-h-none w-[min(100%,440px)] max-w-none border-0 bg-cream p-0 text-ink"
+      >
+        <div className="flex h-full flex-col overflow-y-auto px-7 pb-8 pt-6">
+          <div className="mb-10 flex items-center justify-between">
+            <span className="text-2xl font-extrabold tracking-tight">
+              RITE<span className="text-accent">.</span>
+            </span>
+            <button
+              type="button"
+              onClick={closeMenu}
+              aria-label="Close navigation"
+              className="flex h-11 w-11 items-center justify-center rounded-lg border border-border"
+            >
+              <X size={24} aria-hidden="true" />
+            </button>
+          </div>
+          <nav aria-label="Mobile navigation" className="flex flex-col">
+            {navItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                onClick={closeMenu}
+                aria-current={active === item.label ? "page" : undefined}
+                className="flex items-center justify-between border-b border-border py-4 text-xl font-semibold"
+              >
+                {item.label}
+                <ArrowRight size={19} aria-hidden="true" />
+              </Link>
+            ))}
+          </nav>
+          <div className="mt-auto pt-10">
+            <p className="eyebrow mb-3">Here for you, 24/7</p>
+            <a href={company.phoneHref} className="block text-2xl font-bold">
+              {company.phone}
+            </a>
+            <a
+              href={scheduleUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMenu}
+              className="btn btn-primary mt-5 w-full"
+            >
+              Book a service <ArrowRight size={17} aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </dialog>
     </>
+  );
+}
+
+export function MobileActionBar() {
+  return (
+    <div className="fixed inset-x-0 bottom-0 z-40 flex gap-3 border-t border-border bg-white/95 px-4 pb-[max(12px,env(safe-area-inset-bottom))] pt-3 backdrop-blur-md sm:hidden">
+      <a href={company.phoneHref} className="btn btn-dark flex-1">
+        <Phone size={17} aria-hidden="true" />
+        Call 24/7
+      </a>
+      <a
+        href={scheduleUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn btn-primary flex-1"
+      >
+        Book online <ArrowRight size={17} aria-hidden="true" />
+      </a>
+    </div>
+  );
+}
+
+export function RequestForm({
+  initialService = "",
+  initialZip = "",
+}: {
+  initialService?: string;
+  initialZip?: string;
+}) {
+  const [draft, setDraft] = useState<{ text: string; href: string } | null>(
+    null,
+  );
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">(
+    "idle",
+  );
+  const confirmationRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (draft) confirmationRef.current?.focus();
+  }, [draft]);
+
+  async function copyRequest() {
+    if (!draft) return;
+    try {
+      await navigator.clipboard.writeText(draft.text);
+      setCopyState("copied");
+    } catch {
+      setCopyState("failed");
+    }
+  }
+
+  function prepareRequest(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const service = String(data.get("service"));
+    const text = `Hello Rite Plumbing & Heating,\n\nI would like help with ${service}.\n\nName: ${data.get("name")}\nPhone: ${data.get("phone")}\nZIP code: ${data.get("zip")}\n\nDetails:\n${data.get("details")}\n\nPlease contact me to discuss availability and an estimate. Thank you.`;
+    const href = `mailto:${company.email}?subject=${encodeURIComponent(`Plumbing request: ${service}`)}&body=${encodeURIComponent(text)}`;
+    setDraft({ text, href });
+    setCopyState("idle");
+  }
+
+  return (
+    <div className="rounded-2xl border border-border bg-white p-6 sm:p-9">
+      <span className="eyebrow">Prefer email?</span>
+      <h2 className="mt-3 text-3xl font-bold tracking-tight">
+        Tell us what’s going on.
+      </h2>
+      <p className="mt-3 text-sm leading-6 text-muted-foreground">
+        Prepare a request below, then send it from your email app. For a
+        confirmed appointment, use our online booking calendar.
+      </p>
+      {draft ? (
+        <div
+          ref={confirmationRef}
+          tabIndex={-1}
+          className="mt-7 rounded-xl bg-cream p-6"
+          role="status"
+        >
+          <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-ink text-white">
+            <Mail size={19} aria-hidden="true" />
+          </span>
+          <h3 className="text-xl font-bold">Your email draft is ready.</h3>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            Open your email app to review and send it. Your request has not been
+            sent yet.
+          </p>
+          <a href={draft.href} className="btn btn-primary mt-5 w-full">
+            Open email app <ArrowRight size={16} aria-hidden="true" />
+          </a>
+          <button
+            type="button"
+            onClick={copyRequest}
+            className="btn btn-outline mt-3 w-full"
+          >
+            {copyState === "copied" ? (
+              <Check size={16} aria-hidden="true" />
+            ) : (
+              <Copy size={16} aria-hidden="true" />
+            )}
+            {copyState === "copied" ? "Request copied" : "Copy request instead"}
+          </button>
+          {copyState === "failed" ? (
+            <p className="mt-3 text-sm">
+              Copy the text below and email it to {company.email}.
+            </p>
+          ) : null}
+          <details className="mt-4 text-sm">
+            <summary className="cursor-pointer font-semibold">
+              View request text
+            </summary>
+            <p className="mt-3 whitespace-pre-wrap leading-6">{draft.text}</p>
+          </details>
+          <button
+            type="button"
+            onClick={() => setDraft(null)}
+            className="mt-5 text-sm font-semibold underline underline-offset-4"
+          >
+            Start a new request
+          </button>
+        </div>
+      ) : (
+        <form onSubmit={prepareRequest} className="mt-7 space-y-5">
+          <div className="grid gap-5 sm:grid-cols-2">
+            <label className="field-label">
+              Your name
+              <input
+                name="name"
+                autoComplete="name"
+                required
+                maxLength={100}
+                placeholder="Full name"
+                className="form-input"
+              />
+            </label>
+            <label className="field-label">
+              Phone number
+              <input
+                name="phone"
+                type="tel"
+                autoComplete="tel"
+                required
+                maxLength={30}
+                minLength={7}
+                placeholder="(212) 555-0123"
+                className="form-input"
+              />
+            </label>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <label className="field-label">
+              Service needed
+              <select
+                name="service"
+                defaultValue={initialService}
+                required
+                className="form-input"
+              >
+                <option value="" disabled>
+                  Select a service
+                </option>
+                {servicePages.map((service) => (
+                  <option key={service.slug} value={service.shortTitle}>
+                    {service.shortTitle}
+                  </option>
+                ))}
+                <option value="Not sure — please advise">
+                  Not sure — please advise
+                </option>
+              </select>
+            </label>
+            <label className="field-label">
+              ZIP code
+              <input
+                name="zip"
+                inputMode="numeric"
+                autoComplete="postal-code"
+                pattern="[0-9]{5}"
+                maxLength={5}
+                defaultValue={initialZip}
+                required
+                title="Enter a five-digit ZIP code"
+                placeholder="10022"
+                className="form-input"
+              />
+            </label>
+          </div>
+          <label className="field-label">
+            How can we help?
+            <textarea
+              name="details"
+              required
+              maxLength={1500}
+              rows={4}
+              placeholder="Tell us about the issue and any building requirements…"
+              className="form-input resize-y"
+            />
+          </label>
+          <button type="submit" className="btn btn-dark w-full">
+            Prepare email request <ArrowRight size={17} aria-hidden="true" />
+          </button>
+          <p className="text-xs leading-5 text-muted-foreground">
+            You’ll review and send the request in your email app. Need urgent
+            help?{" "}
+            <a
+              href={company.phoneHref}
+              className="font-bold text-ink underline underline-offset-2"
+            >
+              Call us 24/7.
+            </a>
+          </p>
+        </form>
+      )}
+    </div>
   );
 }
