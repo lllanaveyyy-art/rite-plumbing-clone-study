@@ -6,6 +6,8 @@ The site now uses a consistent navy, warm white, and accessible orange palette; 
 
 ## Previews
 
+These previews show the initial visual redesign, before the October copy edit.
+
 ![Desktop homepage](previews/home-desktop.jpg)
 
 ![Mobile homepage](previews/home-mobile.jpg)
@@ -28,3 +30,17 @@ The site now uses a consistent navy, warm white, and accessible orange palette; 
 The active booking integration is the existing company Housecall Pro URL. The contact form prepares an email draft rather than claiming delivery through an unconfigured backend.
 
 Deployment remains compatible with the repository’s existing Vercel setup. No hosting provider is changed. Canonical URLs use the configured site origin or Vercel hostname; preview deployments are excluded from indexing.
+
+## Copy editing — October 2026
+
+The homepage, all 14 service pages, company and contact pages, FAQs, six articles, navigation, footer, form guidance, and search descriptions were reviewed. Service names and concrete descriptions replace repeated slogan pairs, flow metaphors, and phrases such as “No runaround.”
+
+Company details come from the original Rite Plumbing homepage, company page, and archived service content in `docs/research/riteplumbingnyc.com/`. This includes the three service boroughs, license #1608, free estimates, building documents, payment methods, and the company’s stated history. Arrival times are confirmed by phone rather than promised universally.
+
+Petri Plumbing and Roto-Rooter’s NYC service pages were used as references for direct service headings and descriptions, with original wording written for Rite. Gas safety instructions follow Con Edison’s current guidance.
+
+- Company facts: https://riteplumbingnyc.com/ and https://riteplumbingnyc.com/about-us/
+- Style references: https://www.petriplumbing.com/plumbing-services/ and https://www.rotorooter.com/newyorkny/
+- Gas safety: https://www.coned.com/en/safety/energy-safety/gas-safety/gas-leak-faq
+
+Copy-edit validation: `npm run check` passed. All 76 homepage, content, article, and current/legacy service routes returned successfully; removed slogans were absent and booking links remained present. Browser checks are performed on the Vercel preview because Chromium could not be installed in the local execution environment.

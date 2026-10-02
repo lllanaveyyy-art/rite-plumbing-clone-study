@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: "%s | Rite Plumbing & Heating",
   },
   description:
-    "Local, licensed plumbing and heating for Manhattan, Brooklyn, and Queens. 24/7 emergency help, repairs, installations, and free estimates. Book Rite Plumbing online.",
+    "Licensed plumbing and heating in Manhattan, Brooklyn, and Queens. Repairs, installations, free estimates, and 24/7 emergency service from Rite Plumbing.",
   applicationName: "Rite Plumbing & Heating",
   icons: {
     icon: { url: "/icon.svg", type: "image/svg+xml" },

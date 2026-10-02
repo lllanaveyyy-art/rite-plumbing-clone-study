@@ -4,7 +4,7 @@ import { pageMetadata, siteUrl } from "@/lib/metadata";
 
 export const metadata = pageMetadata(
   "NYC Plumbing & Heating",
-  "Local, licensed plumbing for Manhattan, Brooklyn, and Queens. 24/7 emergency help, expert repairs, and free estimates. Book a Rite Plumbing service online.",
+  "Licensed plumbing and heating in Manhattan, Brooklyn, and Queens. Leak repairs, drain cleaning, water heaters, and 24/7 emergency service. Free estimates.",
   "/",
 );
 

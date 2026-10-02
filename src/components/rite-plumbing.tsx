@@ -72,7 +72,7 @@ export function RiteHeader({ active }: { active?: string }) {
         <div className="site-container flex min-h-8 items-center justify-between gap-4 text-[11px] font-medium">
           <span className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-[#ffad80]" />
-            24/7 emergency plumbing. We’re here to help.
+            24/7 emergency plumbing service
           </span>
           <span className="hidden items-center gap-1.5 text-white/75 sm:flex">
             <MapPin size={12} aria-hidden="true" />
@@ -188,7 +188,7 @@ export function ServiceCard({ service }: { service: ServicePageContent }) {
           {service.description}
         </p>
         <span className="mt-auto block pt-5 text-xs font-bold">
-          Explore service{" "}
+          Service details{" "}
           <span className="ml-1 text-accent" aria-hidden="true">
             →
           </span>
@@ -206,20 +206,18 @@ export function HomePage() {
           <div className="hero-enter">
             <p className="eyebrow flex items-center gap-2.5 text-muted-foreground">
               <span className="h-0.5 w-6 bg-accent" />
-              New York’s neighborhood plumbers
+              Rite Plumbing & Heating
             </p>
             <h1 className="mt-6 text-[46px] font-bold leading-[1.04] tracking-[-0.055em] sm:text-[64px] lg:text-[72px]">
-              Good plumbing.
+              Plumbing & heating
               <br />
-              Great{" "}
-              <span className="text-accent">
-                peace
-                <br className="hidden lg:block" /> of mind.
-              </span>
+              in{" "}
+              <span className="text-accent">New York City</span>
             </h1>
             <p className="mt-6 max-w-[455px] text-base leading-7 text-muted-foreground sm:text-[17px]">
-              From a leaky faucet to a late-night emergency, we’ll help get your
-              day flowing again. Local people. Expert work. No runaround.
+              Licensed plumbing and heating service in Manhattan, Brooklyn,
+              and Queens. We repair leaks, clear drains, and install fixtures
+              and water heaters. Available 24/7 for emergencies.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <BookButton />
@@ -249,7 +247,7 @@ export function HomePage() {
               <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-ink/60 to-transparent" />
               <span className="absolute bottom-7 left-6 flex items-center gap-2 text-xs font-semibold text-white">
                 <MapPin size={16} aria-hidden="true" />
-                Your city. Your plumbers.
+                Serving Manhattan, Brooklyn & Queens
               </span>
             </div>
             <div className="absolute -right-3 -top-5 flex h-[95px] w-[95px] rotate-[8deg] flex-col items-center justify-center rounded-full border-[5px] border-cream bg-accent text-white sm:-right-5 sm:-top-6 sm:h-[116px] sm:w-[116px]">
@@ -257,7 +255,7 @@ export function HomePage() {
                 24/7
               </span>
               <span className="mt-1.5 text-[8px] font-bold uppercase tracking-[0.13em] sm:text-[9px]">
-                Here for you
+                Emergency service
               </span>
             </div>
             <div className="absolute -bottom-7 left-5 right-5 flex items-center gap-4 rounded-xl border border-border bg-white px-5 py-4 shadow-[0_10px_35px_rgba(16,46,60,0.08)] sm:left-7 sm:right-auto sm:min-w-[335px]">
@@ -266,7 +264,7 @@ export function HomePage() {
               </span>
               <div>
                 <p className="text-sm font-bold">
-                  Good hands. Proper credentials.
+                  Licensed & insured
                 </p>
                 <p className="mt-1 text-xs text-muted-foreground">
                   NYC plumbing license #{company.license}
@@ -281,11 +279,11 @@ export function HomePage() {
         <div className="site-container">
           <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
             <div>
-              <p className="eyebrow text-accent">A fix for whatever comes up</p>
+              <p className="eyebrow text-accent">Our services</p>
               <h2 className="section-title mt-4">
-                Big problems. Small fixes.
+                Plumbing repairs
                 <br />
-                We handle both.
+                & installations
               </h2>
             </div>
             <Link
@@ -307,10 +305,10 @@ export function HomePage() {
               </span>
               <div>
                 <h3 className="text-lg font-bold tracking-tight">
-                  Can’t wait until tomorrow?
+                  Need an emergency plumber?
                 </h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Call us for 24/7 emergency plumbing.
+                  Call for an active leak, burst pipe, or drain backup.
                 </p>
               </div>
             </div>
@@ -344,18 +342,18 @@ export function TrustStrip() {
     },
     {
       Icon: Clock3,
-      title: "Here for you 24/7",
+      title: "24/7 emergency service",
       text: "Day, night, and weekends",
     },
     {
       Icon: House,
       title: "Homes & businesses",
-      text: "Repairs to installations",
+      text: "Repairs & installations",
     },
     {
       Icon: FileCheck2,
       title: "Free estimates",
-      text: "Let’s talk about your project",
+      text: "Call or book online",
     },
   ];
   return (
@@ -402,38 +400,38 @@ function WhyRite() {
           <div className="absolute -bottom-5 left-5 right-5 flex items-center gap-3 rounded-xl bg-white px-5 py-4 text-ink sm:left-7 sm:right-auto">
             <BadgeCheck size={29} className="text-accent" aria-hidden="true" />
             <div>
-              <p className="text-sm font-bold">Real people. Reliable work.</p>
+              <p className="text-sm font-bold">Rite Plumbing & Heating</p>
               <p className="mt-1 text-xs text-muted-foreground">
-                Proud to work in the city we call home.
+                Residential & commercial plumbing in NYC
               </p>
             </div>
           </div>
         </div>
         <div className="pt-3 lg:pt-0">
-          <p className="eyebrow text-[#ffad80]">The Rite way to do it</p>
+          <p className="eyebrow text-[#ffad80]">About our company</p>
           <h2 className="section-title mt-4">
-            New York moves fast.
+            Licensed plumbers
             <br />
-            So do we.
+            serving New York
           </h2>
           <p className="mt-5 text-base leading-7 text-white/75">
-            You have enough on your plate. Getting a plumber shouldn’t add to
-            it. We bring clear communication, capable hands, and care for your
-            space.
+            Rite Plumbing & Heating provides plumbing repairs and
+            installations for homes, businesses, and managed buildings in
+            Manhattan, Brooklyn, and Queens.
           </p>
           <div className="mt-8 space-y-6">
             {[
               {
-                title: "Clear answers, from the start",
-                text: "We explain the issue and talk through the work so you know what comes next.",
+                title: "Free estimates",
+                text: "Contact us about your repair or installation. We explain the proposed work and provide an estimate.",
               },
               {
-                title: "Your home gets our respect",
-                text: "Careful repairs, thoughtful installations, and a team that cares about the details.",
+                title: "Licensed and insured",
+                text: "NYC plumbing license #1608. License and insurance documents are available for building management.",
               },
               {
-                title: "We know NYC buildings",
-                text: "Co-ops, condos, and commercial spaces. We help coordinate access and required paperwork.",
+                title: "Building paperwork",
+                text: "We provide COIs, indemnification letters, and a scope of work for buildings that require them.",
               },
             ].map((item, i) => (
               <div key={item.title} className="flex gap-4">
@@ -453,7 +451,7 @@ function WhyRite() {
             href="/about-us"
             className="mt-8 inline-flex items-center gap-3 border-b border-white/40 pb-2 text-sm font-bold"
           >
-            Get to know Rite <ArrowUpRight size={17} aria-hidden="true" />
+            About Rite Plumbing <ArrowUpRight size={17} aria-hidden="true" />
           </Link>
         </div>
       </div>
@@ -464,18 +462,18 @@ function WhyRite() {
 export function HowItWorks() {
   const steps = [
     {
-      title: "Tell us what you need",
-      text: "Call our team or choose a time in our online booking calendar.",
+      title: "Book an appointment",
+      text: "Choose a time in our online calendar, or call (347) 502-6441. Call directly for emergencies.",
       Icon: CalendarDays,
     },
     {
-      title: "We make a plan",
-      text: "We assess the issue and explain the work and estimate before starting.",
+      title: "Discuss the repair",
+      text: "Your plumber checks the problem and explains the proposed work and estimate.",
       Icon: Wrench,
     },
     {
-      title: "Get back to your day",
-      text: "We finish the work, check the result, and walk you through what’s been done.",
+      title: "Complete the visit",
+      text: "After the work, you receive an invoice with payment options for credit card, check, or ACH.",
       Icon: CheckCircle2,
     },
   ];
@@ -483,8 +481,8 @@ export function HowItWorks() {
     <section className="section-space bg-cream">
       <div className="site-container">
         <div className="text-center">
-          <p className="eyebrow text-accent">Less hassle. More flow.</p>
-          <h2 className="section-title mt-4">Good service should be simple.</h2>
+          <p className="eyebrow text-accent">Appointments</p>
+          <h2 className="section-title mt-4">How to schedule a plumber</h2>
         </div>
         <div className="mt-12 grid gap-10 sm:grid-cols-3 sm:gap-8">
           {steps.map(({ title, text, Icon }, i) => (
@@ -517,15 +515,16 @@ export function ServiceAreas() {
     <section id="service-areas" className="bg-white">
       <div className="site-container grid items-center gap-10 border-t border-border py-16 lg:grid-cols-[1fr_1.04fr] lg:gap-16 lg:py-20">
         <div>
-          <p className="eyebrow text-accent">Local roots. Citywide know-how.</p>
+          <p className="eyebrow text-accent">Service areas</p>
           <h2 className="section-title mt-4">
-            From downtown
+            Manhattan, Brooklyn
             <br />
-            to your doorstep.
+            & Queens
           </h2>
           <p className="mt-5 max-w-[420px] text-base leading-7 text-muted-foreground">
-            New York plumbing is its own world. We help homeowners, businesses,
-            and building managers across three boroughs.
+            We provide residential and commercial plumbing across these three
+            boroughs. Contact us for repairs, installations, or emergency
+            service at your property.
           </p>
           <div className="mt-7 flex flex-wrap gap-2.5">
             {["Manhattan", "Brooklyn", "Queens"].map((area) => (
@@ -545,7 +544,7 @@ export function ServiceAreas() {
             href="/contact"
             className="mt-5 inline-flex items-center gap-2 text-sm font-bold"
           >
-            Let’s talk about your property{" "}
+            Contact our team{" "}
             <ArrowUpRight
               size={17}
               className="text-accent"
@@ -583,15 +582,16 @@ export function BuildingDocuments() {
     <section className="bg-sand/70">
       <div className="site-container grid items-center gap-10 py-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <div>
-          <p className="eyebrow text-accent">Built for building requirements</p>
+          <p className="eyebrow text-accent">For building management</p>
           <h2 className="mt-4 text-[30px] font-bold leading-tight tracking-[-0.035em] sm:text-[36px]">
-            Your building’s paperwork?
+            Documents for your
             <br />
-            We can help with that.
+            plumbing work
           </h2>
           <p className="mt-4 text-sm leading-6 text-muted-foreground">
-            Send your building’s requirements before your visit. We’ll help
-            coordinate the documents and scope of work.
+            Need a COI or other documents before work can begin? Send us the
+            requirements from your building manager so we can prepare the
+            paperwork before your appointment.
           </p>
           <a
             href={uploadDocumentsUrl}
@@ -636,15 +636,16 @@ export function FAQSection() {
       <div className="site-container grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
         <div>
           <p className="eyebrow text-accent">
-            A few things you might be wondering
+            FAQs
           </p>
           <h2 className="section-title mt-4">
-            Good questions.
+            Common plumbing
             <br />
-            Straight answers.
+            questions
           </h2>
           <p className="mt-5 max-w-[300px] text-sm leading-6 text-muted-foreground">
-            Still have something on your mind? We’re happy to talk it through.
+            Call us for questions about a repair, booking, or your building’s
+            requirements.
           </p>
           <a
             href={company.phoneHref}
@@ -687,9 +688,9 @@ export function NewsSection({ all = false }: { all?: boolean }) {
           <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
             <div>
               <p className="eyebrow text-accent">
-                A little know-how goes a long way
+                Homeowner resources
               </p>
-              <h2 className="section-title mt-4">Good advice. On the house.</h2>
+              <h2 className="section-title mt-4">Plumbing tips & maintenance</h2>
             </div>
             <Link
               href="/blog"
@@ -731,7 +732,7 @@ export function NewsSection({ all = false }: { all?: boolean }) {
                 {article.title}
               </h3>
               <span className="mt-4 inline-flex items-center gap-2 text-xs font-bold">
-                Read the advice{" "}
+                Read article{" "}
                 <ArrowUpRight
                   size={15}
                   className="text-accent"
@@ -751,14 +752,14 @@ export function FinalCTA() {
     <section className="bg-ink text-white">
       <div className="site-container flex flex-col justify-between gap-8 py-14 lg:flex-row lg:items-center lg:py-16">
         <div>
-          <p className="eyebrow text-[#ffad80]">Let’s take it from here</p>
+          <p className="eyebrow text-[#ffad80]">Schedule a service</p>
           <h2 className="mt-4 text-[36px] font-bold leading-[1.1] tracking-[-0.04em] sm:text-[46px]">
-            Get your day
+            Need a plumber
             <br />
-            flowing again.
+            in New York?
           </h2>
           <p className="mt-4 text-sm leading-6 text-white/75">
-            Expert plumbing. A friendly local team. Here when you need us.
+            Call for 24/7 emergency service or book your appointment online.
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
@@ -788,7 +789,7 @@ export function RiteFooter() {
           <div>
             <BrandLogo light />
             <p className="mt-5 max-w-[230px] text-sm leading-6 text-white/65">
-              Plumbing & heating for the city that never stops.
+              Plumbing and heating repairs in Manhattan, Brooklyn, and Queens.
             </p>
             <div className="mt-5 flex gap-4 text-xs text-white/75">
               {socialLinks.map((social) => (
@@ -805,7 +806,7 @@ export function RiteFooter() {
             </div>
           </div>
           <div>
-            <p className="eyebrow text-white/70">How we help</p>
+            <p className="eyebrow text-white/70">Services</p>
             <ul className="mt-5 space-y-3 text-[13px] text-white/75">
               {servicePages.slice(0, 4).map((service) => (
                 <li key={service.slug}>
@@ -825,7 +826,7 @@ export function RiteFooter() {
             </ul>
           </div>
           <div>
-            <p className="eyebrow text-white/70">Meet Rite</p>
+            <p className="eyebrow text-white/70">Company</p>
             <ul className="mt-5 space-y-3 text-[13px] text-white/75">
               <li>
                 <Link href="/about-us" className="hover:text-[#ffad80]">
@@ -844,7 +845,7 @@ export function RiteFooter() {
               </li>
               <li>
                 <Link href="/video" className="hover:text-[#ffad80]">
-                  Rite in action
+                  Team video
                 </Link>
               </li>
               <li>
@@ -1003,15 +1004,15 @@ export function ServicePage({ page }: { page: ServicePageContent }) {
           <div>
             {page.icon === "gas" ? <GasSafetyNotice /> : null}
             <p className="eyebrow text-accent">
-              Careful work. Clear communication.
+              Service information
             </p>
             <h2 className="mt-4 text-[32px] font-bold leading-tight tracking-[-0.035em]">
-              The right help for your property.
+              {page.shortTitle}
             </h2>
             <p className="mt-5 text-base leading-8 text-muted-foreground">
               {page.body}
             </p>
-            <h3 className="mt-8 text-xl font-bold">How we can help</h3>
+            <h3 className="mt-8 text-xl font-bold">Services include</h3>
             <ul className="mt-5 grid gap-4 sm:grid-cols-2">
               {page.bullets.map((bullet) => (
                 <li
@@ -1042,11 +1043,11 @@ export function ServicePage({ page }: { page: ServicePageContent }) {
               <ServiceGlyph icon={page.icon} />
             </span>
             <h2 className="mt-5 text-2xl font-bold tracking-tight">
-              Let’s get it sorted.
+              Schedule this service
             </h2>
             <p className="mt-3 text-sm leading-6 text-muted-foreground">
-              Call for urgent help or book a planned visit online. We’ll discuss
-              your issue and confirm the next steps.
+              Call (347) 502-6441 or choose an appointment online. Have your
+              address and a description of the problem ready.
             </p>
             <a href={company.phoneHref} className="btn btn-dark mt-6 w-full">
               <Phone size={16} aria-hidden="true" />
@@ -1080,8 +1081,8 @@ export function ServicePage({ page }: { page: ServicePageContent }) {
       {related.length ? (
         <section className="section-space bg-cream">
           <div className="site-container">
-            <p className="eyebrow text-accent">While we’re here</p>
-            <h2 className="section-title mt-4">More ways we can help.</h2>
+            <p className="eyebrow text-accent">Other services</p>
+            <h2 className="section-title mt-4">Related plumbing services</h2>
             <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((service) => (
                 <ServiceCard key={service.slug} service={service} />
@@ -1098,18 +1099,18 @@ export function ServicePage({ page }: { page: ServicePageContent }) {
 export function GasSafetyNotice() {
   return (
     <div className="mb-8 rounded-xl border border-accent/30 bg-accent-soft p-5">
-      <h2 className="text-lg font-bold">Smell gas? Leave first. Call 911.</h2>
+      <h2 className="text-lg font-bold">If you smell gas</h2>
       <p className="mt-2 text-sm leading-6">
-        Leave the area immediately and call 911 from a safe location. Don’t use
-        switches, appliances, flames, or a phone in the affected area.
+        Leave the area immediately. Once you are safely away, call 911. Do not
+        use light switches, appliances, flames, or a phone in the affected area.
       </p>
       <a
-        href="https://www.nyc.gov/site/em/ready/gas-disruptions.page"
+        href="https://www.coned.com/en/safety/energy-safety/gas-safety/gas-leak-faq"
         target="_blank"
         rel="noopener noreferrer"
         className="mt-3 inline-flex items-center gap-2 text-xs font-bold underline underline-offset-4"
       >
-        NYC emergency guidance <ArrowUpRight size={14} aria-hidden="true" />
+        Con Edison gas safety guidance <ArrowUpRight size={14} aria-hidden="true" />
       </a>
     </div>
   );
@@ -1120,8 +1121,8 @@ export function BlogPage() {
     <SiteShell active="Tips & advice">
       <PageIntro
         eyebrow="Tips & advice"
-        title="A little plumbing know-how. A lot less hassle."
-        description="Simple, useful advice for looking after your home and knowing when to call a professional."
+        title="Plumbing tips for NYC homeowners"
+        description="Information about common plumbing problems, routine maintenance, and repairs in houses and apartment buildings."
       />
       <NewsSection all />
       <FinalCTA />
@@ -1133,9 +1134,9 @@ export function VideoPage() {
   return (
     <SiteShell>
       <PageIntro
-        eyebrow="Rite in action"
-        title="Meet the people behind the plumbing."
-        description="A closer look at our team and the work we do in New York."
+        eyebrow="Team video"
+        title="The Rite Plumbing team"
+        description="Watch our company video to see our team and plumbing work in New York City."
       />
       <section className="site-container pb-16">
         <video
@@ -1171,11 +1172,11 @@ export function VideoPage() {
 
 export function AboutPage() {
   return (
-    <SiteShell active="Why Rite">
+    <SiteShell active="About us">
       <PageIntro
-        eyebrow="Why Rite"
-        title="Your city. Your plumbers. Your peace of mind."
-        description="We’re Rite Plumbing & Heating: a local team helping New York homes and businesses keep moving."
+        eyebrow="About us"
+        title="About Rite Plumbing & Heating"
+        description="A licensed and insured plumbing company serving Manhattan, Brooklyn, and Queens."
       />
       <section className="site-container pb-16">
         <div className="relative h-[270px] overflow-hidden rounded-2xl bg-sand sm:h-[440px]">
@@ -1191,28 +1192,31 @@ export function AboutPage() {
         <div id="history" className="grid gap-8 pt-14 lg:grid-cols-2 lg:gap-20">
           <div>
             <p className="eyebrow text-accent">
-              A local team. A personal approach.
+              Our company
             </p>
             <h2 className="section-title mt-4">
-              Good plumbing starts
+              Plumbing & heating
               <br />
-              with good people.
+              for NYC properties
             </h2>
           </div>
           <div className="space-y-5 text-base leading-8 text-muted-foreground">
             <p>
-              New York’s buildings are as individual as the people who live in
-              them. From apartment fixtures to commercial plumbing, we bring
-              practical expertise and clear communication to each job.
+              Rite Plumbing & Heating has served New York homes and businesses
+              for more than 20 years. Our work includes leak repairs, drain
+              cleaning, bathroom and kitchen fixtures, water heaters, and
+              radiator valves.
             </p>
             <p>
-              Our licensed, insured team serves Manhattan, Brooklyn, and Queens.
-              We help with everyday repairs, installations, heating connections,
-              and the urgent problems that can’t wait.
+              We work in apartments, co-ops, condos, and commercial properties
+              across Manhattan, Brooklyn, and Queens. If your building requires
+              a COI, license documents, or a scope of work, send us the
+              requirements before your appointment.
             </p>
             <p id="mission">
-              Our approach is simple: understand the problem, explain the work,
-              and treat your property with care.
+              Our NYC plumbing license number is 1608. Estimates are free, and
+              emergency service is available 24 hours a day. Call our team or
+              use the online calendar to schedule a visit.
             </p>
           </div>
         </div>
@@ -1239,19 +1243,19 @@ export function ContactPage({
     <SiteShell active="Contact">
       <PageIntro
         eyebrow="Contact"
-        title="Let’s get your day back on track."
-        description="Call for urgent help, book an appointment online, or tell us about your project by email."
+        title="Contact Rite Plumbing"
+        description="Call (347) 502-6441 for emergency service, book an appointment online, or email us about a repair or installation."
       />
       <section className="site-container grid items-start gap-9 pb-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:pb-24">
         <div>
           <div className="rounded-2xl bg-ink p-7 text-white sm:p-9">
             <span className="eyebrow text-[#ffad80]">
-              A real team, ready to help
+              Phone & appointments
             </span>
             <h2 className="mt-4 text-3xl font-bold tracking-tight">
-              Plumbing problem?
+              Call or book
               <br />
-              Start here.
+              a service
             </h2>
             <a
               href={company.phoneHref}

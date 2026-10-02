@@ -9,7 +9,7 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(
   "Plumbing & Heating Services in NYC",
-  "Explore residential and commercial plumbing, drain cleaning, water heater repairs, fixtures, heating, and 24/7 emergency services across Manhattan, Brooklyn, and Queens.",
+  "Plumbing repairs, drain cleaning, water heater service, and fixture installation in Manhattan, Brooklyn, and Queens. Residential, commercial, and 24/7 emergency service.",
   "/services",
 );
 
@@ -18,8 +18,8 @@ export default function ServicesIndexPage() {
     <SiteShell active="Services">
       <PageIntro
         eyebrow="Our services"
-        title="Whatever comes up, we’re here to help."
-        description="From a quick repair to a planned installation. Licensed plumbing and heating for your home, your business, and your building."
+        title="Plumbing & heating services in NYC"
+        description="Repairs and installations for homes and businesses in Manhattan, Brooklyn, and Queens. Select a service below for details or call us for emergency help."
       />
       <section className="site-container grid gap-5 pb-16 sm:grid-cols-2 lg:grid-cols-3 lg:pb-24">
         {servicePages.map((service) => (

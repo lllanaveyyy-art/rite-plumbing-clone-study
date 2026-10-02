@@ -14,8 +14,8 @@ import { pageMetadata } from "@/lib/metadata";
 type Props = { params: Promise<{ slug: string }> };
 const routeMeta: Record<string, [string, string]> = {
   "about-us": [
-    "Meet Your Local NYC Plumbing Team",
-    "Meet Rite Plumbing & Heating, the licensed and insured team serving Manhattan, Brooklyn, and Queens. Practical expertise and clear communication for your property.",
+    "About Rite Plumbing & Heating",
+    "Rite Plumbing & Heating serves Manhattan, Brooklyn, and Queens. NYC plumbing license #1608, residential and commercial services, and 24/7 emergency repairs.",
   ],
   contact: [
     "Contact & Book a Plumber in NYC",
@@ -26,8 +26,8 @@ const routeMeta: Record<string, [string, string]> = {
     "Useful plumbing tips for NYC homeowners: caring for fixtures, understanding drains, planning repairs, and knowing when to call a professional.",
   ],
   video: [
-    "Rite Plumbing in Action",
-    "Meet the people behind Rite Plumbing & Heating and see our New York City plumbing team in action.",
+    "Rite Plumbing Team Video",
+    "Watch the Rite Plumbing & Heating company video featuring our team and plumbing work in New York City.",
   ],
 };
 export function generateStaticParams() {

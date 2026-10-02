@@ -186,7 +186,7 @@ export function SiteNavigation({ active }: { active?: string }) {
             ))}
           </nav>
           <div className="mt-auto pt-10">
-            <p className="eyebrow mb-3">Here for you, 24/7</p>
+            <p className="eyebrow mb-3">24/7 emergency service</p>
             <a href={company.phoneHref} className="block text-2xl font-bold">
               {company.phone}
             </a>
@@ -268,11 +268,11 @@ export function RequestForm({
     <div className="rounded-2xl border border-border bg-white p-6 sm:p-9">
       <span className="eyebrow">Prefer email?</span>
       <h2 className="mt-3 text-3xl font-bold tracking-tight">
-        Tell us what’s going on.
+        Email a service request
       </h2>
       <p className="mt-3 text-sm leading-6 text-muted-foreground">
-        Prepare a request below, then send it from your email app. For a
-        confirmed appointment, use our online booking calendar.
+        Fill in the details below to create an email draft. You will send it
+        from your email app. To book an appointment, use the online calendar.
       </p>
       {draft ? (
         <div
@@ -396,7 +396,7 @@ export function RequestForm({
               required
               maxLength={1500}
               rows={4}
-              placeholder="Tell us about the issue and any building requirements…"
+              placeholder="Describe the problem, its location, and any building requirements."
               className="form-input resize-y"
             />
           </label>

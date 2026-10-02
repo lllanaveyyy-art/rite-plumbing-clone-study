@@ -19,7 +19,7 @@ export const heroVideoUrl =
 
 export const navItems: NavigationItem[] = [
   { label: "Services", href: "/services" },
-  { label: "Why Rite", href: "/about-us" },
+  { label: "About us", href: "/about-us" },
   { label: "Service areas", href: "/#service-areas" },
   { label: "Tips & advice", href: "/blog" },
   { label: "Contact", href: "/contact" },
@@ -60,13 +60,13 @@ export type ServicePageContent = {
 
 export const servicePages: ServicePageContent[] = [
   {
-    title: "Emergency plumbing. Help when you need it.",
+    title: "Emergency plumbing in NYC",
     shortTitle: "Emergency plumbing",
     icon: "emergency",
     category: "Emergency",
     description:
-      "A burst pipe or overflowing toilet can’t wait. Reach our NYC plumbing team any time, day or night.",
-    body: "Tell us what’s happening and where you are. We’ll confirm availability and next steps, assess the problem, and explain the repair before work begins. We serve homes and businesses across Manhattan, Brooklyn, and Queens.",
+      "24/7 service for burst pipes, active leaks, overflowing toilets, and drain backups.",
+    body: "Call (347) 502-6441 for an urgent plumbing repair in Manhattan, Brooklyn, or Queens. Tell us where the problem is and whether water is still leaking or backing up. Our team will confirm the available arrival time and arrange a plumber for your home or business.",
     bullets: [
       "Burst and leaking pipes",
       "Overflowing toilets",
@@ -82,13 +82,13 @@ export const servicePages: ServicePageContent[] = [
     ],
   },
   {
-    title: "Clear drains. A home that flows.",
+    title: "Drain cleaning in NYC",
     shortTitle: "Drain cleaning",
     icon: "drain",
     category: "Plumbing",
     description:
-      "Slow sinks, standing shower water, or a stubborn blockage? Let’s get things moving again.",
-    body: "A recurring clog needs more than a temporary fix. Our plumbers assess the affected drain, choose the right clearing method, and check the flow afterward. From kitchen sinks to main drains, we’ll explain what we find and what comes next.",
+      "Clearing clogged sinks, showers, bathtubs, and main drains in homes and commercial properties.",
+    body: "Standing water in the shower or a sink that takes several minutes to empty can be a sign of a blocked drain. We clear drain clogs and investigate recurring backups. If more than one fixture is affected, mention it when you call so we can check for a blockage farther along the line.",
     bullets: [
       "Kitchen and bathroom drains",
       "Shower and bathtub clogs",
@@ -104,13 +104,13 @@ export const servicePages: ServicePageContent[] = [
     ],
   },
   {
-    title: "Hot water. Back where it belongs.",
+    title: "Water heater repair & installation",
     shortTitle: "Water heaters",
     icon: "water",
     category: "Heating",
     description:
-      "Reliable repairs, replacements, and installations for the hot water your day depends on.",
-    body: "No hot water, inconsistent temperatures, or a leaking tank? We assess the heater and its connections, discuss repair and replacement options, and help you choose a solution that fits your property.",
+      "Service for water heaters with leaks, inconsistent temperatures, or no hot water, plus new installations.",
+    body: "We repair and replace water heaters for residential and commercial properties. A visit starts with checking the heater and identifying the fault. If replacement is needed, we can discuss a unit suited to your hot water use and the available space. Have the model number and a description of the problem ready when you book.",
     bullets: [
       "Water heater diagnosis",
       "Repairs and replacements",
@@ -126,13 +126,13 @@ export const servicePages: ServicePageContent[] = [
     ],
   },
   {
-    title: "Small leaks. Expert fixes.",
+    title: "Faucet, sink & fixture repairs",
     shortTitle: "Faucets & fixtures",
     icon: "faucet",
     category: "Plumbing",
     description:
-      "Repair a dripping faucet or give your kitchen and bathroom a fresh start with new fixtures.",
-    body: "From worn faucet parts to a new sink installation, the connections matter. Our team repairs leaks, replaces fixtures, and checks the finished installation so you can get back to using your space.",
+      "Repairs for dripping faucets and leaking sink connections, plus kitchen and bathroom fixture installation.",
+    body: "A faucet may need a replacement part rather than a whole new fixture. We check the leak, repair worn components where possible, and install replacement faucets or sinks when needed. If you have already purchased a fixture, send its details before the appointment so we can confirm the installation requirements.",
     bullets: [
       "Faucet repairs and replacement",
       "Kitchen and bathroom sinks",
@@ -148,13 +148,13 @@ export const servicePages: ServicePageContent[] = [
     ],
   },
   {
-    title: "Your home. In capable hands.",
+    title: "Residential plumbing in NYC",
     shortTitle: "Residential plumbing",
     icon: "home",
     category: "Plumbing",
     description:
-      "Everyday repairs and thoughtful installations for NYC apartments, condos, co-ops, and homes.",
-    body: "City homes come with their own plumbing challenges. We handle leaks, drains, fixtures, and heating connections, and help coordinate the paperwork your building requires. Tell us about your property and we’ll plan the work with you.",
+      "Plumbing repairs and installations for apartments, co-ops, condos, and houses.",
+    body: "We repair leaks, clear drains, replace fixtures, and service water heaters in New York homes. For apartment work, we can provide the insurance and license documents requested by building management. Let us know about access arrangements or a required building water shutoff before the visit.",
     bullets: [
       "Leak diagnosis and repair",
       "Bathroom and kitchen plumbing",
@@ -170,13 +170,13 @@ export const servicePages: ServicePageContent[] = [
     ],
   },
   {
-    title: "Keep your business moving.",
+    title: "Commercial plumbing in NYC",
     shortTitle: "Commercial plumbing",
     icon: "building",
     category: "Commercial",
     description:
-      "Plumbing support for busy businesses, property managers, and the buildings New York works in.",
-    body: "We support restaurants, offices, hotels, and managed properties with repairs, installations, and emergency service. Our team works with your point of contact to agree on access, scope, and building requirements.",
+      "Repairs, installations, and emergency service for restaurants, offices, hotels, and managed buildings.",
+    body: "Contact Rite Plumbing for commercial leaks, blocked drains, fixture repairs, and plumbing installations. We work with business owners and property managers to arrange access and document the proposed work. For an active leak or backup, call our 24/7 number rather than waiting for an email reply.",
     bullets: [
       "Restaurant and retail plumbing",
       "Office and hotel repairs",
@@ -192,13 +192,13 @@ export const servicePages: ServicePageContent[] = [
     ],
   },
   {
-    title: "A bathroom that works beautifully.",
+    title: "Bathroom plumbing & shower repair",
     shortTitle: "Bathrooms & showers",
     icon: "faucet",
     category: "Plumbing",
     description:
-      "Expert help for leaking showers, worn valves, tubs, and bathroom plumbing upgrades.",
-    body: "We repair and install bathroom fixtures and the plumbing behind them. Whether the problem is a shower valve, a slow bathtub drain, or a leaking connection, we’ll assess it and talk you through the work.",
+      "Shower valve and cartridge repairs, bathtub drain clearing, and bathroom fixture installation.",
+    body: "We service bathroom faucets, tubs, showers, and their water connections. Common calls include a shower that will not shut off, a leaking valve, or water collecting in the bathtub. We also install replacement fixtures. Share the fixture brand or a photo with our team if you have it.",
     bullets: [
       "Shower and bathtub repairs",
       "Shower valve replacement",
@@ -214,13 +214,13 @@ export const servicePages: ServicePageContent[] = [
     ],
   },
   {
-    title: "Toilet trouble? Let’s take care of it.",
+    title: "Toilet repair & installation",
     shortTitle: "Toilet repairs",
     icon: "drain",
     category: "Plumbing",
     description:
-      "Clogs, leaks, and new installations handled by a team that knows NYC plumbing.",
-    body: "A toilet that runs, leaks, or won’t flush can disrupt the whole household. We identify the cause, explain the repair, and check the toilet and its connections before wrapping up.",
+      "Clearing toilet clogs, repairing running toilets and leaks, and installing replacement units.",
+    body: "Call us for a toilet that will not flush, keeps running, or leaks around the base. We check the cause and repair the affected parts, including seals, wax rings, and flanges where needed. If you are replacing a toilet, we can remove the old unit and connect the new one.",
     bullets: [
       "Clogged toilet clearing",
       "Running toilet repairs",
@@ -236,13 +236,13 @@ export const servicePages: ServicePageContent[] = [
     ],
   },
   {
-    title: "Get your kitchen back to normal.",
+    title: "Garbage disposal repair & replacement",
     shortTitle: "Garbage disposals",
     icon: "faucet",
     category: "Plumbing",
     description:
-      "Repairs and replacements for disposals that leak, jam, or stop working.",
-    body: "We inspect the disposal and its plumbing connections, discuss whether repair or replacement makes sense, and check the sink drainage after the work is complete.",
+      "Service for leaking, jammed, or nonworking garbage disposals and their sink connections.",
+    body: "A disposal problem may involve the unit itself or the drain connections beneath the sink. We inspect both and advise whether the disposal can be repaired or needs replacement. For a new installation, contact us with the unit details and your current sink setup.",
     bullets: [
       "Disposal diagnosis",
       "Leak repairs",
@@ -258,13 +258,13 @@ export const servicePages: ServicePageContent[] = [
     ],
   },
   {
-    title: "Licensed gas line repairs.",
+    title: "Gas line repair in NYC",
     shortTitle: "Gas line services",
     icon: "gas",
     category: "Plumbing",
     description:
-      "Professional gas plumbing repairs and building coordination after the immediate hazard has been addressed.",
-    body: "Once emergency responders or your utility have made the area safe, contact our team to discuss the repair, access requirements, and documentation for your building.",
+      "Gas piping repairs by a licensed plumbing company, with documentation for building management.",
+    body: "If you suspect a gas leak, leave the area and call 911 from a safe location first. After emergency responders or your utility have made the area safe, contact Rite Plumbing about the required piping repair. We can discuss access, the scope of work, and the documents your building requests.",
     bullets: [
       "Gas piping repairs",
       "Gas line assessment",
@@ -280,13 +280,13 @@ export const servicePages: ServicePageContent[] = [
     ],
   },
   {
-    title: "Bring comfort back home.",
+    title: "Radiator valve repair & installation",
     shortTitle: "Radiators & heating",
     icon: "heat",
     category: "Heating",
     description:
-      "Radiator valve repairs and installations for New York’s homes and buildings.",
-    body: "Older NYC buildings need plumbers who understand their heating connections. We assess leaking radiator valves and heating issues, discuss the required work, and coordinate building access where needed.",
+      "Repair and replacement of leaking or faulty radiator valves in homes and apartment buildings.",
+    body: "A leak at a radiator valve or connection needs attention before it damages floors or walls. We inspect the valve and replace damaged parts or the valve assembly where needed. In a building with shared heating, let us know who manages the system so the work can be coordinated.",
     bullets: [
       "Radiator valve repairs",
       "Valve replacement and installation",
@@ -302,13 +302,13 @@ export const servicePages: ServicePageContent[] = [
     ],
   },
   {
-    title: "A little prevention. More peace of mind.",
+    title: "Sump pump installation & repair",
     shortTitle: "Sump pumps",
     icon: "water",
     category: "Plumbing",
     description:
-      "Installation, maintenance, and repair for your property’s sump pump system.",
-    body: "We assess your sump pump and its connections, discuss maintenance or replacement, and check operation after the service. Share your property’s setup when booking so we can plan the visit.",
+      "Sump pump repairs, replacement, installation, and maintenance for your property.",
+    body: "Contact us if your sump pump is not turning on, runs continuously, or is not removing water from the pit. We check the pump and discharge connections to identify the problem. We also install replacement pumps and provide maintenance for existing systems.",
     bullets: [
       "Sump pump installation",
       "Pump repairs",
@@ -324,13 +324,13 @@ export const servicePages: ServicePageContent[] = [
     ],
   },
   {
-    title: "Hot water. A smarter setup.",
+    title: "Tankless water heater services",
     shortTitle: "Tankless water heaters",
     icon: "water",
     category: "Heating",
     description:
-      "Tankless water heater repairs, replacements, and installation planning for your property.",
-    body: "Choosing a tankless system starts with your hot water needs and the building’s existing connections. We review the setup with you, explain the installation requirements, and service existing units when hot water becomes unreliable.",
+      "Tankless water heater repairs, replacement, and new installations in NYC properties.",
+    body: "We service tankless units that are not producing hot water or are struggling to maintain temperature. For a new installation, we review hot water demand and the building’s existing connections before recommending a setup. Give us the model number and any displayed error code when requesting a repair.",
     bullets: [
       "Tankless heater diagnosis",
       "Repairs and replacement",
@@ -346,13 +346,13 @@ export const servicePages: ServicePageContent[] = [
     ],
   },
   {
-    title: "Plumbing help. Around the clock.",
+    title: "24/7 plumbing services in NYC",
     shortTitle: "24/7 plumbing services",
     icon: "emergency",
     category: "Emergency",
     description:
-      "Plumbing problems don’t follow business hours. You can reach Rite Plumbing 24 hours a day.",
-    body: "Call for an urgent problem or book a planned visit online. Our team serves Manhattan, Brooklyn, and Queens with plumbing and heating repairs for residential and commercial properties. Call to confirm the next available arrival window.",
+      "Day, night, and weekend plumbing service for homes and businesses in Manhattan, Brooklyn, and Queens.",
+    body: "Our phone line is available 24 hours a day, seven days a week. Call for an urgent repair and our team will confirm the next available arrival time. For routine repairs or an installation, you can also choose an appointment through our online calendar.",
     bullets: [
       "Day and night availability",
       "Urgent plumbing repairs",
@@ -417,51 +417,51 @@ export const faqs = [
   {
     question: "Do you offer emergency plumbing?",
     answer:
-      "Yes. You can reach Rite Plumbing 24/7 for urgent plumbing problems. Call (347) 502-6441 so we can discuss the issue and confirm availability and an arrival window.",
+      "Yes. Call (347) 502-6441 any time for an active leak, burst pipe, overflowing toilet, or drain backup. Our team will confirm the available arrival time.",
   },
   {
     question: "Which parts of New York do you serve?",
     answer:
-      "We serve Manhattan, Brooklyn, and Queens. Call with your address to confirm coverage and availability for your property.",
+      "Manhattan, Brooklyn, and Queens. Give us your address when you call so we can confirm service at your location.",
   },
   {
     question: "Are you licensed and insured?",
     answer:
-      "Rite Plumbing & Heating is licensed and insured. Our plumbing license number is 1608. Ask our team for the documentation your building requires.",
+      "Yes. Rite Plumbing & Heating holds NYC plumbing license #1608 and is insured. We can provide license and insurance documents for building management.",
   },
   {
     question: "Can you provide a COI for my building?",
     answer:
-      "Yes. Our team can help with a Certificate of Insurance, license documentation, an indemnification letter, and a scope of work. Send your building’s requirements before the appointment so we can coordinate.",
+      "Yes. We provide Certificates of Insurance, license documents, indemnification letters, and a scope of work. Send your building’s requirements before the appointment.",
   },
   {
     question: "How do I book a visit?",
     answer:
-      "Use Book a service to open our online scheduling calendar, or call us directly. For an active leak or another urgent issue, calling is the quickest way to discuss next steps.",
+      "Choose Book a service to open the appointment calendar, or call (347) 502-6441. For an emergency, call directly.",
   },
   {
     question: "Do you offer estimates?",
     answer:
-      "We offer free estimates. Contact the team with details of your plumbing issue to discuss the scope and arrange the right type of appointment.",
+      "Yes, estimates are free. Call or book online and describe the repair or installation you need.",
   },
 ];
 
 export const documents = [
   {
-    title: "Certificate of Insurance",
-    description: "Insurance documentation for your building’s review.",
+    title: "Certificate of Insurance (COI)",
+    description: "A certificate for your building manager or managing agent.",
   },
   {
     title: "Plumbing license",
-    description: "License information for building management.",
+    description: "NYC plumbing license #1608, supplied for building approval.",
   },
   {
     title: "Indemnification letter",
-    description: "Documentation tailored to the building’s requirements.",
+    description: "A letter for buildings that request one before work begins.",
   },
   {
     title: "Scope of work",
-    description: "A clear outline of the planned plumbing work.",
+    description: "The planned repair or installation, including any required water shutoff.",
   },
 ];
 
@@ -482,22 +482,22 @@ export const news: NewsArticle[] = [
     image: "/images/riteplumbing/news/diy-mistakes-1.jpg",
     date: "August 25, 2023",
     excerpt:
-      "Oftentimes, you find people making mistakes when they try to fix plumbing issues by themselves.",
-    title: "The small plumbing mistakes that become big problems",
+      "Common mistakes include overtightening fittings, using the wrong replacement parts, and repeatedly flushing a blocked toilet.",
+    title: "Common DIY plumbing mistakes",
     category: "Homeowner tips",
     readTime: "2 min read",
     sections: [
       {
-        title: "Know what you’re working with",
-        text: "Before taking apart a fixture, identify its water supply and the correct shutoff. If you aren’t sure which valve controls the fixture, stop and ask a professional. In an apartment building, a shutoff may affect neighboring homes.",
+        title: "Using the wrong shutoff",
+        text: "Know which valve supplies the fixture before attempting a repair. In an apartment building, some valves control water to more than one unit. If you cannot identify the correct shutoff, contact your building manager or a plumber before taking anything apart.",
       },
       {
-        title: "Tighter isn’t always better",
-        text: "Overtightening can damage threads, seals, or a fixture. Different connections require different parts and methods. A persistent leak is a reason to identify the cause rather than keep tightening.",
+        title: "Overtightening a leaking connection",
+        text: "Tightening a fitting harder can damage its threads or seal. A leak may come from a worn washer, a damaged part, or an incorrectly assembled connection. Identify the cause instead of repeatedly tightening the fitting, and check that any replacement part matches the fixture.",
       },
       {
-        title: "Notice a recurring problem",
-        text: "A drain that clogs repeatedly or a faucet that keeps leaking deserves a closer look. Share when the problem happens and what has already been tried with your plumber. That history helps guide the assessment.",
+        title: "Repeating a fix that is not working",
+        text: "Do not keep flushing a toilet that is backing up. A drain that blocks again shortly after clearing also needs further investigation. When you call a plumber, describe the previous repair and how quickly the problem returned.",
       },
     ],
   },
@@ -506,22 +506,22 @@ export const news: NewsArticle[] = [
     image: "/images/riteplumbing/news/spring-cleaning-1.jpg",
     date: "August 25, 2023",
     excerpt:
-      "Spring cleaning is a good time to look at drains, fixtures, leaks, and water heater maintenance.",
-    title: "A simple seasonal check for your home’s plumbing",
+      "Check for leaks beneath sinks, slow drains, running toilets, and signs that your water heater needs service.",
+    title: "A spring plumbing maintenance checklist",
     category: "Maintenance",
     readTime: "2 min read",
     sections: [
       {
-        title: "Look under the sink",
-        text: "Check accessible cabinets for dampness, stains, or a musty smell. Look at visible connections without taking them apart. If you see an active leak, arrange a repair and let building management know when appropriate.",
+        title: "Check sinks and toilets for leaks",
+        text: "Look inside sink cabinets for dampness, water stains, or drips from visible connections. Listen for a toilet that continues to run after flushing, and check for water around its base. Arrange a repair for a leak rather than leaving it until the next maintenance visit.",
       },
       {
-        title: "Notice how the drains behave",
-        text: "Does water drain more slowly than it used to? Does a problem affect one fixture or several? Write down what you notice. Repeated backups or multiple slow drains are worth discussing with a plumber.",
+        title: "Check for slow or blocked drains",
+        text: "Water should not remain in a sink or bathtub long after use. Note which drain is slow and whether other fixtures are affected. Several drains backing up at once can indicate a problem in a shared line, especially in an apartment building.",
       },
       {
-        title: "Plan your maintenance",
-        text: "Keep your water heater’s model and service information handy. Follow the manufacturer’s maintenance guidance and have equipment serviced by a qualified professional. A planned appointment is easier to coordinate than an unexpected disruption.",
+        title: "Review water heater maintenance",
+        text: "Check the heater’s service record and the manufacturer’s recommended maintenance schedule. Mention changes in temperature, unusual noises, or water near the unit when booking service. In a managed building, ask whether the heater serves only your unit or is part of a shared system.",
       },
     ],
   },
@@ -530,22 +530,22 @@ export const news: NewsArticle[] = [
     image: "/images/riteplumbing/news/residential-plumbing-1.jpg",
     date: "August 25, 2023",
     excerpt:
-      "Residential plumbing brings clean water in and carries waste water away through connected systems.",
-    title: "Your home’s plumbing, explained simply",
+      "Water supply pipes bring water to your fixtures. Drains carry wastewater away. In an apartment, parts of both systems may be shared.",
+    title: "How residential plumbing works",
     category: "Plumbing basics",
     readTime: "2 min read",
     sections: [
       {
-        title: "The supply side",
-        text: "Supply pipes bring water to your faucets, toilets, and appliances. A water heater supplies the hot side of the system. Shutoff valves allow fixtures or sections of the supply to be isolated when work is needed.",
+        title: "Water supply pipes",
+        text: "Supply pipes carry water to faucets, toilets, and appliances. Cold water also feeds the water heater, which supplies hot water to the fixtures that need it. Shutoff valves control water to individual fixtures or larger parts of the system.",
       },
       {
-        title: "The drainage side",
-        text: "Drain pipes carry wastewater away from fixtures. Traps and venting are part of that system. If several fixtures back up together, the issue may be farther along the drainage route rather than at one sink.",
+        title: "Drains, traps, and vents",
+        text: "Drain pipes carry wastewater from sinks, showers, toilets, and appliances. Water held in a trap helps keep sewer gases out of the room, while vents let air into the drainage system. A blockage can affect one fixture or several, depending on where it occurs.",
       },
       {
-        title: "Your building matters",
-        text: "Apartments often share supply and drainage infrastructure. Before a repair or installation, check your building’s access and documentation requirements. A plumber and your building manager can coordinate the scope and any shared shutoff.",
+        title: "Shared plumbing in apartment buildings",
+        text: "An apartment’s pipes may connect to risers and drains used by neighboring units. Some repairs therefore require building access or a shared water shutoff. Check with building management before scheduling work, and pass any document requirements to your plumber.",
       },
     ],
   },
@@ -554,22 +554,22 @@ export const news: NewsArticle[] = [
     image: "/images/riteplumbing/services/p9.jpeg.webp",
     date: "August 25, 2023",
     excerpt:
-      "Common plumbing trouble often starts with aging pipes, clogged drains, leaks, and fixture wear.",
-    title: "What recurring plumbing problems can tell you",
+      "Dripping faucets, running toilets, slow drains, and pipe leaks have different causes and need different repairs.",
+    title: "Common plumbing problems and their causes",
     category: "Homeowner tips",
     readTime: "2 min read",
     sections: [
       {
-        title: "Describe the pattern",
-        text: "Note which fixtures are affected, when the issue started, and whether it happens all the time. A clear description helps your plumber plan an assessment.",
+        title: "Dripping faucets and running toilets",
+        text: "A worn faucet component can cause dripping even when the handle is closed. A toilet that keeps running may have a problem with its fill or flush mechanism. These faults often involve replaceable parts, but the part must match the fixture.",
       },
       {
-        title: "Look for visible signs",
-        text: "Damp cabinets, water stains, or an unusual change in fixture behavior are useful details. Avoid opening walls or dismantling shared building plumbing to investigate.",
+        title: "Slow drains and repeated clogs",
+        text: "Hair, grease, and other debris can restrict a drain. A problem affecting several fixtures may be farther along the line. Tell your plumber which drains are affected and whether the blockage returns after clearing; those details help locate the problem.",
       },
       {
-        title: "Get a diagnosis first",
-        text: "Similar symptoms can have different causes. An on-site assessment helps distinguish a worn fixture part from a pipe or building system problem and gives you a clear repair plan.",
+        title: "Leaks beneath sinks or inside walls",
+        text: "Leaks can come from a loose connection, a failed seal, or a damaged pipe. Water stains show where moisture is appearing, but the source may be elsewhere. Contact a plumber for an active leak and notify building management if neighboring units or shared pipes may be affected.",
       },
     ],
   },
@@ -579,22 +579,22 @@ export const news: NewsArticle[] = [
       "/images/riteplumbing/services/clogged-toilet-repairs-installation-1-scaled.jpg.webp",
     date: "August 25, 2023",
     excerpt:
-      "A clogged toilet can overflow or back up, so quick service is safer than waiting overnight.",
-    title: "A clogged toilet: what to do next",
+      "Stop flushing a blocked toilet. An overflow, a recurring clog, or a backup affecting other fixtures needs attention.",
+    title: "Can you leave a toilet clogged overnight?",
     category: "Plumbing basics",
     readTime: "2 min read",
     sections: [
       {
-        title: "Don’t keep flushing",
-        text: "Repeated flushing can add more water to a blocked toilet. Stop using the fixture if it is backing up. Keep people away from overflow and arrange professional help for an active backup.",
+        title: "Stop using the blocked toilet",
+        text: "Leaving a toilet unused does not remove the blockage. Repeated flushing can raise the water level and cause an overflow. Keep the fixture out of use until the clog is cleared. If water is overflowing or sewage is backing up, arrange urgent help.",
       },
       {
-        title: "Check the other fixtures",
-        text: "If a sink or shower also backs up, mention that when you call. A problem involving several fixtures may need assessment beyond the toilet itself.",
+        title: "Look for backups in other fixtures",
+        text: "A shower or sink backing up at the same time can indicate a blockage beyond the toilet. Mention all affected fixtures when calling a plumber. In an apartment building, notify management because a shared drain may be involved.",
       },
       {
-        title: "Call when the problem persists",
-        text: "A recurring clog, a leak around the base, or an overflow should be assessed. In an apartment, notify building management if the issue could affect shared drainage or neighboring units.",
+        title: "Arrange a repair for repeated clogs",
+        text: "A toilet that blocks repeatedly, leaks around the base, or still will not flush after a clog is cleared needs inspection. Rite Plumbing handles toilet clogs, seals, flanges, and replacement installations. Call (347) 502-6441 for an urgent backup.",
       },
     ],
   },
@@ -604,22 +604,22 @@ export const news: NewsArticle[] = [
       "/images/riteplumbing/services/gas-leak-repair-service-1-1920x1280.jpg.webp",
     date: "August 25, 2023",
     excerpt:
-      "Leave the area immediately and call 911 from a safe location. A plumbing booking is not the first step.",
-    title: "Smell gas? Put safety first.",
+      "If you smell gas, leave the area immediately. Call 911 from a safe location and follow instructions from emergency responders.",
+    title: "What to do if you smell gas",
     category: "Safety",
     readTime: "2 min read",
     sections: [
       {
-        title: "Leave and call from a safe location",
-        text: "If you smell gas, leave the area immediately. Once you are safely away, call 911. Do not try to locate or repair the leak yourself.",
+        title: "Leave the area and call 911",
+        text: "Leave immediately if you smell gas. Once you are safely away, call 911 to report the suspected leak. Do not try to find the source or repair it yourself, and do not re-enter until emergency responders say it is safe.",
       },
       {
-        title: "Avoid anything that could create a spark",
-        text: "Do not switch lights or appliances on or off, smoke, light matches, or use a phone in the area where you smell gas. Follow emergency responders’ and your utility’s instructions.",
+        title: "Do not use switches or a phone nearby",
+        text: "Do not turn lights or appliances on or off, smoke, light a match, or use a phone in the affected area. These actions can create an ignition source. Make the emergency call only after leaving the area.",
       },
       {
-        title: "Arrange repairs once the area is safe",
-        text: "Once emergency responders or the utility have addressed the immediate hazard, a licensed plumber can discuss gas piping repairs and the requirements for your building. NYC’s emergency guidance is linked below.",
+        title: "Contact a plumber after the emergency response",
+        text: "Emergency responders or the utility must address the immediate hazard first. After the area is safe, a licensed plumber can discuss any required gas piping repairs and building documentation. See the Con Edison guidance linked above for instructions on reporting a suspected leak.",
       },
     ],
   },
