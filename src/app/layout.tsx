@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import { siteUrl } from "@/lib/metadata";
+import { ScrollReveal } from "@/components/scroll-reveal";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -41,6 +42,7 @@ export default function RootLayout({
           Skip to content
         </a>
         {children}
+        <ScrollReveal />
       </body>
     </html>
   );

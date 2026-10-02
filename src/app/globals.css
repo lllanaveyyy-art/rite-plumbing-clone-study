@@ -151,3 +151,19 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Content is visible by default, including when JavaScript is unavailable. */
+[data-reveal]{
+  transition:opacity .6s ease,translate .6s cubic-bezier(.2,.65,.3,1),box-shadow .2s,border-color .2s
+}
+[data-reveal][data-reveal-pending]{
+  opacity:0;
+  translate:0 26px
+}
+[data-reveal="left"][data-reveal-pending]{translate:-16px 0}
+[data-reveal="right"][data-reveal-pending]{translate:16px 0}
+[data-reveal-delay="1"]{transition-delay:65ms,65ms,0s,0s}
+[data-reveal-delay="2"]{transition-delay:130ms,130ms,0s,0s}
+@media(prefers-reduced-motion:reduce){
+  [data-reveal]{opacity:1!important;translate:none!important;transition:none!important}
+}

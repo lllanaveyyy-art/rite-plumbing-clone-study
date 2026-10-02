@@ -276,7 +276,7 @@ export function HomePage() {
       </section>
       <TrustStrip />
       <section id="services" className="section-space bg-white">
-        <div className="site-container">
+        <div data-reveal="up" className="site-container">
           <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
             <div>
               <p className="eyebrow text-accent">Our services</p>
@@ -361,7 +361,7 @@ export function TrustStrip() {
       aria-label="Our service commitments"
       className="border-y border-border bg-sand/60"
     >
-      <div className="site-container grid grid-cols-2 gap-x-5 gap-y-7 py-7 lg:grid-cols-4">
+      <div data-reveal="up" className="site-container grid grid-cols-2 gap-x-5 gap-y-7 py-7 lg:grid-cols-4">
         {items.map(({ Icon, title, text }) => (
           <div key={title} className="flex items-start gap-3 lg:items-center">
             <Icon
@@ -387,7 +387,7 @@ function WhyRite() {
   return (
     <section className="section-space bg-ink text-white">
       <div className="site-container grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-        <div className="relative">
+        <div className="relative" data-reveal="left">
           <div className="relative h-[390px] overflow-hidden rounded-2xl bg-ink-soft sm:h-[520px]">
             <Image
               src="/images/riteplumbing/service-plumber.jpg"
@@ -407,7 +407,7 @@ function WhyRite() {
             </div>
           </div>
         </div>
-        <div className="pt-3 lg:pt-0">
+        <div className="pt-3 lg:pt-0" data-reveal="right">
           <p className="eyebrow text-[#ffad80]">About our company</p>
           <h2 className="section-title mt-4">
             Licensed plumbers
@@ -479,7 +479,7 @@ export function HowItWorks() {
   ];
   return (
     <section className="section-space bg-cream">
-      <div className="site-container">
+      <div data-reveal="up" className="site-container">
         <div className="text-center">
           <p className="eyebrow text-accent">Appointments</p>
           <h2 className="section-title mt-4">How to schedule a plumber</h2>
@@ -514,7 +514,7 @@ export function ServiceAreas() {
   return (
     <section id="service-areas" className="bg-white">
       <div className="site-container grid items-center gap-10 border-t border-border py-16 lg:grid-cols-[1fr_1.04fr] lg:gap-16 lg:py-20">
-        <div>
+        <div data-reveal="left">
           <p className="eyebrow text-accent">Service areas</p>
           <h2 className="section-title mt-4">
             Manhattan, Brooklyn
@@ -552,7 +552,7 @@ export function ServiceAreas() {
             />
           </Link>
         </div>
-        <div className="relative h-[360px] overflow-hidden rounded-2xl bg-sand sm:h-[430px]">
+        <div data-reveal="right" className="relative h-[360px] overflow-hidden rounded-2xl bg-sand sm:h-[430px]">
           <Image
             src="/images/riteplumbing/services/Rite-Plumbing-20230204-026-1920x1280.jpg.webp"
             alt="Rite Plumbing service truck on a Manhattan street"
@@ -580,7 +580,7 @@ export function ServiceAreas() {
 export function BuildingDocuments() {
   return (
     <section className="bg-sand/70">
-      <div className="site-container grid items-center gap-10 py-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+      <div data-reveal="up" className="site-container grid items-center gap-10 py-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <div>
           <p className="eyebrow text-accent">For building management</p>
           <h2 className="mt-4 text-[30px] font-bold leading-tight tracking-[-0.035em] sm:text-[36px]">
@@ -633,7 +633,7 @@ export function BuildingDocuments() {
 export function FAQSection() {
   return (
     <section id="faq" className="section-space bg-white">
-      <div className="site-container grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
+      <div data-reveal="up" className="site-container grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
         <div>
           <p className="eyebrow text-accent">
             FAQs
@@ -683,7 +683,7 @@ export function FAQSection() {
 export function NewsSection({ all = false }: { all?: boolean }) {
   return (
     <section className="section-space bg-cream">
-      <div className="site-container">
+      <div data-reveal="up" className="site-container">
         {!all ? (
           <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
             <div>
@@ -750,7 +750,7 @@ export function NewsSection({ all = false }: { all?: boolean }) {
 export function FinalCTA() {
   return (
     <section className="bg-ink text-white">
-      <div className="site-container flex flex-col justify-between gap-8 py-14 lg:flex-row lg:items-center lg:py-16">
+      <div data-reveal="up" className="site-container flex flex-col justify-between gap-8 py-14 lg:flex-row lg:items-center lg:py-16">
         <div>
           <p className="eyebrow text-[#ffad80]">Schedule a service</p>
           <h2 className="mt-4 text-[36px] font-bold leading-[1.1] tracking-[-0.04em] sm:text-[46px]">
@@ -921,7 +921,7 @@ export function PageIntro({
 }) {
   return (
     <section className="bg-cream">
-      <div className="site-container py-12 sm:py-16">
+      <div data-reveal="up" className="site-container py-12 sm:py-16">
         <Link
           href="/"
           className="mb-7 inline-flex items-center gap-2 text-xs font-semibold text-muted-foreground"
@@ -955,7 +955,7 @@ export function ServicePage({ page }: { page: ServicePageContent }) {
   return (
     <SiteShell active="Services">
       <section className="bg-cream">
-        <div className="site-container grid items-center gap-10 py-10 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:py-14">
+        <div data-reveal="up" className="site-container grid items-center gap-10 py-10 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:py-14">
           <div>
             <nav
               aria-label="Breadcrumb"
@@ -1000,7 +1000,7 @@ export function ServicePage({ page }: { page: ServicePageContent }) {
         </div>
       </section>
       <section className="section-space bg-white">
-        <div className="site-container grid items-start gap-12 lg:grid-cols-[1fr_350px] lg:gap-16">
+        <div data-reveal="up" className="site-container grid items-start gap-12 lg:grid-cols-[1fr_350px] lg:gap-16">
           <div>
             {page.icon === "gas" ? <GasSafetyNotice /> : null}
             <p className="eyebrow text-accent">
@@ -1080,7 +1080,7 @@ export function ServicePage({ page }: { page: ServicePageContent }) {
       </section>
       {related.length ? (
         <section className="section-space bg-cream">
-          <div className="site-container">
+          <div data-reveal="up" className="site-container">
             <p className="eyebrow text-accent">Other services</p>
             <h2 className="section-title mt-4">Related plumbing services</h2>
             <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -1138,7 +1138,7 @@ export function VideoPage() {
         title="The Rite Plumbing team"
         description="Watch our company video to see our team and plumbing work in New York City."
       />
-      <section className="site-container pb-16">
+      <section className="site-container pb-16" data-reveal="up">
         <video
           controls
           playsInline
@@ -1178,7 +1178,7 @@ export function AboutPage() {
         title="About Rite Plumbing & Heating"
         description="A licensed and insured plumbing company serving Manhattan, Brooklyn, and Queens."
       />
-      <section className="site-container pb-16">
+      <section className="site-container pb-16" data-reveal="up">
         <div className="relative h-[270px] overflow-hidden rounded-2xl bg-sand sm:h-[440px]">
           <Image
             src="/images/riteplumbing/team.jpg"
@@ -1246,7 +1246,7 @@ export function ContactPage({
         title="Contact Rite Plumbing"
         description="Call (347) 502-6441 for emergency service, book an appointment online, or email us about a repair or installation."
       />
-      <section className="site-container grid items-start gap-9 pb-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:pb-24">
+      <section data-reveal="up" className="site-container grid items-start gap-9 pb-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:pb-24">
         <div>
           <div className="rounded-2xl bg-ink p-7 text-white sm:p-9">
             <span className="eyebrow text-[#ffad80]">
